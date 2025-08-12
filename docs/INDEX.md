@@ -4,22 +4,21 @@ This index provides quick navigation to all project files, organized by category
 
 ## **Quick Links**
 
-- **[Installation Guide](README.md#installation)** - How to install and set up the project
-- **[Usage Examples](README.md#usage)** - Basic and advanced usage examples
-- **[CTX Use Case](docs/CTX-PURPOSE.md)** - Breakdown of CTX Use Cases
-- **[Syntax Highlighter](docs/SYNTAX-HIGHLIGHTER.md)** - Syntax Highlighter Summary
-- **[.ctxignore Guide](docs/CTXIGNORE.md)** - File exclusion patterns
-- **[CTX-CARD Format](README.md#ctx-card-format)** - Understanding the output format
-- **[Project Architecture](docs/PROJECT-STRUCTURE.md)** - Implementation details
-- **[CTX-CARD Specification](docs/CTX-ARCHITECTURE.md)** - Complete format specification
-- **[Test Suite](tests/README.md)** - Testing documentation and guidelines
+- **[Installation Guide](../README.md#installation)** - How to install and set up the project
+- **[Usage Examples](../README.md#usage)** - Basic and advanced usage examples
+- **[CTX Use Case](CTX-PURPOSE.md)** - Breakdown of CTX Use Cases
+- **[Syntax Highlighter](SYNTAX-HIGHLIGHTER.md)** - Syntax Highlighter Summary
+- **[.ctxignore Guide](CTXIGNORE.md)** - File exclusion patterns
+- **[CTX-CARD Format](../README.md#ctx-card-format)** - Understanding the output format
+- **[Project Architecture](PROJECT-STRUCTURE.md)** - Implementation details
+- **[CTX-CARD Specification](CTX-ARCHITECTURE.md)** - Complete format specification
+- **[Test Suite](../tests/README.md)** - Testing documentation and guidelines
 
-## **📚 DOCUMENTATION**
+## **DOCUMENTATION**
 
 ### **Core Documentation**
 
 - **[README.md](../README.md)** - Project overview, installation, and usage guide
-- **[CTXCARD.md](../CTXCARD.md)** - Generated CTX-CARD for this project
 - **[CTXCARD.ctx](../CTXCARD.ctx)** - Generated CTX-CARD in native format
 - **[CTXCARD.json](../CTXCARD.json)** - Generated CTX-CARD in JSON format
 - **[.ctxignore](../.ctxignore)** - File exclusion patterns for CTX-CARD generation
@@ -43,7 +42,6 @@ This index provides quick navigation to all project files, organized by category
 
 - **[Syntax-Highlighter/README.md](../Syntax-Highlighter/README.md)** - VSCode syntax highlighting implementation
 - **[Syntax-Highlighter/CTX-DICTIONARY.md](../Syntax-Highlighter/CTX-DICTIONARY.md)** - CTX-CARD tag dictionary and definitions
-- **[Syntax-Highlighter/TODO](../Syntax-Highlighter/TODO)** - Future enhancements and additional parameters
 - **[Syntax-Highlighter/package.json](../Syntax-Highlighter/package.json)** - VSCode extension configuration
 - **[Syntax-Highlighter/language-configuration.json](../Syntax-Highlighter/language-configuration.json)** - VSCode language configuration
 - **[Syntax-Highlighter/install-test.sh](../Syntax-Highlighter/install-test.sh)** - Installation script for testing
@@ -56,7 +54,7 @@ This index provides quick navigation to all project files, organized by category
 
 - **[tests/README.md](../tests/README.md)** - Testing suite documentation and guidelines
 
-## **💻 CODE**
+## **CODE**
 
 ### **Main Application**
 
@@ -102,7 +100,7 @@ This index provides quick navigation to all project files, organized by category
 #### **Unit Tests**
 
 - **[tests/unit/test_scanner.py](../tests/unit/test_scanner.py)** - Repository scanner tests
-- **[tests/unit/test_ast_analyzer.py](../tests/unit/test_ast_analyzer.py)** - AST analyzer tests
+
 - **[tests/unit/test_call_resolver.py](../tests/unit/test_call_resolver.py)** - Call resolver tests
 - **[tests/unit/test_card_renderer.py](../tests/unit/test_card_renderer.py)** - Card renderer tests
 - **[tests/unit/test_utils.py](../tests/unit/test_utils.py)** - Utility functions tests
@@ -130,7 +128,7 @@ This index provides quick navigation to all project files, organized by category
 
 - **[.github/workflows/test.yml](../.github/workflows/test.yml)** - GitHub Actions CI/CD workflow
 
-## **🔧 DEVELOPMENT**
+## **DEVELOPMENT**
 
 ### **Build and Package Files**
 
@@ -150,7 +148,7 @@ This index provides quick navigation to all project files, organized by category
 - **[.venv/](../.venv/)** - Python virtual environment (generated)
 - **[.git/](../.git/)** - Git repository data
 
-## **📋 PROJECT STRUCTURE**
+## **PROJECT STRUCTURE**
 
 For detailed project structure information, see **[PROJECT-STRUCTURE.md](PROJECT-STRUCTURE.md)**.
 
@@ -164,13 +162,12 @@ For detailed project structure information, see **[PROJECT-STRUCTURE.md](PROJECT
 
 ### **Generated Files**
 
-- **`CTXCARD.md`** - Generated CTX-CARD documentation for this project
 - **`CTXCARD.ctx`** - Generated CTX-CARD in native format
 - **`CTXCARD.json`** - Generated CTX-CARD in JSON format
 
 ---
 
-## **🚀 Getting Started**
+## **Getting Started**
 
 1. **Installation**: See [README.md](../README.md#installation)
 2. **Quick Start**: See [README.md](../README.md#usage)
@@ -178,7 +175,7 @@ For detailed project structure information, see **[PROJECT-STRUCTURE.md](PROJECT
 4. **Testing**: Run `python run_tests.py` or see [tests/README.md](../tests/README.md)
 5. **Development**: See [PROJECT-STRUCTURE.md](PROJECT-STRUCTURE.md)
 
-## **📖 Additional Resources**
+## **Additional Resources**
 
 - **[CTX-CARD Architecture](CTX-ARCHITECTURE.md)** - Complete format specification
 - **[CTX Purpose](CTX-PURPOSE.md)** - Use cases and philosophy
