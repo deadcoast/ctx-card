@@ -23,18 +23,26 @@ _A prefix-free, information-dense codebook_ + _edge list_ + _naming grammar_. It
   - e.g., `AL: cfg=>Configuration, svc=>Service, repo=>Repository`
 - `NM:` **Naming grammar (regex)** ⇒ `scope | pattern | example`
   - e.g., `NM: func | ^[a-z][a-z0-9_]*$ | get_user_token`
+- `DEPS:` **External dependencies** ⇒ `name | category | description`
+  - e.g., `DEPS: requests | external | HTTP client library`
+- `ENV:` **Environment configuration** ⇒ `name | category | description`
+  - e.g., `ENV: database_url | environment | config`
+- `SEC:` **Security constraints** ⇒ `name | category | description`
+  - e.g., `SEC: AuthService | authentication | required`
 - `TY:` **Type signature schema** ⇒ `kind | name | sig`
   - e.g., `TY: fn | AuthService.login | (UserCreds)->AuthToken !raises[AuthError]`
 - `TK:` **Token/enum keysets** ⇒ `name | {k1,k2,...}`
   - e.g., `TK: Role | {admin,staff,viewer}`
 - `MO:` **Module index** ⇒ `#id | path | role-tags`
-  - e.g., `MO: #3 | auth/service.py | {svc,auth,api}`
+  - e.g., `MO: #3 | auth/service.py | {svc,auth}`
 - `SY:` **Symbol index (within module)** ⇒ `#mid.#sid | kind | name`
   - e.g., `SY: #3.#1 | cls | AuthService`
 - `SG:` **Signature for symbol** ⇒ `#mid.#sid | signature` (uses `TY` schema)
   - e.g., `SG: #3.#2 | (UserCreds)->AuthToken`
 - `ED:** **Edges (deps & calls)** ⇒`src -> dst | reason-tag\`
   - e.g., `ED: #3.#2 -> #5.#1 | uses:repo`
+- `EVT:` **Event relationships** ⇒ `#mid.#sid | event | name`
+  - e.g., `EVT: #3.#2 | event | login_event`
 - `IN:` **Invariants / contracts** ⇒ short Hoare-style
   - e.g., `IN: login ⇒ requires(valid(creds)) ∧ ensures(token.role∈Role)`
 - `CN:` **Conventions (micro-rules)** ⇒ bullet-ish constraints
@@ -45,6 +53,8 @@ _A prefix-free, information-dense codebook_ + _edge list_ + _naming grammar_. It
   - e.g., `IO: POST /v1/login | UserCreds | AuthToken | 200,401,429`
 - `DT:` **Data shapes (schemata)** ⇒ `Name | fields`
   - e.g., `DT: UserCreds | {email:str, pwd:secret(>=12)}`
+- `ASYNC:` **Async patterns** ⇒ `#mid.#sid | async | name`
+  - e.g., `ASYNC: #3.#2 | async | login_async`
 - `PX:` **Prohibited/allowed patterns** ⇒ `rule | reason`
   - e.g., `PX: forbid global state in svc | concurrency`
 - `EX:` **Examples (1-liners)** ⇒ canonical name spellings
@@ -64,6 +74,11 @@ ID: proj|milkBottle lang|py std|pep8 ts|20250808
 
 AL: cfg=>Configuration svc=>Service repo=>Repository dto=>DataTransferObject
 AL: uc=>UseCase http=>HTTP db=>Database jwt=>JWT
+
+DEPS: requests | external | HTTP client library
+DEPS: fastapi | external | Web framework
+ENV: database_url | environment | config
+SEC: AuthService | authentication | required
 
 NM: module | ^[a-z_]+$ | auth_service
 NM: class  | ^[A-Z][A-Za-z0-9]+$ | AuthService
@@ -90,6 +105,9 @@ SG: #1.#2 | (UserCreds)->AuthToken !raises[AuthError]
 
 ED: #1.#2 -> #2.#1 | uses:repo
 ED: #1.#2 -> #3.#2 | returns:dto
+
+EVT: #1.#2 | event | login_event
+ASYNC: #1.#2 | async | login_async
 
 ER: AuthError | domain | bad credentials
 IN: login ⇒ requires(valid(creds)) ∧ ensures(token.exp>now)
@@ -134,12 +152,17 @@ This is \~30 lines and gives the agent:
 
 ## Drop-in template
 
-```yaml
+```ctx
 ID: proj|<slug> lang|<lang[,lang]> std|<style> ts|<YYYYMMDD>
 
 # Aliases (prefix-free):
 AL: <k1>=> <value1>
 AL: <k2>=> <value2>
+
+# Dependencies and configuration:
+DEPS: <name> | <category> | <description>
+ENV: <name> | <category> | <description>
+SEC: <name> | <category> | <description>
 
 # Naming grammar:
 NM: module | <regex> | <example>
@@ -158,8 +181,10 @@ MO: #<m> | <path> | {<tags>}
 SY: #<m>.#<s> | <kind> | <Name>
 SG: #<m>.#<s> | (<Args>)-><Ret> [!raises[...]][mods...]
 
-# Edges:
+# Edges and relationships:
 ED: #<m>.#<s> -> #<m'>.#<s'> | <reason-tag>
+EVT: #<m>.#<s> | event | <name>
+ASYNC: #<m>.#<s> | async | <name>
 
 # Contracts & policy:
 IN: <predicate>
@@ -180,7 +205,7 @@ RV: <checklist item>
 
 ## CTX-CARD: Compact Context Encoding for Codebase Understanding
 
-```yaml
+```ctx
 # CTX-CARD: Compact Context Encoding for Codebase Understanding
 # Purpose: Provide minimal-token, high-information structural + semantic map of a codebase.
 # Goal: Enable precise reasoning over naming, types, relationships, and rules.
@@ -200,17 +225,22 @@ RV: <checklist item>
 ID: Global identity → proj|<slug> lang|<lang[,lang]> std|<style> ts|<YYYYMMDD>
 AL: Alias table → k=>Value (prefix-free; reused everywhere)
 NM: Naming grammar → scope | regex | example
+DEPS: External dependencies → name | category | description
+ENV: Environment configuration → name | category | description
+SEC: Security constraints → name | category | description
 TY: Type schema → kind | name | sig
 TK: Token/enum set → name | {k1,k2,...}
 MO: Module index → #id | path | {role-tags}
 SY: Symbol index → #mid.#sid | kind | name
 SG: Signature for symbol → #mid.#sid | signature
 ED: Edges (deps/calls) → src -> dst | reason
+EVT: Event relationships → #mid.#sid | event | name
 IN: Invariants/contracts → Hoare-style pre/post
 CN: Conventions → rule
 ER: Error taxonomy → Name | category | meaning
 IO: I/O contracts → endpoint | in | out | codes
 DT: Data shape → Name | {field:type[rule],...}
+ASYNC: Async patterns → #mid.#sid | async | name
 PX: Prohibited/allowed patterns → rule | reason
 EX: Canonical examples → micro example
 RV: Review focus → checklist
@@ -219,13 +249,18 @@ RV: Review focus → checklist
 ## 3. INTERPRETATION LOGIC (Agent Rules)
 1. **Read `ID`** first for global context.
 2. **Load `AL`** into vocabulary — expand aliases during reasoning.
-3. **Apply `NM`** patterns to validate or generate new names.
-4. **Link `MO` → SY`** → `SG` to form full symbol definitions.
-5. **Resolve edges** from `ED` using indices; infer dependencies & flow.
-6. **Use `DT` + `TY` + `TK`** to infer type constraints & enum logic.
-7. **Check `IN`, `CN`, `PX`** before suggesting or modifying code.
-8. **Use `IO`** to ensure API usage is consistent.
-9. **When diffing**, only process lines in `Δ`.
+3. **Check `DEPS`** for external dependencies and project scope.
+4. **Review `ENV`** for environment configuration requirements.
+5. **Validate `SEC`** for security constraints and permissions.
+6. **Apply `NM`** patterns to validate or generate new names.
+7. **Link `MO` → SY`** → `SG` to form full symbol definitions.
+8. **Resolve edges** from `ED` using indices; infer dependencies & flow.
+9. **Process `EVT`** for event relationships and handlers.
+10. **Use `DT` + `TY` + `TK`** to infer type constraints & enum logic.
+11. **Check `IN`, `CN`, `PX`** before suggesting or modifying code.
+12. **Use `IO`** to ensure API usage is consistent.
+13. **Consider `ASYNC`** patterns for async/await code generation.
+14. **When diffing**, only process lines in `Δ`.
 
 ## 4. FORMAT RULES
 - Tag, colon, single space, payload.

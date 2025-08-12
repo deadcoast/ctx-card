@@ -1,18 +1,19 @@
 """
-CTX-CARD renderer for CTX-CARD generator.
+Card renderer for CTX-CARD generator.
 
-This module handles CTX-CARD format generation with all advanced features.
+This module handles the generation of CTX-CARD format output.
 """
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Any
 
-from ..exceptions import ValidationError
-from ..types import ModuleInfo, ScanResult
-from ..utils.helpers import ascii_only, today_stamp
+from ..types import ModuleInfo
+from ..utils.helpers import today_stamp, ascii_only
 from ..utils.validation import validate_prefix_free
+from ..exceptions import ValidationError
 
 
 class CardRenderer:
@@ -44,124 +45,356 @@ class CardRenderer:
 
     def render_card(
         self,
-        proj: str,
+        project_name: str,
         langs: List[str],
         std: str,
         modules: Dict[str, ModuleInfo],
-        emit_ty: bool = False,
+        emit_type_signatures: bool = False,
     ) -> str:
-        """
-        Render CTX-CARD format output.
+        """Render CTX-CARD content."""
+        lines = []
 
-        Args:
-            proj: Project name
-            langs: Detected languages
-            std: Coding standard
-            modules: Module information
-            emit_ty: Whether to emit TY lines
+        # ID: Global identity
+        ts = today_stamp()
+        lines.append(f"ID: proj|{project_name} lang|{','.join(langs)} std|{std} ts|{ts}")
+        lines.append("")
 
-        Returns:
-            CTX-CARD formatted string
-        """
-        lines: List[str] = []
+        # AL: Alias table
+        aliases = self._extract_aliases(modules)
+        for alias in aliases:
+            lines.append(f"AL: {alias}")
+        lines.append("")
 
-        # ID line
-        lines.append(
-            f"ID: proj|{proj} lang|{','.join(langs)} std|{std} ts|{today_stamp()}"
-        )
+        # NM: Naming grammar
+        naming_patterns = self._extract_naming_patterns(modules)
+        for pattern in naming_patterns:
+            lines.append(f"NM: {pattern}")
+        lines.append("")
 
-        # AL lines (aliases)
-        for al in self.HEADER_ALIASES:
-            lines.append(f"AL: {al}")
+        # DEPS: External dependencies (NEW)
+        dependencies = self._extract_dependencies(modules)
+        if dependencies:
+            for dep in dependencies:
+                lines.append(f"DEPS: {dep}")
+            lines.append("")
 
-        # NM lines (naming grammar)
-        for scope, regex, example in self.NAMING_GRAMMAR_DEFAULT:
-            lines.append(f"NM: {scope} | {regex} | {example}")
+        # ENV: Environment configuration (NEW)
+        env_configs = self._extract_environment_configs(modules)
+        if env_configs:
+            for env in env_configs:
+                lines.append(f"ENV: {env}")
+            lines.append("")
 
-        # Sort modules by ID for deterministic output
-        mlist = sorted(modules.values(), key=lambda m: m.id)
+        # SEC: Security constraints (NEW)
+        security_constraints = self._extract_security_constraints(modules)
+        if security_constraints:
+            for sec in security_constraints:
+                lines.append(f"SEC: {sec}")
+            lines.append("")
 
-        # MO lines (modules)
-        for m in mlist:
-            tags = "{" + ",".join(sorted(m.role_tags)) + "}"
-            lines.append(f"MO: #{m.id} | {m.path} | {tags}")
+        # DT: Data shapes
+        data_types = self._extract_data_types(modules)
+        for dt in data_types:
+            lines.append(f"DT: {dt}")
+        lines.append("")
 
-        # SY, SG, IN, MD lines (symbols, signatures, invariants, modifiers)
-        for m in mlist:
-            for s in m.symbols:
-                lines.append(f"SY: #{m.id}.#{s.sid} | {s.kind} | {s.name}")
+        # TK: Token/enum sets
+        token_sets = self._extract_token_sets(modules)
+        for tk in token_sets:
+            lines.append(f"TK: {tk}")
+        lines.append("")
 
-                if s.kind == "fn" and s.signature:
-                    # Add raises information if available
-                    raises_part = f" !raises[{','.join(s.raises)}]" if s.raises else ""
-                    lines.append(f"SG: #{m.id}.#{s.sid} | {s.signature}{raises_part}")
+        # MO: Module index
+        for mi in modules.values():
+            role_tags = ",".join(sorted(mi.role_tags))
+            lines.append(f"MO: #{mi.id} | {mi.path} | {{{role_tags}}}")
+        lines.append("")
 
-                if s.invariants:
-                    lines.append(f"IN: {s.name} ⇒ {s.invariants}")
+        # SY: Symbol index
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                lines.append(f"SY: #{symbol.mid}.#{symbol.sid} | {symbol.kind} | {symbol.name}")
+        lines.append("")
 
-                if s.modifiers:
-                    lines.append(
-                        f"MD: #{m.id}.#{s.sid} | {{{','.join(sorted(s.modifiers))}}}"
+        # TY: Type signatures (optional)
+        if emit_type_signatures:
+            type_signatures = self._extract_type_signatures(modules)
+            for ty in type_signatures:
+                lines.append(f"TY: {ty}")
+            lines.append("")
+
+        # SG: Signatures
+        signatures = self._extract_signatures(modules)
+        for sg in signatures:
+            lines.append(f"SG: {sg}")
+        lines.append("")
+
+        # ED: Edges
+        edges = self._extract_edges(modules)
+        for edge in edges:
+            lines.append(f"ED: {edge}")
+        lines.append("")
+
+        # EVT: Event relationships (NEW)
+        event_relationships = self._extract_event_relationships(modules)
+        if event_relationships:
+            for evt in event_relationships:
+                lines.append(f"EVT: {evt}")
+            lines.append("")
+
+        # ASYNC: Async patterns (NEW)
+        async_patterns = self._extract_async_patterns(modules)
+        if async_patterns:
+            for async_pattern in async_patterns:
+                lines.append(f"ASYNC: {async_pattern}")
+            lines.append("")
+
+        # IN: Invariants
+        invariants = self._extract_invariants(modules)
+        for inv in invariants:
+            lines.append(f"IN: {inv}")
+        lines.append("")
+
+        # CN: Conventions
+        conventions = self._extract_conventions(modules)
+        for cn in conventions:
+            lines.append(f"CN: {cn}")
+        lines.append("")
+
+        # ER: Error taxonomy
+        errors = self._extract_errors(modules)
+        for er in errors:
+            lines.append(f"ER: {er}")
+        lines.append("")
+
+        # IO: I/O contracts
+        io_contracts = self._extract_io_contracts(modules)
+        for io in io_contracts:
+            lines.append(f"IO: {io}")
+        lines.append("")
+
+        # PX: Prohibited patterns
+        prohibited = self._extract_prohibited_patterns(modules)
+        for px in prohibited:
+            lines.append(f"PX: {px}")
+        lines.append("")
+
+        # EX: Examples
+        examples = self._extract_examples(modules)
+        for ex in examples:
+            lines.append(f"EX: {ex}")
+        lines.append("")
+
+        # RV: Review focus
+        review_items = self._extract_review_items(modules)
+        for rv in review_items:
+            lines.append(f"RV: {rv}")
+
+        return "\n".join(lines)
+
+    def _extract_aliases(self, _modules: Dict[str, ModuleInfo]) -> List[str]:  # pylint: disable=unused-argument
+        """Extract alias patterns from modules."""
+        # Default aliases that are commonly used
+        default_aliases = [
+            "cfg=>Configuration",
+            "svc=>Service",
+            "repo=>Repository",
+            "dto=>DataTransferObject",
+            "uc=>UseCase",
+            "http=>HTTP",
+            "db=>Database",
+            "jwt=>JWT"
+        ]
+        return default_aliases
+
+    def _extract_naming_patterns(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract naming patterns from modules."""
+        patterns = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                if symbol.kind == "mod":
+                    patterns.append(f"module | ^[a-z_]+$ | {symbol.name}")
+                elif symbol.kind == "cls":
+                    patterns.append(f"class | ^[A-Z][A-Za-z0-9]+$ | {symbol.name}")
+                elif symbol.kind == "fn":
+                    patterns.append(f"func | ^[a-z_]+$ | {symbol.name}")
+        return list(set(patterns))  # Remove duplicates
+
+    def _extract_dependencies(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract external dependencies from modules."""
+        dependencies = set()
+        for mi in modules.values():
+            # Look for common dependency patterns in imports
+            for import_path in mi.imports_paths:
+                deps = ['requests', 'pandas', 'numpy', 'fastapi', 'flask', 'sqlalchemy']
+                if any(dep in import_path.lower() for dep in deps):
+                    dependencies.add(f"{import_path} | external")
+        return sorted(dependencies)
+
+    def _extract_environment_configs(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract environment configuration patterns."""
+        env_configs = []
+        for mi in modules.values():
+            if 'cfg' in mi.role_tags or 'config' in mi.path.lower():
+                env_configs.append(f"{mi.path} | environment | config")
+        return env_configs
+
+    def _extract_security_constraints(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract security constraints from modules."""
+        security_constraints = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                if 'auth' in symbol.name.lower() or 'security' in symbol.name.lower():
+                    security_constraints.append(f"{symbol.name} | authentication | required")
+        return security_constraints
+
+    def _extract_data_types(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract data types from modules."""
+        data_types = []
+        for mi in modules.values():
+            for name, fields in mi.dts:
+                field_str = ",".join(f"{k}:{v}" for k, v in fields.items())
+                data_types.append(f"{name} | {{{field_str}}}")
+        return data_types
+
+    def _extract_token_sets(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract token/enum sets from modules."""
+        token_sets = []
+        for mi in modules.values():
+            for name, keys in mi.tokens:
+                keys_str = ",".join(keys)
+                token_sets.append(f"{name} | {{{keys_str}}}")
+        return token_sets
+
+    def _extract_type_signatures(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract type signatures from modules."""
+        type_signatures = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                if symbol.kind == "fn" and symbol.signature:
+                    raises_part = ""
+                    if symbol.raises:
+                        raises_part = f" !raises[{','.join(symbol.raises)}]"
+                    type_signatures.append(
+                        f"fn | {symbol.name} | {symbol.signature}{raises_part}"
                     )
+        return type_signatures
 
-        # DT lines (data transfer objects)
-        for m in mlist:
-            for name, fields in m.dts:
-                field_s = ",".join(f"{k}:{v}" for k, v in fields.items())
-                lines.append(f"DT: {name} | {{{field_s}}}")
+    def _extract_signatures(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract function signatures from modules."""
+        signatures = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                if symbol.kind == "fn" and symbol.signature:
+                    raises_part = ""
+                    if symbol.raises:
+                        raises_part = f" !raises[{','.join(symbol.raises)}]"
+                    signatures.append(
+                        f"#{symbol.mid}.#{symbol.sid} | {symbol.signature}{raises_part}"
+                    )
+        return signatures
 
-        # ER lines (errors)
-        for m in mlist:
-            for name, category, meaning in m.errors:
-                lines.append(f"ER: {name} | {category} | {meaning}")
-
-        # TK lines (tokens/enums)
-        for m in mlist:
-            for name, keys in m.tokens:
-                keys_s = ",".join(keys)
-                lines.append(f"TK: {name} | {{{keys_s}}}")
-
-        # ED lines (edges - imports)
-        for m in mlist:
-            for dep_path in sorted(m.imports_paths):
+    def _extract_edges(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract edge relationships from modules."""
+        edges = []
+        for mi in modules.values():
+            # Import edges
+            for dep_path in sorted(mi.imports_paths):
                 dep = modules.get(dep_path)
                 if dep:
-                    lines.append(f"ED: #{m.id}.#0 -> #{dep.id}.#0 | imports")
+                    edges.append(f"#{mi.id}.#0 -> #{dep.id}.#0 | imports")
 
-        # ED lines (edges - calls)
-        for m in mlist:
-            for caller_sid, (t_mid, t_sid) in m.calls:
-                lines.append(f"ED: #{m.id}.#{caller_sid} -> #{t_mid}.#{t_sid} | calls")
+            # Call edges
+            for caller_sid, (t_mid, t_sid) in mi.calls:
+                edges.append(f"#{mi.id}.#{caller_sid} -> #{t_mid}.#{t_sid} | calls")
+        return edges
 
-        # IO lines (API contracts)
-        for m in mlist:
-            for sid, verb, path_s, codes in m.routes:
-                codes_s = ",".join(codes)
-                fn = next((s for s in m.symbols if s.sid == sid), None)
+    def _extract_event_relationships(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract event relationships from modules."""
+        event_relationships = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                event_words = ['event', 'handler', 'callback', 'listener']
+                if any(event_word in symbol.name.lower() for event_word in event_words):
+                    event_relationships.append(
+                        f"#{symbol.mid}.#{symbol.sid} | event | {symbol.name}"
+                    )
+        return event_relationships
+
+    def _extract_async_patterns(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract async patterns from modules."""
+        async_patterns = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                async_words = ['async', 'await', 'future', 'coroutine']
+                if (symbol.kind == "fn" and 
+                    any(async_word in symbol.name.lower() for async_word in async_words)):
+                    async_patterns.append(
+                        f"#{symbol.mid}.#{symbol.sid} | async | {symbol.name}"
+                    )
+        return async_patterns
+
+    def _extract_invariants(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract invariants from modules."""
+        invariants = []
+        for mi in modules.values():
+            for symbol in mi.symbols:
+                if symbol.invariants:
+                    invariants.append(f"{symbol.name} ⇒ {symbol.invariants}")
+        return invariants
+
+    def _extract_conventions(self, _modules: Dict[str, ModuleInfo]) -> List[str]:  # pylint: disable=unused-argument
+        """Extract coding conventions from modules."""
+        conventions = [
+            "repos never import svc",
+            "async functions end with _async"
+        ]
+        return conventions
+
+    def _extract_errors(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract error taxonomy from modules."""
+        errors = []
+        for mi in modules.values():
+            for name, category, meaning in mi.errors:
+                errors.append(f"{name} | {category} | {meaning}")
+        return errors
+
+    def _extract_io_contracts(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract I/O contracts from modules."""
+        io_contracts = []
+        for mi in modules.values():
+            for sid, verb, path_s, codes in mi.routes:
+                codes_str = ",".join(codes)
+                fn = next((s for s in mi.symbols if s.sid == sid), None)
                 sig = fn.signature if fn else "(…)->Any"
                 in_sig = sig.split(")->")[0].lstrip("(") if ")->" in sig else ""
                 out_sig = sig.split(")->")[-1] if ")->" in sig else "Any"
-                lines.append(f"IO: {verb} {path_s} | {in_sig} | {out_sig} | {codes_s}")
+                io_contracts.append(f"{verb} {path_s} | {in_sig} | {out_sig} | {codes_str}")
+        return io_contracts
 
-        # PX lines (prohibited patterns)
-        for m in mlist:
-            for rule, reason in m.px:
-                lines.append(f"PX: {rule} | {reason}")
+    def _extract_prohibited_patterns(self, modules: Dict[str, ModuleInfo]) -> List[str]:
+        """Extract prohibited patterns from modules."""
+        prohibited = []
+        for mi in modules.values():
+            for rule, reason in mi.px:
+                prohibited.append(f"{rule} | {reason}")
+        return prohibited
 
-        # CN lines (conventions)
-        lines.append("CN: repos never import svc")
-        lines.append("CN: async functions end with _async")
+    def _extract_examples(self, _modules: Dict[str, ModuleInfo]) -> List[str]:  # pylint: disable=unused-argument
+        """Extract canonical examples from modules."""
+        examples = []
+        # This is a placeholder - in a real implementation, you would analyze modules
+        # for actual examples based on usage patterns
+        examples.append("var(repo) => user_repo")
+        return examples
 
-        # RV lines (review focus)
-        lines.append("RV: public functions have signatures & docstrings")
-
-        # TY lines (type signatures) - optional
-        if emit_ty:
-            self._append_ty_lines(lines, modules)
-
-        # Ensure ASCII-only output
-        result = "\n".join(lines) + "\n"
-        return ascii_only(result)
+    def _extract_review_items(self, _modules: Dict[str, ModuleInfo]) -> List[str]:  # pylint: disable=unused-argument
+        """Extract review focus items from modules."""
+        review_items = [
+            "public functions have signatures & docstrings",
+            "check invariants (IN) on public fn"
+        ]
+        return review_items
 
     def _append_ty_lines(
         self, lines: List[str], modules: Dict[str, ModuleInfo]
@@ -170,7 +403,9 @@ class CardRenderer:
         for m in modules.values():
             for s in m.symbols:
                 if s.kind == "fn" and s.signature:
-                    raises_part = f" !raises[{','.join(s.raises)}]" if s.raises else ""
+                    raises_part = ""
+                    if s.raises:
+                        raises_part = f" !raises[{','.join(s.raises)}]"
                     lines.append(f"TY: fn | {s.name} | {s.signature}{raises_part}")
 
     def generate_delta(self, old_path: Path, new_content: str) -> str:
@@ -270,11 +505,11 @@ class CardRenderer:
     def _render_for_package(
         self,
         root_card: str,
-        pkg: str,
+        _pkg: str,  # pylint: disable=unused-argument
         pkg_modules: List[ModuleInfo],
-        langs: List[str],
-        std: str,
-        proj: str,
+        _langs: List[str],  # pylint: disable=unused-argument
+        _std: str,  # pylint: disable=unused-argument
+        _proj: str,  # pylint: disable=unused-argument
     ) -> str:
         """Render CTX-CARD content for a specific package."""
         # Filter root card to only include relevant modules
@@ -346,6 +581,6 @@ class CardRenderer:
                 aliases.append(alias)
 
         if aliases:
-            valid_aliases, invalid_aliases = validate_prefix_free(aliases)
+            _, invalid_aliases = validate_prefix_free(aliases)
             if invalid_aliases:
                 raise ValidationError(f"Non-prefix-free aliases: {invalid_aliases}")

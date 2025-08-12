@@ -19,6 +19,12 @@ This document defines the VSCode TextMate grammar for CTX-CARD (`.ctx`) files. C
 - `AL:` - Alias table (prefix-free abbreviations)
 - `NM:` - Naming grammar with regex patterns
 
+#### **Configuration and Environment Tags**
+
+- `DEPS:` - External dependencies and versions
+- `ENV:` - Environment variables and configuration
+- `SEC:` - Security constraints and permissions
+
 #### **Index and Structure Tags**
 
 - `MO:` - Module index with role tags
@@ -29,6 +35,7 @@ This document defines the VSCode TextMate grammar for CTX-CARD (`.ctx`) files. C
 #### **Relationship Tags**
 
 - `ED:` - Edge relationships (imports/calls)
+- `EVT:` - Event relationships and handlers
 - `TY:` - Type signature schema (optional)
 
 #### **Semantic Tags**
@@ -39,6 +46,7 @@ This document defines the VSCode TextMate grammar for CTX-CARD (`.ctx`) files. C
 - `IO:` - I/O contracts (API endpoints)
 - `DT:` - Data shapes (schemata)
 - `TK:` - Token/enum keysets
+- `ASYNC:` - Asynchronous patterns and promises
 
 #### **Policy and Review Tags**
 
@@ -52,7 +60,7 @@ This document defines the VSCode TextMate grammar for CTX-CARD (`.ctx`) files. C
 #### **Tag Patterns**
 
 ```regex
-^(ID|AL|NM|MO|SY|SG|MD|ED|TY|IN|CN|ER|IO|DT|TK|PX|EX|RV|DELTA):
+^(ID|AL|NM|DEPS|ENV|SEC|MO|SY|SG|MD|ED|EVT|TY|IN|CN|ER|IO|DT|TK|ASYNC|PX|EX|RV|DELTA):
 ```
 
 #### **Index References**
@@ -145,7 +153,7 @@ This document defines the VSCode TextMate grammar for CTX-CARD (`.ctx`) files. C
       "patterns": [
         {
           "name": "keyword.control.ctx",
-          "match": "^(ID|AL|NM|MO|SY|SG|MD|ED|TY|IN|CN|ER|IO|DT|TK|PX|EX|RV|DELTA):"
+          "match": "^(ID|AL|NM|DEPS|ENV|SEC|MO|SY|SG|MD|ED|EVT|TY|IN|CN|ER|IO|DT|TK|ASYNC|PX|EX|RV|DELTA):"
         }
       ]
     },
@@ -364,6 +372,14 @@ ID: proj|complexApp lang|py,ts std|pep8,eslint ts|20241201
 AL: cfg=>Configuration svc=>Service repo=>Repository dto=>DataTransferObject
 AL: uc=>UseCase http=>HTTP db=>Database jwt=>JWT api=>API
 
+DEPS: requests | external | HTTP client library
+DEPS: pandas | external | Data analysis library
+DEPS: fastapi | external | Web framework
+ENV: auth_service | environment | config
+ENV: database_url | environment | config
+SEC: AuthService | authentication | required
+SEC: SecurityMiddleware | authorization | required
+
 NM: module | ^[a-z_]+$ | auth_service
 NM: class  | ^[A-Z][A-Za-z0-9]+$ | AuthService
 NM: func   | ^[a-z_]+$ | issue_token
@@ -391,6 +407,12 @@ ED: #1.#2 -> #2.#1 | uses:repo
 ED: #1.#2 -> #3.#1 | accepts:dto
 ED: #1.#2 -> #3.#2 | returns:dto
 ED: #1.#3 -> #2.#1 | uses:repo
+
+EVT: #1.#2 | event | login_event
+EVT: #1.#3 | event | token_refresh_event
+
+ASYNC: #1.#2 | async | login_async
+ASYNC: #1.#3 | async | refresh_token_async
 
 DT: UserCreds | {email:str,password:str,remember:bool}
 DT: AuthToken | {jwt:str,exp:datetime,user_id:int}

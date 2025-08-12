@@ -18,9 +18,15 @@ from .scanner import RepoScanner
 class ASTAnalyzer:
     """Coordinates AST analysis and call resolution."""
 
-    def __init__(self):
-        """Initialize the AST analyzer."""
-        self.scanner = RepoScanner()
+    def __init__(self, max_workers: int = 4, cache_size: int = 1000):
+        """
+        Initialize the AST analyzer.
+        
+        Args:
+            max_workers: Maximum number of parallel workers for file processing
+            cache_size: Maximum size of file content cache
+        """
+        self.scanner = RepoScanner(max_workers=max_workers, cache_size=cache_size)
         self.call_resolver = CallResolver()
 
     def analyze_repository(
@@ -42,7 +48,7 @@ class ASTAnalyzer:
             Complete scan result with all analysis
         """
         # Pass A: Initial scanning and symbol extraction
-        scan_result = self.scanner.scan_repo(root, include_glob, exclude_glob)
+        scan_result = self.scanner.scan_repository(root, include_glob, exclude_glob)
 
         # Pass B: Cross-module call resolution
         self.extract_calls(root, scan_result)

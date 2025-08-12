@@ -15,6 +15,11 @@ This document outlines the current project structure for the CTX-CARD generator,
 - **CLI Interface**: Command-line tool with multiple options
 - **Documentation**: Complete documentation suite
 - **CI/CD**: GitHub Actions workflow
+- **File Extension Support**: Native `.ctx` format with `--format ctx` option
+- **Validation System**: Comprehensive CTX-CARD format validation
+- **Performance Optimizations**: Parallel processing and caching for large codebases
+- **Enhanced Tag Types**: `DEPS:`, `ENV:`, `SEC:`, `EVT:`, `ASYNC:` for better AI comprehension
+- **LSP Integration**: Semantic token support for editor integration
 
 ### **Current Version**
 
@@ -174,10 +179,12 @@ This document outlines the current project structure for the CTX-CARD generator,
 #### Command-Line Options
 
 - **Basic Usage**: `python -m ctxcard_gen [path]`
-- **Output Options**: `--stdout`, `--per-package`
+- **Output Options**: `--stdout`, `--per-package`, `--format ctx`
 - **Filtering**: `--include`, `--exclude`, `--show-ignored`
 - **Analysis**: `--emit-ty`, `--delta-from`, `--stats`
 - **Project**: `--proj`, `--lang`
+- **Validation**: `--validate` for CTX-CARD format validation
+- **Performance**: `--max-workers N`, `--cache-size N` for large codebases
 
 #### Entry Points
 
@@ -281,14 +288,6 @@ CTXCARD_INCLUDE_COMMENTS=false
 - **pytest**: Testing
 - **coverage**: Coverage reporting
 
-### Code Quality Tools
-
-- **Black**: Code formatting (88 character line length)
-- **isort**: Import sorting
-- **flake8**: Linting with PEP 8 compliance
-- **pytest**: Testing framework with coverage
-- **mypy**: Type checking (optional)
-
 ### Development Commands
 
 ```bash
@@ -328,10 +327,19 @@ pytest --cov=src/ctxcard_gen
 ### Optimization Strategies
 
 - **Lazy Loading**: Load files only when needed
-- **Parallel Processing**: Process multiple files concurrently
-- **Caching**: Cache AST parsing results
-- **Memory Management**: Efficient data structures
+- **Parallel Processing**: Process multiple files concurrently with configurable workers
+- **File Caching**: LRU cache for file content to reduce I/O overhead
+- **Memory Management**: Efficient data structures and configurable cache sizes
 - **Streaming**: Process large files in chunks
+- **Performance Tuning**: CLI options for `--max-workers` and `--cache-size`
+
+### Performance Features
+
+- **Automatic Parallelization**: Uses parallel processing for codebases with >50 files
+- **Configurable Workers**: `--max-workers N` option for performance tuning
+- **File Content Caching**: `--cache-size N` option for memory management
+- **Thread-Safe Operations**: Proper locking for concurrent file processing
+- **Memory Efficiency**: LRU cache with configurable size limits
 
 ### Monitoring
 
@@ -375,12 +383,14 @@ pytest --cov=src/ctxcard_gen
 
 - **Format Compliance**: Full CTX-CARD v2.1 specification
 - **Tag Support**: All required tags (ID, AL, NM, MO, SY, SG, ED, etc.)
+- **Enhanced Tags**: `DEPS:`, `ENV:`, `SEC:`, `EVT:`, `ASYNC:` for comprehensive AI comprehension
 - **Delta Generation**: Diff-based updates with DELTA tags
 - **Per-package Output**: Separate CTX-CARD files per package
 - **Type Signatures**: Optional TY: line emission
 - **Statistics**: Analysis statistics output
 - **ASCII Output**: Guaranteed ASCII-only output
-- **Validation**: Prefix-free alias validation
+- **Validation**: Prefix-free alias validation and comprehensive format validation
+- **File Format**: Support for both `.md` and `.ctx` extensions
 
 ### File Management
 
@@ -412,3 +422,28 @@ pytest --cov=src/ctxcard_gen
 - **Dependency Analysis**: Deep dependency graphs
 - **Security Scanning**: Security vulnerability detection
 - **Performance Analysis**: Performance bottleneck detection
+
+## Validation and Quality Assurance
+
+### CTX-CARD Validation
+
+- **Structure Validation**: Validates required tags and format compliance
+- **ASCII Compliance**: Ensures output meets CTX-CARD ASCII-only requirement
+- **Cross-Reference Validation**: Validates index references and edge relationships
+- **Semantic Token Generation**: LSP-compatible token generation for editor integration
+- **Comprehensive Reports**: Detailed validation reports with errors and warnings
+
+### Validation Features
+
+- **`--validate` Option**: CLI flag for output validation
+- **Real-time Validation**: Validation during generation process
+- **Error Reporting**: Detailed error messages with line numbers
+- **Warning System**: Non-critical issues reported as warnings
+- **LSP Integration**: Semantic tokens for advanced editor support
+
+### Quality Metrics
+
+- **Format Compliance**: Ensures CTX-CARD specification adherence
+- **Token Efficiency**: Validates information density requirements
+- **Cross-Reference Integrity**: Checks index and edge consistency
+- **Naming Convention Compliance**: Validates regex pattern adherence

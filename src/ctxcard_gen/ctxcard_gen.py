@@ -38,9 +38,9 @@ from .types import GeneratorConfig
 class CTXCardGenerator:
     """Main CTX-CARD generator class."""
 
-    def __init__(self, config: GeneratorConfig):
+    def __init__(self, config: GeneratorConfig, max_workers: int = 4, cache_size: int = 1000):
         self.config = config
-        self.analyzer = ASTAnalyzer()
+        self.analyzer = ASTAnalyzer(max_workers=max_workers, cache_size=cache_size)
         self.renderer = CardRenderer()
 
     def generate(self) -> str:
@@ -105,9 +105,10 @@ class CTXCardGenerator:
         """Save per-package CTX-CARD files."""
         output_dir = self.config.output_path.parent
         base_name = self.config.output_path.stem
+        extension = self.config.output_path.suffix
 
         for pkg, content in packages.items():
-            pkg_path = output_dir / f"{base_name}.{pkg}.md"
+            pkg_path = output_dir / f"{base_name}.{pkg}{extension}"
             pkg_path.write_text(content, encoding="utf-8")
             print(f"Wrote {pkg_path}")
 
@@ -147,6 +148,38 @@ def main() -> None:
     parser.add_argument(
         "--show-ignored", action="store_true", help="Show ignored files and patterns"
     )
+    parser.add_argument(
+        "--format", 
+        choices=["md", "ctx"], 
+        default="md", 
+        help="Output format: 'md' for .md files, 'ctx' for .ctx files (default: md)"
+    )
+    parser.add_argument(
+        "--validate", 
+        action="store_true", 
+        help="Validate CTX-CARD output and report errors/warnings"
+    )
+    parser.add_argument(
+        "--max-workers", 
+        type=int, 
+        default=4, 
+        help="Maximum parallel workers for large codebases (default: 4)"
+    )
+    parser.add_argument(
+        "--cache-size", 
+        type=int, 
+        default=1000, 
+        help="File cache size for performance optimization (default: 1000)"
+    )
+    parser.add_argument(
+        "--export-format",
+        choices=["json", "yaml", "xml", "md"],
+        help="Export CTX-CARD to additional format (JSON, YAML, XML, or enhanced Markdown)"
+    )
+    parser.add_argument(
+        "--export-path",
+        help="Output path for exported format (default: same directory as main output)"
+    )
 
     args = parser.parse_args()
 
@@ -158,7 +191,23 @@ def main() -> None:
             sys.exit(1)
 
         project_name = args.proj or root_path.name
-        output_path = Path(args.out)
+        
+        # Handle output format
+        if args.format == "ctx":
+            # Use .ctx extension for CTX-CARD format
+            output_path = Path(args.out)
+            if output_path.suffix == ".md":
+                output_path = output_path.with_suffix(".ctx")
+            elif output_path.suffix != ".ctx":
+                output_path = output_path.with_suffix(".ctx")
+        else:
+            # Use .md extension for markdown format
+            output_path = Path(args.out)
+            if output_path.suffix == ".ctx":
+                output_path = output_path.with_suffix(".md")
+            elif output_path.suffix != ".md":
+                output_path = output_path.with_suffix(".md")
+        
         delta_from = Path(args.delta_from) if args.delta_from else None
 
         config = GeneratorConfig(
@@ -173,9 +222,28 @@ def main() -> None:
             per_package=args.per_package,
         )
 
-        # Generate CTX-CARD
-        generator = CTXCardGenerator(config)
+        # Generate CTX-CARD with performance options
+        generator = CTXCardGenerator(config, max_workers=args.max_workers, cache_size=args.cache_size)
         content = generator.generate()
+
+        # Validate output if requested
+        if args.validate:
+            from ctxcard_gen.utils.validation import get_validation_report
+            report = get_validation_report(content)
+            
+            if report["errors"]:
+                print("\nValidation Errors:")
+                for error in report["errors"]:
+                    print(f"  ❌ {error}")
+            
+            if report["warnings"]:
+                print("\nValidation Warnings:")
+                for warning in report["warnings"]:
+                    print(f"  ⚠️  {warning}")
+            
+            if report["valid"] and not report["warnings"]:
+                print("\n✅ CTX-CARD validation passed")
+            print()
 
         # Print statistics if requested
         if args.stats:
@@ -206,6 +274,30 @@ def main() -> None:
 
         # Save main output
         generator.save_output(content)
+
+        # Export to additional format if requested
+        if args.export_format:
+            from ctxcard_gen.utils.export import (
+                export_to_json, export_to_yaml, export_to_xml, export_to_markdown
+            )
+            
+            # Determine export path
+            if args.export_path:
+                export_path = Path(args.export_path)
+            else:
+                export_path = output_path.parent / f"{output_path.stem}.{args.export_format}"
+            
+            # Export based on format
+            if args.export_format == "json":
+                export_to_json(content, export_path)
+            elif args.export_format == "yaml":
+                export_to_yaml(content, export_path)
+            elif args.export_format == "xml":
+                export_to_xml(content, export_path)
+            elif args.export_format == "md":
+                export_to_markdown(content, export_path)
+            
+            print(f"Exported to {export_path}")
 
         # Generate per-package files if requested
         if args.per_package and not args.stdout:

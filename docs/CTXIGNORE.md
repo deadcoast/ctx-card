@@ -37,7 +37,7 @@ The `.ctxignore` file uses glob patterns with the following features:
 
 ### Basic .ctxignore File
 
-```
+```.ctxignore
 # Python cache files
 __pycache__/
 *.pyc
@@ -66,7 +66,7 @@ temp/
 
 ### Using Negation
 
-```
+```.ctxignore
 # Ignore all Python files
 *.py
 
@@ -78,7 +78,7 @@ temp/
 
 ### Complex Patterns
 
-```
+```.ctxignore
 # Ignore all files in node_modules
 node_modules/
 

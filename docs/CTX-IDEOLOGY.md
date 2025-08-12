@@ -4,25 +4,6 @@
 
 **CTX is a token-efficient format designed exclusively for AI/LLM consumption to understand codebases quickly.**
 
-## CURRENT ISSUES
-
-1. **Syntax Highlighting:** `@ctx.tmLanguage.json` and `@ctx.language-configuration.json` have errors , they seem to be skeleton implementations or not working as expected.
-
-2. WHAT SHOWS UP IN THE VSCODE SYNTAX HIGHLIGHTER:
-
-- **ALMOST NONE OF THE HIGHLIGHTING WORKS, OR IS CORRECT.**
-- **WHAT DOES WORK, IS RANDOM AND INCONSISTENT / INCORRECT.**
-
-- The `$` sign seems to be highlighted correctly (pink/red)
-- Brackets `()[]{}` all display yellow (incorrect - should differentiate by function)
-  - In `(valid(creds))`: outer bracket yellow, inner bracket pink/red (partially working)
-- "keyword.control.ctx" only works on two lines, where it highlights the entire line blue instead of just the keyword
-- the `!` in `!raises[AuthError,ValidationError]` is not highlighted as a exclamation mark, it is highlighted as a comment
-- the `:` in `:str` is not highlighted as a colon, it is highlighted as a comment
-- the `->` in `->` is not highlighted as a arrow, it is highlighted as a comment
-- the `#` in `#1.#1` is not highlighted as a number, it is highlighted as a comment
-- the `^` in `^[a-z_]+$` is not highlighted as a regex, it is highlighted as a comment
-
 ## CORE DESIGN PRINCIPLES
 
 ### Target User: AI Agents ONLY

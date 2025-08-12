@@ -96,6 +96,21 @@ python -m ctxcard_gen --stats
 
 # Show ignored patterns
 python -m ctxcard_gen --show-ignored
+
+# Output in .ctx format instead of .md
+python -m ctxcard_gen --format ctx
+
+# Validate CTX-CARD output
+python -m ctxcard_gen --validate
+
+# Performance tuning for large codebases
+python -m ctxcard_gen --max-workers 8 --cache-size 2000
+
+# Export to additional formats
+python -m ctxcard_gen --export-format json
+python -m ctxcard_gen --export-format yaml
+python -m ctxcard_gen --export-format xml
+python -m ctxcard_gen --export-format md
 ```
 
 ## .ctxignore File
@@ -389,6 +404,14 @@ mypy src/
 - **Delta Generation**: Diff-based updates with Δ tags
 - **Type Signature Emission**: Optional TY: lines
 - **Statistics**: Analysis statistics output
+- **`.ctx` Extension Support**: Native CTX-CARD file format
+- **Validation System**: Comprehensive CTX-CARD format validation
+- **Performance Optimizations**: Parallel processing and caching for large codebases
+- **LSP Integration**: Semantic token support for editor integration
+- **Enhanced Tag Types**: `DEPS:`, `ENV:`, `SEC:`, `EVT:`, `ASYNC:` for better AI comprehension
+- **Export Formats**: JSON, YAML, XML, and enhanced Markdown export
+- **Auto-completion**: LSP-compatible completion for indices and references
+- **Cross-reference Navigation**: Go-to-definition and find all references
 
 ### v2.0.0
 

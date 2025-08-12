@@ -1,24 +1,27 @@
 """
 Repository scanner for CTX-CARD generator.
 
-This module handles file discovery, module indexing, and initial scanning of repositories.
+This module handles file discovery, module indexing, and initial scanning.
 """
 
 from __future__ import annotations
 
 import ast
+import os
+import re
+import threading
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple, Any
 
-from ..exceptions import FileError, ParseError
-from ..types import ModuleInfo, ScanResult, Symbol
+from ..exceptions import ValidationError
+from ..types import ModuleInfo, Symbol, ScanResult
 from ..utils.helpers import (
-    ann_to_str,
-    ascii_only,
-    file_to_dotted,
     is_probably_binary,
     relpath,
-    today_stamp,
+    file_to_dotted,
+    ann_to_str,
 )
 from ..utils.ignore import load_ignore_file
 
@@ -45,9 +48,32 @@ class RepoScanner:
         ".cs",
     }
 
-    def __init__(self):
-        """Initialize the repository scanner."""
-        pass
+    def __init__(self, max_workers: int = 4, cache_size: int = 1000):
+        """
+        Initialize the repository scanner.
+
+        Args:
+            max_workers: Maximum number of parallel workers for file processing
+            cache_size: Maximum size of file content cache
+        """
+        self.max_workers = max_workers
+        self.cache_size = cache_size
+        self._file_cache: Dict[Path, str] = {}
+        self._cache_lock = threading.Lock()
+
+    def _get_cached_content(self, file_path: Path) -> Optional[str]:
+        """Get file content from cache if available."""
+        with self._cache_lock:
+            return self._file_cache.get(file_path)
+
+    def _set_cached_content(self, file_path: Path, content: str) -> None:
+        """Cache file content with size limit."""
+        with self._cache_lock:
+            if len(self._file_cache) >= self.cache_size:
+                # Remove oldest entry (simple LRU)
+                oldest_key = next(iter(self._file_cache))
+                del self._file_cache[oldest_key]
+            self._file_cache[file_path] = content
 
     def is_code_file(self, path: Path) -> bool:
         """Check if a file is a code file."""
@@ -78,12 +104,12 @@ class RepoScanner:
         """Detect programming languages in the repository."""
         # Load ignore file
         ignore_file = load_ignore_file(root)
-        
+
         exts = set()
         for p in root.rglob("*"):
             if p.is_file() and not ignore_file.should_ignore(p):
                 exts.add(p.suffix.lower())
-        
+
         lang_map = {
             ".py": "py",
             ".ts": "ts",
@@ -129,47 +155,37 @@ class RepoScanner:
                 return rp
         return None
 
-    def scan_repo(
-        self, root: Path, include_glob: Optional[str], exclude_glob: Optional[str]
+    def scan_repository(
+        self, root: Path, include_pattern: Optional[str] = None, exclude_pattern: Optional[str] = None
     ) -> ScanResult:
-        """
-        Scan a repository and build module information.
-
-        Args:
-            root: Repository root path
-            include_glob: Glob pattern for files to include
-            exclude_glob: Glob pattern for files to exclude
-
-        Returns:
-            ScanResult with modules and detected languages
-        """
+        """Scan repository and build module indices."""
         # Load ignore file
         ignore_file = load_ignore_file(root)
-        
-        # Discover files
-        files = []
-        it = root.rglob("**/*" if include_glob is None else include_glob)
-        for p in it:
-            if not p.is_file():
-                continue
-            if exclude_glob and p.match(exclude_glob):
-                continue
-            if ignore_file.should_ignore(p):
-                continue
-            if self.is_code_file(p):
-                files.append(p)
 
-        files = sorted(set(files), key=lambda x: relpath(x, root))
+        # Find all code files
+        code_files = []
+        for p in root.rglob("*"):
+            if (
+                p.is_file()
+                and self.is_code_file(p)
+                and not ignore_file.should_ignore(p)
+            ):
+                rel_path = relpath(p, root)
+                if include_pattern and not p.match(include_pattern):
+                    continue
+                if exclude_pattern and p.match(exclude_pattern):
+                    continue
+                code_files.append(rel_path)
 
-        # Build module information
+        # Build initial module info
         modules: Dict[str, ModuleInfo] = {}
         mid = 1
-
-        for path in files:
-            rp = relpath(path, root)
-            md = file_to_dotted(rp)
+        for rp in sorted(code_files):
             mi = ModuleInfo(
-                id=mid, path=rp, dotted=md, role_tags=self.role_tags_for(rp)
+                id=mid,
+                path=rp,
+                dotted=file_to_dotted(rp),
+                role_tags=self.role_tags_for(rp),
             )
             mi.symbols.append(Symbol(mid=mid, sid=1, kind="mod", name=Path(rp).stem))
             modules[rp] = mi
@@ -178,7 +194,25 @@ class RepoScanner:
         # Build indices for resolution
         dotted_to_path, stem_to_paths = self.build_indices(modules)
 
-        # Process Python files
+        # Process Python files with parallel processing for large codebases
+        if len(code_files) > 50:  # Use parallel processing for large codebases
+            self._process_files_parallel(root, modules, dotted_to_path, stem_to_paths)
+        else:
+            self._process_files_sequential(root, modules, dotted_to_path, stem_to_paths)
+
+        # Detect languages
+        langs = self.detect_langs(root)
+
+        return ScanResult(modules=modules, langs=langs)
+
+    def _process_files_sequential(
+        self,
+        root: Path,
+        modules: Dict[str, ModuleInfo],
+        dotted_to_path: Dict[str, str],
+        stem_to_paths: Dict[str, List[str]],
+    ):
+        """Process files sequentially (original method)."""
         for rp, mi in modules.items():
             full = root / rp
             if full.suffix.lower() != ".py":
@@ -187,7 +221,7 @@ class RepoScanner:
             try:
                 src = full.read_text(encoding="utf-8", errors="replace")
                 tree = ast.parse(src, filename=str(full))
-            except Exception as e:
+            except Exception:  # pylint: disable=broad-except
                 # Skip files that can't be parsed
                 continue
 
@@ -197,17 +231,58 @@ class RepoScanner:
             # Process symbols and extract metadata
             self._process_symbols(tree, mi, rp)
 
-        # Detect languages
-        langs = self.detect_langs(root)
+    def _process_files_parallel(
+        self,
+        root: Path,
+        modules: Dict[str, ModuleInfo],
+        dotted_to_path: Dict[str, str],
+        stem_to_paths: Dict[str, List[str]],
+    ):
+        """Process files in parallel for better performance."""
+        def process_single_file(rp: str) -> Tuple[str, Optional[ast.AST]]:
+            """Process a single file and return AST if successful."""
+            full = root / rp
+            if full.suffix.lower() != ".py":
+                return rp, None
 
-        return ScanResult(modules=modules, langs=langs)
+            try:
+                # Check cache first
+                cached_content = self._get_cached_content(full)
+                if cached_content is None:
+                    cached_content = full.read_text(encoding="utf-8", errors="replace")
+                    self._set_cached_content(full, cached_content)
+
+                tree = ast.parse(cached_content, filename=str(full))
+                return rp, tree
+            except Exception:  # pylint: disable=broad-except
+                # Skip files that can't be parsed
+                return rp, None
+
+        # Process files in parallel
+        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+            future_to_rp = {
+                executor.submit(process_single_file, rp): rp
+                for rp in modules.keys()
+            }
+
+            for future in as_completed(future_to_rp):
+                rp, tree = future.result()
+                if tree is not None:
+                    mi = modules[rp]
+                    full = root / rp
+
+                    # Process imports and build import paths
+                    self._process_imports(tree, mi, full, root, dotted_to_path, stem_to_paths)
+
+                    # Process symbols and extract metadata
+                    self._process_symbols(tree, mi, rp)
 
     def _process_imports(
         self,
         tree: ast.AST,
         mi: ModuleInfo,
-        full: Path,
-        root: Path,
+        _full: Path,  # pylint: disable=unused-argument
+        _root: Path,  # pylint: disable=unused-argument
         dotted_to_path: Dict[str, str],
         stem_to_paths: Dict[str, List[str]],
     ):
@@ -427,7 +502,7 @@ class RepoScanner:
             mi.dts.append((cls, fields))
 
     def _process_routes(
-        self, node: ast.FunctionDef | ast.AsyncFunctionDef, mi: ModuleInfo, sid: int
+        self, node: ast.FunctionDef | ast.AsyncFunctionDef, mi: ModuleInfo, _sid: int  # pylint: disable=unused-argument
     ):
         """Process API route decorators."""
         for d in node.decorator_list:
@@ -449,7 +524,7 @@ class RepoScanner:
                         and isinstance(d.args[0], ast.Constant)
                         and isinstance(d.args[0].value, str)
                     ):
-                        mi.routes.append((sid, verb, d.args[0].value, ["200"]))
+                        mi.routes.append((_sid, verb, d.args[0].value, ["200"]))
 
                 if nm and nm.endswith(".route"):
                     pathv = None
@@ -471,7 +546,7 @@ class RepoScanner:
                                     verb = elt.value.upper()
                                     break
                     if pathv:
-                        mi.routes.append((sid, verb, pathv, ["200"]))
+                        mi.routes.append((_sid, verb, pathv, ["200"]))
 
     # Helper methods for AST analysis
     def _dotted_from_ast(self, expr: ast.AST) -> str:

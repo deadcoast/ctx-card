@@ -1,26 +1,25 @@
 """
 Call resolver for CTX-CARD generator.
 
-This module handles cross-module function call resolution and re-export processing.
+This module handles cross-module function call resolution and import analysis.
 """
 
 from __future__ import annotations
 
 import ast
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Tuple
 
-from ..exceptions import ASTError
-from ..types import ModuleInfo, ScanResult
-from ..utils.helpers import file_to_dotted
+from ..exceptions import ValidationError
+from ..types import ModuleInfo, Symbol, ScanResult
 
 
 class CallResolver:
-    """Resolves cross-module function calls and handles re-exports."""
+    """Resolves function calls across modules."""
 
     def __init__(self):
         """Initialize the call resolver."""
-        pass
+        pass  # pylint: disable=unnecessary-pass
 
     def build_reexports_global(self, modules: Dict[str, ModuleInfo]) -> Dict[str, str]:
         """Build global re-export mappings across all modules."""
@@ -73,7 +72,7 @@ class CallResolver:
                 return None, None, "module_not_found"
 
             mt = modules[rp_target]
-            mod_prefix_len = len(file_to_dotted(rp_target).split("."))
+            mod_prefix_len = len(mt.dotted.split("."))
             parts = dotted.split(".")
             rest = parts[mod_prefix_len:]
 
