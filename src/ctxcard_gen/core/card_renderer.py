@@ -6,9 +6,8 @@ This module handles the generation of CTX-CARD format output.
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List
 
 from ..types import ModuleInfo
 from ..utils.helpers import today_stamp, ascii_only
@@ -41,7 +40,6 @@ class CardRenderer:
 
     def __init__(self):
         """Initialize the card renderer."""
-        pass
 
     def render_card(
         self,
@@ -327,7 +325,7 @@ class CardRenderer:
         for mi in modules.values():
             for symbol in mi.symbols:
                 async_words = ['async', 'await', 'future', 'coroutine']
-                if (symbol.kind == "fn" and 
+                if (symbol.kind == "fn" and
                     any(async_word in symbol.name.lower() for async_word in async_words)):
                     async_patterns.append(
                         f"#{symbol.mid}.#{symbol.sid} | async | {symbol.name}"
@@ -434,7 +432,7 @@ class CardRenderer:
             delta_lines = self._diff_lines(old_lines, new_lines)
             if delta_lines:
                 return "\n" + "\n".join(delta_lines) + "\n"
-        except Exception:
+        except Exception:  # pylint: disable=broad-exception-caught
             pass
 
         return ""

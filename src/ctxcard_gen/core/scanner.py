@@ -7,22 +7,13 @@ This module handles file discovery, module indexing, and initial scanning.
 from __future__ import annotations
 
 import ast
-import os
-import re
 import threading
-from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple, Any
+from typing import Dict, List, Optional, Set, Tuple
 
-from ..exceptions import ValidationError
 from ..types import ModuleInfo, Symbol, ScanResult
-from ..utils.helpers import (
-    is_probably_binary,
-    relpath,
-    file_to_dotted,
-    ann_to_str,
-)
+from ..utils.helpers import is_probably_binary, relpath, file_to_dotted, ann_to_str
 from ..utils.ignore import load_ignore_file
 
 
@@ -156,7 +147,7 @@ class RepoScanner:
         return None
 
     def scan_repository(
-        self, root: Path, include_pattern: Optional[str] = None, exclude_pattern: Optional[str] = None
+        self, root: Path, include_pattern: Optional[str] = None, exclude_pattern: Optional[str] = None  # pylint: disable=line-too-long
     ) -> ScanResult:
         """Scan repository and build module indices."""
         # Load ignore file
@@ -435,7 +426,7 @@ class RepoScanner:
         node: ast.FunctionDef | ast.AsyncFunctionDef,
         mi: ModuleInfo,
         sid: int,
-        rp: str,
+        rp: str,  # pylint: disable=unused-argument
     ) -> int:
         """Process a function definition."""
         name = node.name

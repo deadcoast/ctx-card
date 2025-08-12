@@ -7,10 +7,9 @@ files and directories from CTX-CARD generation.
 
 from __future__ import annotations
 
-import fnmatch
 import re
 from pathlib import Path
-from typing import List, Set
+from typing import List
 
 
 class IgnorePattern:
@@ -28,7 +27,7 @@ class IgnorePattern:
         self.line_number = line_number
         self.is_negation = pattern.startswith("!")
         self.is_directory = pattern.endswith("/")
-        
+
         # Convert glob pattern to regex
         self.regex = self._glob_to_regex(pattern)
 
@@ -49,41 +48,41 @@ class IgnorePattern:
         # Convert glob wildcards to regex
         # Handle ** (recursive directory matching)
         pattern = pattern.replace("**", "__RECURSIVE__")
-        
+
         # Handle character classes before escaping
         # Replace [!abc] with a special marker
         pattern = re.sub(r"\[!([^\]]+)\]", r"__NEGATED__\1__END__", pattern)
-        
+
         # Escape regex special characters
         pattern = re.escape(pattern)
-        
+
         # Convert glob wildcards to regex
         pattern = pattern.replace("\\*", ".*")  # * -> .*
         pattern = pattern.replace("\\?", ".")   # ? -> .
-        
+
         # Handle recursive directory matching
         pattern = pattern.replace("__RECURSIVE__", ".*")
-        
+
         # Fix **/* patterns to match files directly in directory
         pattern = re.sub(r"\.\*/\.\*", ".*", pattern)
-        
+
         # Handle character classes like [abc]
         pattern = pattern.replace("\\[", "[")
         pattern = pattern.replace("\\]", "]")
-        
+
         # Handle negated character classes
         pattern = re.sub(r"__NEGATED__([^_]+)__END__", r"[^\1]", pattern)
-        
+
         # Handle regular character classes
         pattern = re.sub(r"\[([^\\]+)\]", r"[\1]", pattern)
-        
+
         # Handle directory patterns
         if pattern.endswith("/"):
             pattern = pattern[:-1] + "(/.*)?"
-        
+
         # Anchor to start and end
         pattern = f"^{pattern}$"
-        
+
         return re.compile(pattern, re.IGNORECASE)
 
     def matches(self, path: str) -> bool:
@@ -116,7 +115,7 @@ class IgnoreFile:
     def _load_ignore_file(self) -> None:
         """Load and parse .ctxignore file."""
         ignore_file = self.root_path / ".ctxignore"
-        
+
         if not ignore_file.exists():
             return
 
@@ -124,16 +123,16 @@ class IgnoreFile:
             with ignore_file.open("r", encoding="utf-8") as f:
                 for line_num, line in enumerate(f, 1):
                     line = line.strip()
-                    
+
                     # Skip empty lines and comments
                     if not line or line.startswith("#"):
                         continue
-                    
+
                     # Create pattern
                     pattern = IgnorePattern(line, line_num)
                     self.patterns.append(pattern)
-                    
-        except Exception as e:
+
+        except Exception as e:  # pylint: disable=broad-exception-caught
             # Log error but continue without ignore file
             print(f"Warning: Could not read .ctxignore file: {e}")
 
@@ -158,7 +157,7 @@ class IgnoreFile:
         # Check against all patterns
         negations: List[IgnorePattern] = []
         positives: List[IgnorePattern] = []
-        
+
         for pattern in self.patterns:
             if pattern.is_negation:
                 negations.append(pattern)

@@ -149,13 +149,15 @@
 ### **Mathematical Efficiency Requirements**
 
 All enhancements must meet the core CTX principle:
-```
+
+```ctx
 (CTX-CARD Output Tokens + Training Docs Tokens) < (Raw Source Analysis Tokens)
 ```
 
 ### **Correct CTX-CARD Principles**
 
 Based on the actual documentation, CTX-CARD should provide:
+
 1. **Structural and semantic maps** of codebases (not just architectural)
 2. **Information density** without loss of meaning
 3. **Token efficiency** for AI comprehension
@@ -183,6 +185,7 @@ Based on the actual documentation, CTX-CARD should provide:
 ### **Token Efficiency Verification**
 
 For every implemented enhancement, we verify:
+
 - **Information density**: More information in fewer tokens
 - **AI comprehension**: Easier for AI agents to understand
 - **Structural value**: Contributes to codebase understanding

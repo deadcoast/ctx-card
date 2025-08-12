@@ -21,7 +21,7 @@ class ASTAnalyzer:
     def __init__(self, max_workers: int = 4, cache_size: int = 1000):
         """
         Initialize the AST analyzer.
-        
+
         Args:
             max_workers: Maximum number of parallel workers for file processing
             cache_size: Maximum size of file content cache
@@ -52,7 +52,7 @@ class ASTAnalyzer:
 
         # Pass B: Cross-module call resolution
         self.extract_calls(root, scan_result)
-        
+
         # Process re-exports
         self.call_resolver.process_reexports(scan_result.modules)
 

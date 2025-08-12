@@ -10,8 +10,7 @@ import ast
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from ..exceptions import ValidationError
-from ..types import ModuleInfo, Symbol, ScanResult
+from ctxcard_gen.types import ModuleInfo, ScanResult
 
 
 class CallResolver:
@@ -19,7 +18,6 @@ class CallResolver:
 
     def __init__(self):
         """Initialize the call resolver."""
-        pass  # pylint: disable=unnecessary-pass
 
     def build_reexports_global(self, modules: Dict[str, ModuleInfo]) -> Dict[str, str]:
         """Build global re-export mappings across all modules."""
@@ -117,7 +115,8 @@ class CallResolver:
             try:
                 src = full.read_text(encoding="utf-8", errors="replace")
                 tree = ast.parse(src, filename=str(full))
-            except Exception:
+            except Exception as e:  # pylint: disable=broad-exception-caught
+                print(f"Error parsing {full}: {e}")
                 continue
 
             # Add parent links for AST traversal
