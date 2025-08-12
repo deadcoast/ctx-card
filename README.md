@@ -2,6 +2,8 @@
 
 A Python CLI application for generating **CTX-CARD** format codebase documentation. CTX-CARD is a prefix-free, information-dense codebook with edge lists and naming grammar that provides minimal-token, high-information structural and semantic maps of codebases.
 
+Review [Index](docs/INDEX.md) for documentation map.
+
 ## Features
 
 - **AST-based Analysis**: Deep Python code parsing using the `ast` module
