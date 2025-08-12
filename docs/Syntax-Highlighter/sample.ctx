@@ -1,0 +1,72 @@
+# CTX-CARD Sample File for Syntax Highlighting Test
+ID: proj|sampleApp lang|py,ts std|pep8,eslint ts|20241201
+
+AL: cfg=>Configuration svc=>Service repo=>Repository dto=>DataTransferObject
+AL: uc=>UseCase http=>HTTP db=>Database jwt=>JWT api=>API
+
+NM: module | ^[a-z_]+$ | auth_service
+NM: class  | ^[A-Z][A-Za-z0-9]+$ | AuthService
+NM: func   | ^[a-z_]+$ | issue_token
+NM: var    | ^[a-z_]+$ | user_repo
+
+MO: #1 | auth/service.py | {svc,auth,api}
+MO: #2 | auth/repository.py | {repo,auth,db}
+MO: #3 | auth/dto.py | {dto,auth}
+MO: #4 | utils/helpers.py | {util}
+
+SY: #1.#1 | cls | AuthService
+SY: #1.#2 | fn  | login
+SY: #1.#3 | fn  | refresh_token
+SY: #2.#1 | cls | UserRepository
+SY: #3.#1 | cls | UserCreds
+SY: #3.#2 | cls | AuthToken
+SY: #4.#1 | fn  | validate_email
+
+SG: #1.#2 | (UserCreds)->AuthToken !raises[AuthError,ValidationError]
+SG: #1.#3 | (str)->AuthToken !raises[AuthError]
+SG: #2.#1 | (db:Database)->None
+SG: #4.#1 | (str)->bool
+
+MD: #1.#2 | {classmethod}
+MD: #2.#1 | {singleton}
+
+ED: #1.#2 -> #2.#1 | uses:repo
+ED: #1.#2 -> #3.#1 | accepts:dto
+ED: #1.#2 -> #3.#2 | returns:dto
+ED: #1.#3 -> #2.#1 | uses:repo
+ED: #1.#2 -> #4.#1 | uses:util
+
+DT: UserCreds | {email:str,password:str,remember:bool}
+DT: AuthToken | {jwt:str,exp:datetime,user_id:int}
+
+TK: Role | {admin,staff,viewer,guest}
+TK: Status | {active,inactive,suspended}
+
+ER: AuthError | domain | authentication failure
+ER: ValidationError | domain | input validation failure
+
+IN: login ⇒ requires(valid(creds)) ∧ ensures(token.exp>now)
+IN: refresh_token ⇒ requires(valid(jwt)) ∧ ensures(new_token.exp>old_token.exp)
+
+CN: async fn end with _async
+CN: repos never import svc
+CN: all public fn have type hints
+
+IO: POST /v1/login | UserCreds | AuthToken | 200,401,422
+IO: POST /v1/refresh | str | AuthToken | 200,401
+
+PX: forbid bare except | error-handling
+PX: forbid global state in svc | concurrency
+PX: forbid print() in production | logging
+
+EX: var(repo) => user_repo (not usersRepo)
+EX: fn(async) => login_async (not loginAsync)
+
+RV: Check invariants (IN) on public fn
+RV: Verify error handling (ER) coverage
+RV: Validate naming conventions (NM)
+
+# Delta section for changes
+DELTA: MO: #5 | new/feature.py | {feature}
+DELTA: SY: #5.#1 | fn | new_function
+DELTA: SG: #5.#1 | ()->None

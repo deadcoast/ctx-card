@@ -1,0 +1,18 @@
+# Test CTX-CARD file for syntax highlighting
+ID: proj|test lang|py std|pep8 ts|20241201
+
+AL: cfg=>Configuration svc=>Service repo=>Repository
+
+NM: module | ^[a-z_]+$ | auth_service
+NM: class  | ^[A-Z][A-Za-z0-9]+$ | AuthService
+
+MO: #1 | auth/service.py | {svc,auth}
+SY: #1.#1 | cls | AuthService
+SY: #1.#2 | fn  | login
+
+SG: #1.#2 | (UserCreds)->AuthToken !raises[AuthError]
+ED: #1.#2 -> #2.#1 | calls
+
+IN: login ⇒ requires(valid(creds)) ∧ ensures(token.exp>now)
+CN: async fn end with _async
+PX: forbid bare except | error-handling

@@ -1,0 +1,65 @@
+{
+  "name": "ctx-card-syntax",
+  "displayName": "CTX-CARD Syntax Highlighting",
+  "description": "Comprehensive syntax highlighting for CTX-CARD format files - a prefix-free, information-dense codebook format for AI agent context and codebase documentation",
+  "version": "1.0.0",
+  "publisher": "ctxcard",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "ctx-card",
+    "codebook",
+    "documentation",
+    "ai",
+    "context",
+    "syntax-highlighting"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ctxcard/ctxcard-gen.git"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "ctx",
+        "aliases": [
+          "CTX-CARD",
+          "ctx",
+          "Context Card"
+        ],
+        "extensions": [
+          ".ctx",
+          ".ctxc"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/ctx-light.png",
+          "dark": "./icons/ctx-dark.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ctx",
+        "scopeName": "source.ctx",
+        "path": "./syntaxes/ctx.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "ctx",
+        "path": "./snippets/ctx.json"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

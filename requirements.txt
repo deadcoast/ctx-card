@@ -1,0 +1,19 @@
+# Core dependencies for CTX-CARD generator
+# Standard library modules are preferred over external dependencies
+
+# Development dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+isort>=5.12.0
+
+# Optional: For enhanced AST analysis (if needed)
+# ast-comments>=1.0.0  # For comment preservation in AST
+# astroid>=2.15.0      # Enhanced AST analysis
+
+# Optional: For performance monitoring
+# psutil>=5.9.0        # System resource monitoring
+
+# Optional: For enhanced file type detection
+# python-magic>=0.4.27 # File type detection (requires libmagic)

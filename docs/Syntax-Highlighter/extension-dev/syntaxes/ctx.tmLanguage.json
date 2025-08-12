@@ -1,0 +1,260 @@
+{
+  "name": "CTX-CARD",
+  "scopeName": "source.ctx",
+  "fileTypes": ["ctx", "ctxc"],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#ctx-tags"
+    },
+    {
+      "include": "#ctx-elements"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.ctx",
+          "match": "^#.*$"
+        }
+      ]
+    },
+    "ctx-tags": {
+      "patterns": [
+        {
+          "name": "keyword.control.ctx",
+          "match": "^(ID|AL|NM|MO|SY|SG|MD|ED|TY|IN|CN|ER|IO|DT|TK|PX|EX|RV|DELTA):"
+        }
+      ]
+    },
+    "ctx-elements": {
+      "patterns": [
+        {
+          "include": "#ctx-indices"
+        },
+        {
+          "include": "#ctx-role-tags"
+        },
+        {
+          "include": "#ctx-regex-patterns"
+        },
+        {
+          "include": "#ctx-function-signatures"
+        },
+        {
+          "include": "#ctx-relationships"
+        },
+        {
+          "include": "#ctx-strings"
+        },
+        {
+          "include": "#ctx-paths"
+        },
+        {
+          "include": "#ctx-numbers"
+        },
+        {
+          "include": "#ctx-identifiers"
+        }
+      ]
+    },
+    "ctx-indices": {
+      "patterns": [
+        {
+          "name": "constant.numeric.index.ctx",
+          "match": "\\b#\\d+\\.\\d+\\b"
+        },
+        {
+          "name": "constant.numeric.index.ctx",
+          "match": "\\b#\\d+\\b"
+        }
+      ]
+    },
+    "ctx-role-tags": {
+      "patterns": [
+        {
+          "name": "string.quoted.role-tags.ctx",
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#ctx-identifiers"
+            },
+            {
+              "include": "#ctx-relationships"
+            }
+          ]
+        }
+      ]
+    },
+    "ctx-regex-patterns": {
+      "patterns": [
+        {
+          "name": "string.regex.ctx",
+          "begin": "\\^",
+          "end": "\\$",
+          "patterns": [
+            {
+              "include": "#ctx-regex-elements"
+            }
+          ]
+        }
+      ]
+    },
+    "ctx-regex-elements": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.ctx",
+          "match": "\\\\."
+        },
+        {
+          "name": "constant.character.class.ctx",
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "name": "constant.character.escape.ctx",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "keyword.operator.quantifier.ctx",
+          "match": "[*+?]|\\{[0-9,]+\\}"
+        }
+      ]
+    },
+    "ctx-function-signatures": {
+      "patterns": [
+        {
+          "name": "meta.function.signature.ctx",
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#ctx-identifiers"
+            },
+            {
+              "include": "#ctx-relationships"
+            },
+            {
+              "include": "#ctx-strings"
+            },
+            {
+              "include": "#ctx-numbers"
+            }
+          ]
+        },
+        {
+          "name": "meta.function.signature.ctx",
+          "match": "!raises?\\[[^\\]]*\\]"
+        },
+        {
+          "name": "meta.function.signature.ctx",
+          "match": "->[^!]*"
+        }
+      ]
+    },
+    "ctx-relationships": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arrow.ctx",
+          "match": "->"
+        },
+        {
+          "name": "keyword.operator.arrow.ctx",
+          "match": "⇒"
+        },
+        {
+          "name": "keyword.operator.arrow.ctx",
+          "match": "→"
+        },
+        {
+          "name": "keyword.operator.pipe.ctx",
+          "match": "\\|"
+        },
+        {
+          "name": "keyword.operator.alias.ctx",
+          "match": "=>"
+        },
+        {
+          "name": "keyword.operator.logical.ctx",
+          "match": "∧|∨|¬|↔"
+        },
+        {
+          "name": "keyword.operator.comparison.ctx",
+          "match": "==|!=|<=|>=|<|>"
+        },
+        {
+          "name": "keyword.operator.assignment.ctx",
+          "match": "="
+        },
+        {
+          "name": "keyword.operator.arithmetic.ctx",
+          "match": "\\+|-|\\*|/|%"
+        }
+      ]
+    },
+    "ctx-strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.ctx",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.ctx",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.ctx",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.ctx",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "ctx-paths": {
+      "patterns": [
+        {
+          "name": "string.quoted.path.ctx",
+          "match": "\\b[a-zA-Z0-9_/.-]+\\.(py|js|ts|go|java|cpp|h|hpp|rs|php|rb|cs|swift|kt|scala|ctx|ctxc)\\b"
+        }
+      ]
+    },
+    "ctx-numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.integer.ctx",
+          "match": "\\b\\d+\\b"
+        },
+        {
+          "name": "constant.numeric.float.ctx",
+          "match": "\\b\\d+\\.\\d+\\b"
+        },
+        {
+          "name": "constant.numeric.timestamp.ctx",
+          "match": "\\b\\d{8}\\b"
+        }
+      ]
+    },
+    "ctx-identifiers": {
+      "patterns": [
+        {
+          "name": "variable.other.ctx",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}

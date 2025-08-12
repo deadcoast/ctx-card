@@ -1,0 +1,339 @@
+Metadata-Version: 2.4
+Name: ctxcard-gen
+Version: 2.1.0
+Summary: CTX-CARD Generator - A prefix-free, information-dense codebook generator for codebases
+Author-email: CTX-CARD Team <team@ctxcard.dev>
+Maintainer-email: CTX-CARD Maintainers <maintainers@ctxcard.dev>
+License: MIT
+Project-URL: Homepage, https://github.com/ctxcard/ctxcard-gen
+Project-URL: Documentation, https://ctxcard.dev/docs
+Project-URL: Repository, https://github.com/ctxcard/ctxcard-gen
+Project-URL: Bug Tracker, https://github.com/ctxcard/ctxcard-gen/issues
+Keywords: code-analysis,documentation,ast,codebase,ctx-card
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Documentation
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Markup
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Provides-Extra: enhanced
+Requires-Dist: ast-comments>=1.0.0; extra == "enhanced"
+Requires-Dist: astroid>=2.15.0; extra == "enhanced"
+Provides-Extra: monitoring
+Requires-Dist: psutil>=5.9.0; extra == "monitoring"
+Provides-Extra: file-detection
+Requires-Dist: python-magic>=0.4.27; extra == "file-detection"
+
+# CTX-CARD Generator
+
+A Python CLI application for generating **CTX-CARD** format codebase documentation. CTX-CARD is a prefix-free, information-dense codebook with edge lists and naming grammar that provides minimal-token, high-information structural and semantic maps of codebases.
+
+## Features
+
+- **AST-based Analysis**: Deep Python code parsing using the `ast` module
+- **CTX-CARD v2.1 Compliance**: Full implementation of the CTX-CARD specification
+- **Cross-module Call Resolution**: Two-pass analysis for function call graphs
+- **Symbol Extraction**: Classes, functions, properties, and modules
+- **DTO Detection**: Automatic detection of `@dataclass` and `pydantic.BaseModel`
+- **Error Taxonomy**: Custom exception detection and classification
+- **API Route Detection**: FastAPI and Flask route decorator parsing
+- **Linting Integration**: Built-in code quality checks (PX tags)
+- **Property & Descriptor Detection**: Support for `@property`, `@cached_property`, and descriptor classes
+- **Raise Analysis**: `!raises[...]` in function signatures
+- **Re-export Handling**: `__init__.py` and `__all__` processing
+- **Delta Generation**: Diff-based updates for incremental changes
+- **Per-package Generation**: Separate CTX-CARD files for each package
+- **Type Signature Emission**: Optional `TY:` lines for type information
+- **Multi-language Support**: Extensible for TypeScript, Go, and other languages
+
+## Installation
+
+### From Source
+
+```bash
+# Clone the repository
+git clone https://github.com/ctxcard/ctxcard-gen.git
+cd ctxcard-gen
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install -e ".[dev]"
+```
+
+### Development Setup
+
+```bash
+# Install development dependencies
+pip install -e ".[dev,enhanced,monitoring]"
+
+# Run tests
+pytest
+
+# Format code
+black src/ tests/
+isort src/ tests/
+
+# Lint code
+flake8 src/ tests/
+```
+
+## Usage
+
+### Basic Usage
+
+```bash
+# Generate CTX-CARD for current directory
+python -m ctxcard_gen
+
+# Generate for specific directory
+python -m ctxcard_gen /path/to/project
+
+# Output to stdout
+python -m ctxcard_gen --stdout
+
+# Specify project name
+python -m ctxcard_gen --proj my-project
+```
+
+### Advanced Options
+
+```bash
+# Include only Python files
+python -m ctxcard_gen --include "**/*.py"
+
+# Exclude test files
+python -m ctxcard_gen --exclude "**/tests/**"
+
+# Include type signatures
+python -m ctxcard_gen --emit-ty
+
+# Generate delta against existing CTX-CARD
+python -m ctxcard_gen --delta-from CTXCARD.md
+
+# Per-package CTX-CARD files
+python -m ctxcard_gen --per-package
+
+# Print analysis statistics
+python -m ctxcard_gen --stats
+```
+
+## CTX-CARD Format
+
+CTX-CARD is a structured format for representing codebase information:
+
+```yaml
+ID: proj|myProject lang|py std|pep8 ts|20241201
+
+AL: cfg=>Configuration svc=>Service repo=>Repository
+NM: module | ^[a-z_]+$ | auth_service
+NM: class  | ^[A-Z][A-Za-z0-9]+$ | AuthService
+
+MO: #1 | auth/service.py | {svc,auth}
+SY: #1.#1 | cls | AuthService
+SY: #1.#2 | fn  | AuthService.login
+SG: #1.#2 | (UserCreds)->AuthToken !raises[AuthError]
+MD: #1.#2 | {classmethod}
+
+ED: #1.#2 -> #2.#1 | calls
+IN: login ⇒ requires(valid(creds)) ∧ ensures(token.exp>now)
+
+CN: async fn end with _async
+PX: forbid bare except | error-handling
+```
+
+### Tag Reference
+
+- **ID**: Project identity and metadata
+- **AL**: Prefix-free alias table
+- **NM**: Naming grammar with regex patterns
+- **MO**: Module index with role tags
+- **SY**: Symbol index within modules
+- **SG**: Function signatures with raises
+- **MD**: Method modifiers (staticmethod, classmethod, property, descriptor)
+- **ED**: Edge relationships (imports/calls)
+- **IN**: Invariants from docstrings
+- **CN**: Coding conventions
+- **ER**: Error taxonomy
+- **IO**: API contracts
+- **DT**: Data transfer objects
+- **TK**: Token/enum sets
+- **PX**: Prohibited patterns
+- **EX**: Canonical examples
+- **RV**: Review checklists
+- **TY**: Type signatures (optional)
+- **Δ**: Delta changes
+
+## Architecture
+
+### Core Components
+
+1. **RepoScanner**: File discovery and module indexing
+2. **ASTAnalyzer**: Python AST parsing and symbol extraction
+3. **CallResolver**: Cross-module function call analysis
+4. **CardRenderer**: CTX-CARD format generation
+
+### Data Models
+
+- `ModuleInfo`: Repository module representation
+- `Symbol`: Code symbol (class, function, property)
+- `ScanResult`: Complete repository analysis
+- `GeneratorConfig`: Generation configuration
+
+### Analysis Features
+
+- **Symbol Extraction**: Classes, functions, properties, modules
+- **Type Inference**: Type annotations and signatures
+- **Call Resolution**: Function call graph analysis
+- **Import Analysis**: Import path resolution and re-exports
+- **Linting**: Code quality rule violations
+- **Route Detection**: FastAPI/Flask route decorators
+- **DTO Detection**: @dataclass and pydantic models
+- **Raise Analysis**: Exception types in function bodies
+- **Property Detection**: @property and @cached_property
+- **Descriptor Detection**: Classes with **get**/**set**/**set_name**
+
+## Development
+
+### Project Structure
+
+```
+ctxcard-gen/
+├── src/
+│   └── ctxcard_gen/
+│       ├── __init__.py
+│       ├── core/
+│       │   ├── ast_analyzer.py
+│       │   ├── card_renderer.py
+│       │   ├── scanner.py
+│       │   └── call_resolver.py
+│       ├── utils/
+│       │   ├── helpers.py
+│       │   └── validation.py
+│       ├── types.py
+│       └── exceptions.py
+├── tests/
+│   ├── test_ast_analyzer.py
+│   ├── test_card_renderer.py
+│   └── test_scanner.py
+├── docs/
+│   └── CTX-ARCHITECTURE.md
+├── pyproject.toml
+├── requirements.txt
+└── README.md
+```
+
+### Testing
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=src/ctxcard_gen
+
+# Run specific test categories
+pytest -m unit
+pytest -m integration
+pytest -m "not slow"
+```
+
+### Code Quality
+
+```bash
+# Format code
+black src/ tests/
+
+# Sort imports
+isort src/ tests/
+
+# Lint code
+flake8 src/ tests/
+
+# Type checking
+mypy src/
+```
+
+## Version History
+
+### v2.1.0 (Current)
+
+- **Raise Analysis**: `!raises[...]` in function signatures
+- **Enhanced PX Linting**: Bare except, wildcard imports, eval/exec, mutable defaults, print()
+- **Per-package Generation**: Separate CTX-CARD files for each package
+- **Delta Generation**: Diff-based updates with Δ tags
+- **Type Signature Emission**: Optional TY: lines
+- **Statistics**: Analysis statistics output
+
+### v2.0.0
+
+- **Cross-module Call Resolution**: Two-pass analysis for function calls
+- **Re-export Handling**: `__init__.py` and `__all__` processing
+- **Class Method Resolution**: Support for `Class.method()` calls
+- **Property Detection**: @property and @cached_property support
+- **Descriptor Detection**: Classes with descriptor dunder methods
+
+### v1.5.0
+
+- **Function-level Call Graph**: Cross-module function call resolution
+- **DTO Detection**: @dataclass and pydantic.BaseModel support
+- **Error Taxonomy**: Custom exception detection
+- **API Route Detection**: FastAPI and Flask route parsing
+- **Invariants**: Docstring parsing for requires/ensures
+
+### v1.0.0
+
+- **Basic AST Analysis**: Module and symbol extraction
+- **Import Resolution**: Module-level import edges
+- **CTX-CARD v1 Compliance**: Core format implementation
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
+
+### Development Guidelines
+
+- Follow PEP 8 style guidelines
+- Use type hints for all functions
+- Write comprehensive docstrings
+- Add tests for new features
+- Maintain CTX-CARD format compliance
+- Update documentation as needed
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- CTX-CARD specification and architecture
+- Python AST module for code analysis
+- Rich ecosystem of Python development tools
+
+## Support
+
+- **Documentation**: [https://ctxcard.dev/docs](https://ctxcard.dev/docs)
+- **Issues**: [GitHub Issues](https://github.com/ctxcard/ctxcard-gen/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ctxcard/ctxcard-gen/discussions)

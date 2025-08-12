@@ -1,0 +1,168 @@
+{
+  "CTX-CARD Header": {
+    "prefix": "ctx-header",
+    "body": [
+      "ID: proj|${1:projectName} lang|${2:py} std|${3:pep8} ts|${4:20241201}",
+      "",
+      "AL: cfg=>Configuration svc=>Service repo=>Repository dto=>DataTransferObject"
+    ],
+    "description": "CTX-CARD project header with identity and aliases"
+  },
+  "CTX-CARD Naming Grammar": {
+    "prefix": "ctx-naming",
+    "body": [
+      "NM: module | ^[a-z_]+$ | ${1:example_module}",
+      "NM: class  | ^[A-Z][A-Za-z0-9]+$ | ${2:ExampleClass}",
+      "NM: func   | ^[a-z_]+$ | ${3:example_function}",
+      "NM: var    | ^[a-z_]+$ | ${4:example_variable}"
+    ],
+    "description": "CTX-CARD naming grammar patterns"
+  },
+  "CTX-CARD Module": {
+    "prefix": "ctx-module",
+    "body": [
+      "MO: #${1:1} | ${2:path/to/module.py} | {${3:svc,auth}}"
+    ],
+    "description": "CTX-CARD module definition"
+  },
+  "CTX-CARD Symbol": {
+    "prefix": "ctx-symbol",
+    "body": [
+      "SY: #${1:1}.#${2:1} | ${3:cls} | ${4:ClassName}"
+    ],
+    "description": "CTX-CARD symbol definition"
+  },
+  "CTX-CARD Function Signature": {
+    "prefix": "ctx-signature",
+    "body": [
+      "SG: #${1:1}.#${2:1} | (${3:args})->${4:ReturnType} !raises[${5:ErrorType}]"
+    ],
+    "description": "CTX-CARD function signature"
+  },
+  "CTX-CARD Edge": {
+    "prefix": "ctx-edge",
+    "body": [
+      "ED: #${1:1}.#${2:1} -> #${3:2}.#${4:1} | ${5:calls}"
+    ],
+    "description": "CTX-CARD edge relationship"
+  },
+  "CTX-CARD Data Type": {
+    "prefix": "ctx-datatype",
+    "body": [
+      "DT: ${1:TypeName} | {${2:field}:${3:type}, ${4:field2}:${5:type2}}"
+    ],
+    "description": "CTX-CARD data type definition"
+  },
+  "CTX-CARD Token Set": {
+    "prefix": "ctx-token",
+    "body": [
+      "TK: ${1:TokenName} | {${2:value1}, ${3:value2}, ${4:value3}}"
+    ],
+    "description": "CTX-CARD token/enum set"
+  },
+  "CTX-CARD Invariant": {
+    "prefix": "ctx-invariant",
+    "body": [
+      "IN: ${1:function} ⇒ requires(${2:precondition}) ∧ ensures(${3:postcondition})"
+    ],
+    "description": "CTX-CARD invariant/contract"
+  },
+  "CTX-CARD Convention": {
+    "prefix": "ctx-convention",
+    "body": [
+      "CN: ${1:convention rule}"
+    ],
+    "description": "CTX-CARD coding convention"
+  },
+  "CTX-CARD Error": {
+    "prefix": "ctx-error",
+    "body": [
+      "ER: ${1:ErrorName} | ${2:category} | ${3:description}"
+    ],
+    "description": "CTX-CARD error taxonomy"
+  },
+  "CTX-CARD API Contract": {
+    "prefix": "ctx-api",
+    "body": [
+      "IO: ${1:POST} ${2:/v1/endpoint} | ${3:InputType} | ${4:OutputType} | ${5:200,401,422}"
+    ],
+    "description": "CTX-CARD API contract"
+  },
+  "CTX-CARD Prohibited Pattern": {
+    "prefix": "ctx-prohibited",
+    "body": [
+      "PX: forbid ${1:pattern} | ${2:reason}"
+    ],
+    "description": "CTX-CARD prohibited pattern"
+  },
+  "CTX-CARD Example": {
+    "prefix": "ctx-example",
+    "body": [
+      "EX: ${1:context} => ${2:correct} (not ${3:incorrect})"
+    ],
+    "description": "CTX-CARD canonical example"
+  },
+  "CTX-CARD Review": {
+    "prefix": "ctx-review",
+    "body": [
+      "RV: ${1:review checklist item}"
+    ],
+    "description": "CTX-CARD review focus"
+  },
+  "CTX-CARD Delta": {
+    "prefix": "ctx-delta",
+    "body": [
+      "DELTA: ${1:tag}: ${2:changed content}"
+    ],
+    "description": "CTX-CARD delta change"
+  },
+  "CTX-CARD Comment": {
+    "prefix": "ctx-comment",
+    "body": [
+      "# ${1:comment}"
+    ],
+    "description": "CTX-CARD comment"
+  },
+  "CTX-CARD Complete Template": {
+    "prefix": "ctx-template",
+    "body": [
+      "# CTX-CARD for ${1:ProjectName}",
+      "ID: proj|${1:ProjectName} lang|${2:py} std|${3:pep8} ts|${4:20241201}",
+      "",
+      "AL: cfg=>Configuration svc=>Service repo=>Repository dto=>DataTransferObject",
+      "",
+      "NM: module | ^[a-z_]+$ | ${5:example_module}",
+      "NM: class  | ^[A-Z][A-Za-z0-9]+$ | ${6:ExampleClass}",
+      "NM: func   | ^[a-z_]+$ | ${7:example_function}",
+      "NM: var    | ^[a-z_]+$ | ${8:example_variable}",
+      "",
+      "MO: #1 | ${9:path/to/module.py} | {${10:svc,auth}}",
+      "",
+      "SY: #1.#1 | cls | ${11:ClassName}",
+      "SY: #1.#2 | fn  | ${12:function_name}",
+      "",
+      "SG: #1.#2 | (${13:args})->${14:ReturnType} !raises[${15:ErrorType}]",
+      "",
+      "ED: #1.#2 -> #2.#1 | ${16:calls}",
+      "",
+      "DT: ${17:TypeName} | {${18:field}:${19:type}}",
+      "",
+      "TK: ${20:TokenName} | {${21:value1}, ${22:value2}}",
+      "",
+      "ER: ${23:ErrorName} | ${24:category} | ${25:description}",
+      "",
+      "IN: ${26:function} ⇒ requires(${27:precondition}) ∧ ensures(${28:postcondition})",
+      "",
+      "CN: ${29:convention rule}",
+      "",
+      "IO: ${30:POST} ${31:/v1/endpoint} | ${32:InputType} | ${33:OutputType} | ${34:200,401}",
+      "",
+      "PX: forbid ${35:pattern} | ${36:reason}",
+      "",
+      "EX: ${37:context} => ${38:correct} (not ${39:incorrect})",
+      "",
+      "RV: ${40:review checklist item}"
+    ],
+    "description": "Complete CTX-CARD template"
+  }
+}

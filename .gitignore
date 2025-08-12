@@ -1,0 +1,9 @@
+/.DS_Store
+/.coverage
+/.ctxignore
+/.cursor
+/.cursorrules
+/.pytest_cache
+/.venv
+/CTXCARD.md
+/__pycache__
