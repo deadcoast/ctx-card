@@ -102,11 +102,11 @@ python -m ctxcard_gen --show-ignored
 
 The `.ctxignore` file allows you to specify patterns for files and directories that should be excluded from CTX-CARD generation. It works similarly to `.gitignore` but is specifically designed for CTX-CARD analysis.
 
-### Basic Usage
+### Instructions
 
 Create a `.ctxignore` file in your project root:
 
-```
+```ctxignore
 # Python cache files
 __pycache__/
 *.pyc
@@ -125,7 +125,7 @@ CTXCARD*.md
 
 ### Pattern Examples
 
-```bash
+```ctxignore
 # Ignore all Python files
 *.py
 
@@ -223,6 +223,75 @@ PX: forbid bare except | error-handling
 - **Property Detection**: @property and @cached_property
 - **Descriptor Detection**: Classes with **get**/**set**/**set_name**
 - **File Filtering**: `.ctxignore` pattern-based file exclusion
+
+## CTX-CARD Syntax Highlighter (VS Code / Cursor)
+
+This repo ships a TextMate grammar for `.ctx` files.
+
+- Folder: `Syntax-Highlighter/`
+- Grammar: `Syntax-Highlighter/syntaxes/ctx.tmLanguage.json`
+- Language config: `Syntax-Highlighter/language-configuration.json`
+- Snippets: `Syntax-Highlighter/snippets/ctx.json`
+- Samples: `Syntax-Highlighter/{test.ctx,sample.ctx,comprehensive-test.ctx}`
+
+### Install via VSIX (recommended)
+
+```bash
+cd Syntax-Highlighter
+npx @vscode/vsce package --no-yarn
+# -> creates Syntax-Highlighter/ctx-card-syntax-1.0.0.vsix
+```
+
+Then in VS Code / Cursor:
+
+- Command Palette → “Extensions: Install from VSIX…”
+- Choose `Syntax-Highlighter/ctx-card-syntax-1.0.0.vsix`
+- Reload when prompted
+- Open a `.ctx` file → “Change Language Mode” → select “CTX-CARD” (sticks per‑workspace)
+
+### Quick local install (no VSIX)
+
+```bash
+cd Syntax-Highlighter
+./install-test.sh
+# Installs to ~/.vscode/extensions/ctxcard.ctx-card-syntax-1.0.0
+```
+
+## Installation (VSIX recommended)
+
+Build the VSIX:
+
+```bash
+cd Syntax-Highlighter
+npx @vscode/vsce package --no-yarn
+# Produces: ctx-card-syntax-1.0.0.vsix
+```
+
+Install in VS Code / Cursor:
+
+- Command Palette → “Extensions: Install from VSIX…”
+- Choose `Syntax-Highlighter/ctx-card-syntax-1.0.0.vsix`
+- Reload when prompted
+- Open a `.ctx` file → “Change Language Mode” → select “CTX-CARD”
+
+Workspace override (to beat ConTeXt auto-detect):
+
+```json
+{
+  "files.associations": {
+    "*.ctx": "ctx",
+    "*.ctxc": "ctx",
+    "*.ctxcard": "ctx"
+  }
+}
+```
+
+## Paths (rooted)
+
+- Grammar: `Syntax-Highlighter/syntaxes/ctx.tmLanguage.json`
+- Language config: `Syntax-Highlighter/language-configuration.json`
+- Snippets: `Syntax-Highlighter/snippets/ctx.json`
+- Tests: `Syntax-Highlighter/{test.ctx,sample.ctx,comprehensive-test.ctx}`
 
 ## Development
 

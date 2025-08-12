@@ -1,7 +1,7 @@
 {
   "name": "CTX-CARD",
   "scopeName": "source.ctx",
-  "fileTypes": ["ctx", "ctxc"],
+  "fileTypes": ["ctx", "ctxc", "ctxcard"],
   "patterns": [
     {
       "include": "#comments"
@@ -26,7 +26,7 @@
       "patterns": [
         {
           "name": "keyword.control.ctx",
-          "match": "^(ID|AL|NM|MO|SY|SG|MD|ED|TY|IN|CN|ER|IO|DT|TK|PX|EX|RV|DELTA):"
+          "match": "^[\t ]*(ID|AL|NM|MO|SY|SG|MD|ED|TY|IN|CN|ER|IO|DT|TK|PX|EX|RV|DELTA|Δ):"
         }
       ]
     },
@@ -94,13 +94,7 @@
       "patterns": [
         {
           "name": "string.regex.ctx",
-          "begin": "\\^",
-          "end": "\\$",
-          "patterns": [
-            {
-              "include": "#ctx-regex-elements"
-            }
-          ]
+          "match": "\\^[^\n]*?\\$"
         }
       ]
     },
@@ -154,7 +148,7 @@
         },
         {
           "name": "meta.function.signature.ctx",
-          "match": "->[^!]*"
+          "match": "->[^!\n|]*"
         }
       ]
     },

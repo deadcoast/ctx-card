@@ -6,8 +6,10 @@ This index provides quick navigation to all project files, organized by category
 
 - **[Installation Guide](README.md#installation)** - How to install and set up the project
 - **[Usage Examples](README.md#usage)** - Basic and advanced usage examples
-- **[CTX-CARD Format](README.md#ctx-card-format)** - Understanding the output format
+- **[CTX Use Case](docs/CTX-PURPOSE.md)** - Breakdown of CTX Use Cases
+- **[Syntax Highlighter](docs/SYNTAX-HIGHLIGHTER.md)** - Syntax Highlighter Summary
 - **[.ctxignore Guide](docs/CTXIGNORE.md)** - File exclusion patterns
+- **[CTX-CARD Format](README.md#ctx-card-format)** - Understanding the output format
 - **[Project Architecture](docs/PROJECT_STRUCTURE.md)** - Implementation details
 - **[CTX-CARD Specification](docs/CTX-ARCHITECTURE.md)** - Complete format specification
 - **[Test Suite](tests/README.md)** - Testing documentation and guidelines

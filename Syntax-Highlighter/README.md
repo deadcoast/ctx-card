@@ -103,44 +103,49 @@ This directory contains the VSCode syntax highlighting implementation for CTX-CA
 | Regex Patterns      | `#D7BA7D` (Yellow)      | `string.regex.ctx`             |
 | Comments            | `#6A9955` (Green)       | `comment.line.number-sign.ctx` |
 
-## Installation and Usage
+## Installation (VSIX recommended)
 
-### **Quick Test Installation**
+Build the VSIX:
 
 ```bash
-# Run the installation script
-cd docs/Syntax-Highlighter
+cd Syntax-Highlighter
+npx @vscode/vsce package --no-yarn
+# Produces: ctx-card-syntax-1.0.0.vsix
+```
+
+Install in VS Code / Cursor:
+
+- Command Palette → “Extensions: Install from VSIX…”
+- Choose `Syntax-Highlighter/ctx-card-syntax-1.0.0.vsix`
+- Reload when prompted
+- Open a `.ctx` file → “Change Language Mode” → select “CTX-CARD”
+
+Workspace override (to beat ConTeXt auto-detect):
+
+```json
+{
+  "files.associations": {
+    "*.ctx": "ctx",
+    "*.ctxc": "ctx",
+    "*.ctxcard": "ctx"
+  }
+}
+```
+
+## Quick local install (no VSIX)
+
+```bash
+cd Syntax-Highlighter
 ./install-test.sh
+# Installs to ~/.vscode/extensions/ctxcard.ctx-card-syntax-1.0.0
 ```
 
-### **Manual Installation**
+## Paths (rooted)
 
-1. **Copy Extension Files**
-
-   ```bash
-   # Copy to VSCode extensions directory
-   cp -r docs/Syntax-Highlighter ~/.vscode/extensions/ctx-card-syntax-test/
-   ```
-
-2. **Restart VSCode**
-
-   ```bash
-   # Restart VSCode to load the extension
-   code .
-   ```
-
-3. **Test Syntax Highlighting**
-   ```bash
-   # Open a test file
-   code docs/Syntax-Highlighter/comprehensive-test.ctx
-   ```
-
-### **VSCode Extension (Future)**
-
-```bash
-# Install from marketplace (when published)
-code --install-extension ctxcard.ctx-syntax
-```
+- Grammar: `Syntax-Highlighter/syntaxes/ctx.tmLanguage.json`
+- Language config: `Syntax-Highlighter/language-configuration.json`
+- Snippets: `Syntax-Highlighter/snippets/ctx.json`
+- Tests: `Syntax-Highlighter/{test.ctx,sample.ctx,comprehensive-test.ctx}`
 
 ## Testing
 
@@ -202,6 +207,7 @@ code --install-extension ctxcard.ctx-syntax
    ```
 
 2. **Include in Main Patterns**
+
    ```json
    "patterns": [
      {

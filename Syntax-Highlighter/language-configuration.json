@@ -25,18 +25,18 @@
   ],
   "folding": {
     "markers": {
-      "start": "^[A-Z]{2,4}:",
-      "end": "^[A-Z]{2,4}:"
+      "start": "^[\\t ]*[A-ZΔ]{2,6}:",
+      "end": "^[\\t ]*[A-ZΔ]{2,6}:"
     }
   },
   "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
   "indentationRules": {
-    "increaseIndentPattern": "^[A-Z]{2,4}:",
-    "decreaseIndentPattern": "^[A-Z]{2,4}:"
+    "increaseIndentPattern": "^[\\t ]*[A-ZΔ]{2,6}:",
+    "decreaseIndentPattern": "^[\\t ]*[A-ZΔ]{2,6}:"
   },
   "onEnterRules": [
     {
-      "beforeText": "^[A-Z]{2,4}:",
+      "beforeText": "^[\\t ]*[A-ZΔ]{2,6}:",
       "action": {
         "indent": "indent"
       }

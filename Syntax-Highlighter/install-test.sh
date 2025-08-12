@@ -4,10 +4,14 @@
 
 echo "Installing CTX-CARD syntax highlighting for testing..."
 
-# Get VSCode extensions directory
+# Get VSCode/Cursor extensions directory
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS
-    VSCODE_EXTENSIONS_DIR="$HOME/.vscode/extensions"
+    # macOS: prefer Cursor if present, else VSCode
+    if [[ -d "$HOME/Library/Application Support/Cursor/User/globalStorage/extensions" ]]; then
+        VSCODE_EXTENSIONS_DIR="$HOME/Library/Application Support/Cursor/User/globalStorage/extensions"
+    else
+        VSCODE_EXTENSIONS_DIR="$HOME/.vscode/extensions"
+    fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     VSCODE_EXTENSIONS_DIR="$HOME/.vscode/extensions"
@@ -19,19 +23,27 @@ else
     exit 1
 fi
 
-# Create extension directory
-EXTENSION_DIR="$VSCODE_EXTENSIONS_DIR/ctx-card-syntax-test"
-mkdir -p "$EXTENSION_DIR"
+# Resolve script directory for reliable file paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Determine publisher.name-version so VS Code registers it
+PUBLISHER=$(node -e 'try{console.log(require(process.argv[1]).publisher||"ctxcard")}catch(e){console.log("ctxcard")}' "$SCRIPT_DIR/package.json")
+NAME=$(node -e 'try{console.log(require(process.argv[1]).name||"ctx-card-syntax")}catch(e){console.log("ctx-card-syntax")}' "$SCRIPT_DIR/package.json")
+VERSION=$(node -e 'try{console.log(require(process.argv[1]).version||"1.0.0")}catch(e){console.log("1.0.0")}' "$SCRIPT_DIR/package.json")
+
+EXTENSION_DIR="$VSCODE_EXTENSIONS_DIR/${PUBLISHER}.${NAME}-${VERSION}"
+rm -rf "$EXTENSION_DIR"
+mkdir -p "$EXTENSION_DIR/syntaxes" "$EXTENSION_DIR/snippets"
 
 # Copy files
-cp package.json "$EXTENSION_DIR/"
-cp language-configuration.json "$EXTENSION_DIR/"
-mkdir -p "$EXTENSION_DIR/syntaxes"
-cp syntaxes/ctx.tmLanguage.json "$EXTENSION_DIR/syntaxes/"
-mkdir -p "$EXTENSION_DIR/snippets"
-cp snippets/ctx.json "$EXTENSION_DIR/snippets/"
+cp "$SCRIPT_DIR/package.json" "$EXTENSION_DIR/"
+cp "$SCRIPT_DIR/language-configuration.json" "$EXTENSION_DIR/"
+cp "$SCRIPT_DIR/syntaxes/ctx.tmLanguage.json" "$EXTENSION_DIR/syntaxes/"
+cp "$SCRIPT_DIR/snippets/ctx.json" "$EXTENSION_DIR/snippets/"
 
 echo "Files copied to: $EXTENSION_DIR"
+echo ""
+echo "Note: If using Cursor, ensure experimental extension loading is enabled."
 echo ""
 echo "To test the syntax highlighting:"
 echo "1. Restart VSCode"

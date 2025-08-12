@@ -1,0 +1,10 @@
+{
+  // Ensure this workspace treats .ctx and .ctxc as CTX-CARD, not ConTeXt LaTeX
+  "files.associations": {
+    "*.ctx": "ctx",
+    "*.ctxc": "ctx",
+    "*.ctxcard": "ctx"
+  }
+}
+
+
