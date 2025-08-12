@@ -6,7 +6,7 @@ This module allows the package to be run as a module:
     python -m ctxcard_gen [options] [root_path]
 """
 
-from .ctxcard_gen import main
+from .ctxcard_gen import main  # pylint: disable=import-error
 
 if __name__ == "__main__":
     main()

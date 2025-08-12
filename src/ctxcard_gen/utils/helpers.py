@@ -21,7 +21,7 @@ def relpath(p: Path, root: Path) -> str:
     """Get relative path from root, falling back to absolute path if needed."""
     try:
         return str(p.relative_to(root).as_posix())
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         return str(p.as_posix())
 
 
@@ -30,7 +30,7 @@ def is_probably_binary(path: Path) -> bool:
     try:
         with path.open("rb") as f:
             return b"\0" in f.read(2048)
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         return True
 
 
@@ -53,5 +53,5 @@ def ann_to_str(ann: Optional[ast.AST]) -> str:
         return ""
     try:
         return ast.unparse(ann)
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         return ""

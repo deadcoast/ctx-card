@@ -10,7 +10,7 @@ import ast
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from ctxcard_gen.types import ModuleInfo, ScanResult
+from ..types import ModuleInfo, ScanResult
 
 
 class CallResolver:

@@ -15,7 +15,7 @@ from .core.ast_analyzer import ASTAnalyzer
 from .core.call_resolver import CallResolver
 from .core.card_renderer import CardRenderer
 from .core.scanner import RepoScanner
-from .ctxcard_gen import CTXCardGenerator
+from .ctxcard_gen import CTXCardGenerator  # pylint: disable=import-error
 from .exceptions import CTXCardError, ParseError, ValidationError
 from .types import GeneratorConfig, ModuleInfo, ScanResult, Symbol
 from .utils.ignore import IgnoreFile, IgnorePattern, load_ignore_file

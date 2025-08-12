@@ -27,11 +27,10 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
-from typing import Optional
 
 from .core.ast_analyzer import ASTAnalyzer
 from .core.card_renderer import CardRenderer
-from .exceptions import CTXCardError, ParseError, ValidationError
+from .exceptions import CTXCardError
 from .types import GeneratorConfig
 
 
@@ -149,26 +148,26 @@ def main() -> None:
         "--show-ignored", action="store_true", help="Show ignored files and patterns"
     )
     parser.add_argument(
-        "--format", 
-        choices=["md", "ctx"], 
-        default="md", 
+        "--format",
+        choices=["md", "ctx"],
+        default="md",
         help="Output format: 'md' for .md files, 'ctx' for .ctx files (default: md)"
     )
     parser.add_argument(
-        "--validate", 
-        action="store_true", 
+        "--validate",
+        action="store_true",
         help="Validate CTX-CARD output and report errors/warnings"
     )
     parser.add_argument(
-        "--max-workers", 
-        type=int, 
-        default=4, 
+        "--max-workers",
+        type=int,
+        default=4,
         help="Maximum parallel workers for large codebases (default: 4)"
     )
     parser.add_argument(
-        "--cache-size", 
-        type=int, 
-        default=1000, 
+        "--cache-size",
+        type=int,
+        default=1000,
         help="File cache size for performance optimization (default: 1000)"
     )
     parser.add_argument(
@@ -191,7 +190,7 @@ def main() -> None:
             sys.exit(1)
 
         project_name = args.proj or root_path.name
-        
+
         # Handle output format
         if args.format == "ctx":
             # Use .ctx extension for CTX-CARD format
@@ -207,7 +206,7 @@ def main() -> None:
                 output_path = output_path.with_suffix(".md")
             elif output_path.suffix != ".md":
                 output_path = output_path.with_suffix(".md")
-        
+
         delta_from = Path(args.delta_from) if args.delta_from else None
 
         config = GeneratorConfig(
@@ -223,24 +222,24 @@ def main() -> None:
         )
 
         # Generate CTX-CARD with performance options
-        generator = CTXCardGenerator(config, max_workers=args.max_workers, cache_size=args.cache_size)
+        generator = CTXCardGenerator(config, max_workers=args.max_workers, cache_size=args.cache_size)  # pylint: disable=line-too-long
         content = generator.generate()
 
         # Validate output if requested
         if args.validate:
-            from ctxcard_gen.utils.validation import get_validation_report
+            from ctxcard_gen.utils.validation import get_validation_report  # pylint: disable=import-outside-toplevel
             report = get_validation_report(content)
-            
+
             if report["errors"]:
                 print("\nValidation Errors:")
                 for error in report["errors"]:
                     print(f"  ❌ {error}")
-            
+
             if report["warnings"]:
                 print("\nValidation Warnings:")
                 for warning in report["warnings"]:
                     print(f"  ⚠️  {warning}")
-            
+
             if report["valid"] and not report["warnings"]:
                 print("\n✅ CTX-CARD validation passed")
             print()
@@ -259,10 +258,10 @@ def main() -> None:
 
         # Show ignored files if requested
         if args.show_ignored:
-            from ctxcard_gen.utils.ignore import load_ignore_file
+            from ctxcard_gen.utils.ignore import load_ignore_file  # pylint: disable=import-outside-toplevel
             ignore_file = load_ignore_file(root_path)
             patterns = ignore_file.get_ignored_patterns()
-            
+
             if patterns:
                 print("\nIgnored Patterns:")
                 for pattern in patterns:
@@ -277,16 +276,16 @@ def main() -> None:
 
         # Export to additional format if requested
         if args.export_format:
-            from ctxcard_gen.utils.export import (
+            from ctxcard_gen.utils.export import (  # pylint: disable=import-outside-toplevel
                 export_to_json, export_to_yaml, export_to_xml, export_to_markdown
             )
-            
+
             # Determine export path
             if args.export_path:
                 export_path = Path(args.export_path)
             else:
                 export_path = output_path.parent / f"{output_path.stem}.{args.export_format}"
-            
+
             # Export based on format
             if args.export_format == "json":
                 export_to_json(content, export_path)
@@ -296,7 +295,7 @@ def main() -> None:
                 export_to_xml(content, export_path)
             elif args.export_format == "md":
                 export_to_markdown(content, export_path)
-            
+
             print(f"Exported to {export_path}")
 
         # Generate per-package files if requested
@@ -310,7 +309,7 @@ def main() -> None:
     except KeyboardInterrupt:
         print("\nOperation cancelled by user", file=sys.stderr)
         sys.exit(1)
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         print(f"Unexpected error: {e}", file=sys.stderr)
         sys.exit(1)
 

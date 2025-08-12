@@ -27,12 +27,11 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
-from typing import Optional
 
-from .core.ast_analyzer import ASTAnalyzer
-from .core.card_renderer import CardRenderer
-from .exceptions import CTXCardError, ParseError, ValidationError
-from .types import GeneratorConfig
+from ctxcard_gen.core.ast_analyzer import ASTAnalyzer
+from ctxcard_gen.core.card_renderer import CardRenderer
+from ctxcard_gen.exceptions import CTXCardError
+from ctxcard_gen.types import GeneratorConfig
 
 
 class CTXCardGenerator:
@@ -200,7 +199,7 @@ def main() -> None:
     except KeyboardInterrupt:
         print("\nOperation cancelled by user", file=sys.stderr)
         sys.exit(1)
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         print(f"Unexpected error: {e}", file=sys.stderr)
         sys.exit(1)
 
