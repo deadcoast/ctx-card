@@ -10,7 +10,7 @@ This index provides quick navigation to all project files, organized by category
 - **[Syntax Highlighter](docs/SYNTAX-HIGHLIGHTER.md)** - Syntax Highlighter Summary
 - **[.ctxignore Guide](docs/CTXIGNORE.md)** - File exclusion patterns
 - **[CTX-CARD Format](README.md#ctx-card-format)** - Understanding the output format
-- **[Project Architecture](docs/PROJECT_STRUCTURE.md)** - Implementation details
+- **[Project Architecture](docs/PROJECT-STRUCTURE.md)** - Implementation details
 - **[CTX-CARD Specification](docs/CTX-ARCHITECTURE.md)** - Complete format specification
 - **[Test Suite](tests/README.md)** - Testing documentation and guidelines
 
@@ -26,21 +26,21 @@ This index provides quick navigation to all project files, organized by category
 
 - **[CTX-ARCHITECTURE.md](docs/CTX-ARCHITECTURE.md)** - CTX-CARD specification and format guide
 - **[CTXIGNORE.md](docs/CTXIGNORE.md)** - Complete `.ctxignore` documentation and examples
-- **[PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md)** - Project architecture and implementation details
+- **[PROJECT-STRUCTURE.md](docs/PROJECT-STRUCTURE.md)** - Project architecture and implementation details
 
 ### **Syntax Highlighting**
 
-- **[Syntax-Highlighter/README.md](docs/Syntax-Highlighter/README.md)** - VSCode syntax highlighting implementation
-- **[Syntax-Highlighter/CTX-VSC-LANG.md](docs/Syntax-Highlighter/CTX-VSC-LANG.md)** - Comprehensive syntax highlighting specification
+- **[Syntax-Highlighter/README.md](Syntax-Highlighter/README.md)** - VSCode syntax highlighting implementation
+- **[Syntax-Highlighter/CTX-VSC-LANG.md](Syntax-Highlighter/CTX-VSC-LANG.md)** - Comprehensive syntax highlighting specification
 - **[Syntax-Highlighter/FIXES.md](docs/Syntax-Highlighter/FIXES.md)** - Detailed fixes for syntax highlighting issues
-- **[Syntax-Highlighter/syntaxes/ctx.tmLanguage.json](docs/Syntax-Highlighter/syntaxes/ctx.tmLanguage.json)** - VSCode TextMate grammar (FIXED)
-- **[Syntax-Highlighter/language-configuration.json](docs/Syntax-Highlighter/language-configuration.json)** - VSCode language configuration
-- **[Syntax-Highlighter/package.json](docs/Syntax-Highlighter/package.json)** - VSCode extension configuration
-- **[Syntax-Highlighter/install-test.sh](docs/Syntax-Highlighter/install-test.sh)** - Installation script for testing
-- **[Syntax-Highlighter/test.ctx](docs/Syntax-Highlighter/test.ctx)** - Simple test file
-- **[Syntax-Highlighter/comprehensive-test.ctx](docs/Syntax-Highlighter/comprehensive-test.ctx)** - Comprehensive test file
-- **[Syntax-Highlighter/sample.ctx](docs/Syntax-Highlighter/sample.ctx)** - Sample CTX-CARD file for testing
-- **[Syntax-Highlighter/TODO](docs/Syntax-Highlighter/TODO)** - Future enhancements and additional parameters
+- **[Syntax-Highlighter/syntaxes/ctx.tmLanguage.json](Syntax-Highlighter/syntaxes/ctx.tmLanguage.json)** - VSCode TextMate grammar (FIXED)
+- **[Syntax-Highlighter/language-configuration.json](Syntax-Highlighter/language-configuration.json)** - VSCode language configuration
+- **[Syntax-Highlighter/package.json](Syntax-Highlighter/package.json)** - VSCode extension configuration
+- **[Syntax-Highlighter/install-test.sh](Syntax-Highlighter/install-test.sh)** - Installation script for testing
+- **[Syntax-Highlighter/test.ctx](Syntax-Highlighter/snippets/test.ctx)** - Simple test file
+- **[Syntax-Highlighter/comprehensive-test.ctx](Syntax-Highlighter/snippets/comprehensive-test.ctx)** - Comprehensive test file
+- **[Syntax-Highlighter/sample.ctx](Syntax-Highlighter/snippets/sample.ctx)** - Sample CTX-CARD file for testing
+- **[Syntax-Highlighter/TODO](Syntax-Highlighter/TODO)** - Future enhancements and additional parameters
 
 ### **Test Documentation**
 
@@ -121,4 +121,4 @@ This index provides quick navigation to all project files, organized by category
 
 ## **Project Structure**
 
-[PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md)
+[PROJECT-STRUCTURE.md](docs/PROJECT-STRUCTURE.md)
