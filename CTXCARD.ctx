@@ -1,0 +1,1343 @@
+ID: proj|ctx-card-generator lang|py std|pep8 ts|20250812
+
+AL: cfg=>Configuration
+AL: svc=>Service
+AL: repo=>Repository
+AL: dto=>DataTransferObject
+AL: uc=>UseCase
+AL: http=>HTTP
+AL: db=>Database
+AL: jwt=>JWT
+
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_edges_invalid_target_symbol
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_file
+NM: func | ^[a-z_]+$ | CardRenderer._extract_io_contracts
+NM: func | ^[a-z_]+$ | CallResolver.resolve_target
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_analyze_repository_basic
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_with_role_tags
+NM: func | ^[a-z_]+$ | TestHelpers.test_ann_to_str_error_handling
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestIgnoreFile
+NM: func | ^[a-z_]+$ | IgnoreFile._load_ignore_file
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_packages
+NM: module | ^[a-z_]+$ | test_utils
+NM: func | ^[a-z_]+$ | CallResolver._find_caller_sid
+NM: func | ^[a-z_]+$ | CTXCardGenerator.generate_per_package
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestLoadIgnoreFile
+NM: func | ^[a-z_]+$ | CardRenderer._extract_errors
+NM: func | ^[a-z_]+$ | RepoScanner._class_has_descriptor_dunders
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_complex_structure
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_ast_analyzer_initialization
+NM: func | ^[a-z_]+$ | RepoScanner.__init__
+NM: func | ^[a-z_]+$ | TestCallResolver.test_build_indices_empty
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_with_classes
+NM: func | ^[a-z_]+$ | is_probably_binary
+NM: func | ^[a-z_]+$ | test_cli_help
+NM: class | ^[A-Z][A-Za-z0-9]+$ | CallResolver
+NM: func | ^[a-z_]+$ | ASTAnalyzer.extract_calls
+NM: func | ^[a-z_]+$ | RepoScanner._dotted_from_ast
+NM: func | ^[a-z_]+$ | RepoScanner._method_modifiers
+NM: func | ^[a-z_]+$ | validate_function_signatures
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ASTAnalyzer
+NM: func | ^[a-z_]+$ | TestHelpers.test_ann_to_str_simple
+NM: module | ^[a-z_]+$ | test_scanner
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_group_modules_by_package
+NM: func | ^[a-z_]+$ | CTXCardGenerator.save_output
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_binary_files
+NM: func | ^[a-z_]+$ | CardRenderer.validate_output
+NM: func | ^[a-z_]+$ | ASTAnalyzer.__init__
+NM: func | ^[a-z_]+$ | test_generation_performance
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_get_validation_report_complete
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_parse_ctx_card_complex
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_ast_analyzer_component_integration
+NM: func | ^[a-z_]+$ | ASTAnalyzer.get_statistics
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_semantic_tokens
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_include_patterns
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_analyze_repository_with_include
+NM: func | ^[a-z_]+$ | TestCallResolver.test_build_reexports_global_empty
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_indices_duplicate_symbol_id
+NM: func | ^[a-z_]+$ | RepoScanner.role_tags_for
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_ascii_compliance_invalid
+NM: func | ^[a-z_]+$ | TestHelpers.test_is_probably_binary_binary
+NM: func | ^[a-z_]+$ | export_to_yaml
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_generate_delta_empty
+NM: func | ^[a-z_]+$ | RepoScanner._process_files_sequential
+NM: module | ^[a-z_]+$ | __main__
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_complex_patterns
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_with_exceptions
+NM: func | ^[a-z_]+$ | load_ignore_file
+NM: func | ^[a-z_]+$ | RepoScanner._set_cached_content
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_matches_character_classes
+NM: class | ^[A-Z][A-Za-z0-9]+$ | CTXCardGenerator
+NM: func | ^[a-z_]+$ | sample_ctxcard_content
+NM: class | ^[A-Z][A-Za-z0-9]+$ | CTXCardError
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestHelpers
+NM: func | ^[a-z_]+$ | validate_cross_references
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_recursive_patterns
+NM: func | ^[a-z_]+$ | CardRenderer._extract_conventions
+NM: func | ^[a-z_]+$ | IgnorePattern.__init__
+NM: module | ^[a-z_]+$ | test_call_resolver
+NM: func | ^[a-z_]+$ | CardRenderer._extract_prohibited_patterns
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_case_sensitivity
+NM: func | ^[a-z_]+$ | ascii_only
+NM: func | ^[a-z_]+$ | run_command
+NM: class | ^[A-Z][A-Za-z0-9]+$ | IgnorePattern
+NM: func | ^[a-z_]+$ | old_ctxcard_content
+NM: func | ^[a-z_]+$ | TestHelpers.test_ascii_only_clean
+NM: module | ^[a-z_]+$ | call_resolver
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_directory_patterns
+NM: func | ^[a-z_]+$ | CardRenderer._extract_event_relationships
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_with_type_signatures
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestCallResolver
+NM: func | ^[a-z_]+$ | RepoScanner._get_cached_content
+NM: class | ^[A-Z][A-Za-z0-9]+$ | GeneratorConfig
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_indices_wrong_symbol_module
+NM: func | ^[a-z_]+$ | test_full_generation
+NM: func | ^[a-z_]+$ | RepoScanner.detect_langs
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestValidationFunctions
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_multiple_files
+NM: func | ^[a-z_]+$ | validate_role_tags
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_regex_patterns_valid
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_prefix_free_mixed
+NM: func | ^[a-z_]+$ | RepoScanner._process_files_parallel
+NM: func | ^[a-z_]+$ | relpath
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_export_to_markdown
+NM: func | ^[a-z_]+$ | RepoScanner._process_class_member
+NM: func | ^[a-z_]+$ | CardRenderer._extract_token_sets
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_directory
+NM: module | ^[a-z_]+$ | export
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_negation_patterns
+NM: func | ^[a-z_]+$ | RepoScanner.scan_repository
+NM: func | ^[a-z_]+$ | get_definition_location
+NM: module | ^[a-z_]+$ | test_card_renderer
+NM: func | ^[a-z_]+$ | CTXCardGenerator.__init__
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestValidationIntegration
+NM: func | ^[a-z_]+$ | file_to_dotted
+NM: func | ^[a-z_]+$ | export_to_xml
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_prefix_free_invalid
+NM: func | ^[a-z_]+$ | RepoScanner._process_class
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_empty_modules
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_init
+NM: module | ^[a-z_]+$ | test_export
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_export_to_json
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_init
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_path_outside_root
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_matches_negated_character_classes
+NM: func | ^[a-z_]+$ | CTXCardGenerator.generate
+NM: func | ^[a-z_]+$ | TestCallResolver.test_resolve_target_function
+NM: func | ^[a-z_]+$ | TestCallResolver.test_build_reexports_global_single_module
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_validate_analysis_duplicate_symbol_ids
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestRepoScanner
+NM: func | ^[a-z_]+$ | parse_ctx_card
+NM: func | ^[a-z_]+$ | test_generation_with_type_signatures
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_basic
+NM: module | ^[a-z_]+$ | scanner
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_multiple_languages
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_encoding_issues
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_ast_analyzer_two_pass_analysis
+NM: func | ^[a-z_]+$ | CardRenderer._diff_lines
+NM: func | ^[a-z_]+$ | CardRenderer.generate_delta
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_cross_references_valid
+NM: func | ^[a-z_]+$ | CallResolver._resolve_call_target
+NM: func | ^[a-z_]+$ | IgnoreFile.get_ignored_patterns
+NM: func | ^[a-z_]+$ | CTXCardGenerator.save_per_package
+NM: module | ^[a-z_]+$ | test_full_generation
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_character_classes
+NM: func | ^[a-z_]+$ | RepoScanner._scan_lint_items
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_indices_valid
+NM: func | ^[a-z_]+$ | RepoScanner.build_indices
+NM: func | ^[a-z_]+$ | CardRenderer._extract_aliases
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestExportFunctions
+NM: func | ^[a-z_]+$ | CardRenderer._extract_security_constraints
+NM: class | ^[A-Z][A-Za-z0-9]+$ | CardRenderer
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_negation_pattern
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_mixed_patterns
+NM: func | ^[a-z_]+$ | TestCallResolver.test_longest_prefix_module_exact_match
+NM: func | ^[a-z_]+$ | validate_prefix_free
+NM: func | ^[a-z_]+$ | validate_ascii_compliance
+NM: func | ^[a-z_]+$ | IgnorePattern._glob_to_regex
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_get_ignored_patterns
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_ast_analyzer_integration
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_export_to_yaml
+NM: module | ^[a-z_]+$ | __init__
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_for_package
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_with_paths
+NM: func | ^[a-z_]+$ | CardRenderer._extract_signatures
+NM: func | ^[a-z_]+$ | CallResolver.longest_prefix_module
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_export_to_xml
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_analyze_repository_with_exclude
+NM: func | ^[a-z_]+$ | RepoScanner._collect_raises_in_function
+NM: func | ^[a-z_]+$ | TestHelpers.test_relpath_fallback
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_parse_empty_content
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_edges_invalid_caller
+NM: func | ^[a-z_]+$ | export_to_markdown
+NM: func | ^[a-z_]+$ | CardRenderer._extract_examples
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_performance
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_directory_pattern
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ConfigurationError
+NM: func | ^[a-z_]+$ | export_to_json
+NM: func | ^[a-z_]+$ | TestLoadIgnoreFile.test_load_ignore_file
+NM: func | ^[a-z_]+$ | CardRenderer._extract_data_types
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_edges_valid
+NM: func | ^[a-z_]+$ | test_generation_with_exclude_pattern
+NM: func | ^[a-z_]+$ | CardRenderer._extract_async_patterns
+NM: module | ^[a-z_]+$ | test_validation
+NM: func | ^[a-z_]+$ | test_generation_error_handling
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_extract_calls
+NM: func | ^[a-z_]+$ | RepoScanner._process_dto_error_enum
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_parse_ctx_card_basic
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_add_pattern
+NM: module | ^[a-z_]+$ | helpers
+NM: module | ^[a-z_]+$ | card_renderer
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_generate_delta_with_changes
+NM: func | ^[a-z_]+$ | CallResolver._dotted_from_ast
+NM: func | ^[a-z_]+$ | TestCallResolver.test_init
+NM: func | ^[a-z_]+$ | validate_edges
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_init
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestASTAnalyzer
+NM: func | ^[a-z_]+$ | TestHelpers.test_file_to_dotted_python
+NM: func | ^[a-z_]+$ | validate_indices
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_syntax_errors
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_parse_comments_only
+NM: func | ^[a-z_]+$ | ASTAnalyzer.validate_analysis
+NM: func | ^[a-z_]+$ | TestValidationIntegration.test_complete_ctx_card_validation
+NM: class | ^[A-Z][A-Za-z0-9]+$ | Symbol
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_validate_analysis_empty
+NM: func | ^[a-z_]+$ | IgnoreFile.should_ignore
+NM: func | ^[a-z_]+$ | validate_ctx_card_structure
+NM: func | ^[a-z_]+$ | find_all_references
+NM: func | ^[a-z_]+$ | IgnorePattern.matches
+NM: module | ^[a-z_]+$ | test_ast_analyzer
+NM: func | ^[a-z_]+$ | TestHelpers.test_is_probably_binary_text
+NM: class | ^[A-Z][A-Za-z0-9]+$ | RepoScanner
+NM: func | ^[a-z_]+$ | validate_regex_patterns
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_prefix_free_valid
+NM: func | ^[a-z_]+$ | CardRenderer.__init__
+NM: func | ^[a-z_]+$ | CardRenderer._extract_edges
+NM: module | ^[a-z_]+$ | ctxcard_gen
+NM: func | ^[a-z_]+$ | CardRenderer._extract_naming_patterns
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_ctx_card_structure_invalid
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_matches_recursive_glob
+NM: func | ^[a-z_]+$ | CardRenderer._extract_dependencies
+NM: func | ^[a-z_]+$ | CardRenderer._append_ty_lines
+NM: func | ^[a-z_]+$ | CardRenderer.render_card
+NM: func | ^[a-z_]+$ | TestIgnoreFile.test_should_ignore_regex_patterns
+NM: class | ^[A-Z][A-Za-z0-9]+$ | IgnoreFile
+NM: func | ^[a-z_]+$ | CardRenderer.render_per_package
+NM: func | ^[a-z_]+$ | ASTAnalyzer.analyze_repository
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ModuleInfo
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_regex_patterns_valid
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_validate_analysis_valid
+NM: func | ^[a-z_]+$ | TestHelpers.test_today_stamp
+NM: func | ^[a-z_]+$ | TestCallResolver.test_build_reexports_global_with_reexports
+NM: func | ^[a-z_]+$ | RepoScanner._process_symbols
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_init
+NM: func | ^[a-z_]+$ | TestHelpers.test_ann_to_str_none
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_get_statistics
+NM: func | ^[a-z_]+$ | test_generation_with_delta
+NM: class | ^[A-Z][A-Za-z0-9]+$ | FileError
+NM: func | ^[a-z_]+$ | TestHelpers.test_ann_to_str_complex
+NM: func | ^[a-z_]+$ | RepoScanner.longest_prefix_module
+NM: func | ^[a-z_]+$ | TestCallResolver.test_build_indices_single_module
+NM: func | ^[a-z_]+$ | CallResolver.build_reexports_global
+NM: func | ^[a-z_]+$ | CallResolver.process_reexports
+NM: func | ^[a-z_]+$ | RepoScanner.is_code_file
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_ctx_card_structure_missing_required
+NM: func | ^[a-z_]+$ | RepoScanner._process_routes
+NM: func | ^[a-z_]+$ | TestCallResolver.test_resolve_target_module_anchor
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_ast_analyzer_performance
+NM: func | ^[a-z_]+$ | sample_project_dir
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_ctx_card_structure_valid
+NM: module | ^[a-z_]+$ | exceptions
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_prefix_free_valid
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ValidationError
+NM: func | ^[a-z_]+$ | sample_scan_result
+NM: func | ^[a-z_]+$ | RepoScanner._exception_name_from_raise
+NM: module | ^[a-z_]+$ | test_cli
+NM: func | ^[a-z_]+$ | RepoScanner._function_signature
+NM: func | ^[a-z_]+$ | today_stamp
+NM: func | ^[a-z_]+$ | TestHelpers.test_relpath_success
+NM: func | ^[a-z_]+$ | test_generation_with_per_package
+NM: func | ^[a-z_]+$ | IgnoreFile.__init__
+NM: func | ^[a-z_]+$ | TestLoadIgnoreFile.test_load_ignore_file_with_patterns
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_with_ignore_patterns
+NM: func | ^[a-z_]+$ | main
+NM: func | ^[a-z_]+$ | CardRenderer._group_modules_by_package
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ParseError
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestIgnorePattern
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_with_properties
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_render_card_with_decorators
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestCardRenderer
+NM: func | ^[a-z_]+$ | TestCallResolver.test_resolve_target_not_found
+NM: func | ^[a-z_]+$ | TestHelpers.test_ascii_only_with_unicode
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_ast_analyzer_error_handling
+NM: func | ^[a-z_]+$ | RepoScanner._has_mutable_default
+NM: module | ^[a-z_]+$ | types
+NM: func | ^[a-z_]+$ | TestHelpers.test_is_probably_binary_mixed
+NM: func | ^[a-z_]+$ | test_generation_with_include_pattern
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_prefix_free_invalid
+NM: func | ^[a-z_]+$ | RepoScanner._is_enum_class
+NM: func | ^[a-z_]+$ | CardRenderer._extract_invariants
+NM: func | ^[a-z_]+$ | CardRenderer._extract_type_signatures
+NM: func | ^[a-z_]+$ | sample_modules
+NM: module | ^[a-z_]+$ | test_ignore
+NM: func | ^[a-z_]+$ | RepoScanner._walk_ignoring_nested
+NM: func | ^[a-z_]+$ | ann_to_str
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_export_without_output_path
+NM: func | ^[a-z_]+$ | CallResolver.__init__
+NM: func | ^[a-z_]+$ | TestASTAnalyzer.test_validate_analysis_duplicate_module_ids
+NM: func | ^[a-z_]+$ | CardRenderer._render_for_package
+NM: func | ^[a-z_]+$ | validate_naming_conventions
+NM: func | ^[a-z_]+$ | CallResolver.extract_calls
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_regex_patterns_invalid
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ScanResult
+NM: func | ^[a-z_]+$ | validate_semantic_tokens
+NM: func | ^[a-z_]+$ | TestCallResolver.test_longest_prefix_module_nested
+NM: module | ^[a-z_]+$ | ignore
+NM: module | ^[a-z_]+$ | conftest
+NM: class | ^[A-Z][A-Za-z0-9]+$ | TestValidation
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_get_validation_report_with_errors
+NM: func | ^[a-z_]+$ | RepoScanner._process_imports
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_ascii_compliance_valid
+NM: func | ^[a-z_]+$ | TestCardRenderer.test_append_ty_lines
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_indices_duplicate_module_id
+NM: func | ^[a-z_]+$ | TestCallResolver.test_resolve_target_class_method
+NM: class | ^[A-Z][A-Za-z0-9]+$ | ASTError
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_empty
+NM: func | ^[a-z_]+$ | CardRenderer._extract_environment_configs
+NM: func | ^[a-z_]+$ | get_completion_items
+NM: func | ^[a-z_]+$ | CardRenderer._extract_review_items
+NM: func | ^[a-z_]+$ | TestValidationFunctions.test_validate_cross_references_invalid
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_matches_simple_glob
+NM: func | ^[a-z_]+$ | RepoScanner._process_function
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_regex_patterns_invalid
+NM: func | ^[a-z_]+$ | TestRepoScanner.test_scan_repository_single_python_file
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_parse_ctx_card_new_tags
+NM: module | ^[a-z_]+$ | run_tests
+NM: func | ^[a-z_]+$ | TestValidation.test_validate_edges_invalid_target_module
+NM: module | ^[a-z_]+$ | ast_analyzer
+NM: func | ^[a-z_]+$ | TestCallResolver.test_longest_prefix_module_no_match
+NM: func | ^[a-z_]+$ | get_validation_report
+NM: func | ^[a-z_]+$ | TestIgnorePattern.test_matches_directory_glob
+NM: func | ^[a-z_]+$ | CallResolver.build_indices
+NM: module | ^[a-z_]+$ | validation
+NM: func | ^[a-z_]+$ | TestExportFunctions.test_parse_edge_cases
+
+SEC: CardRenderer._extract_security_constraints | authentication | required
+
+DT: Symbol | {mid:int,sid:int,kind:str,name:str,signature:Optional[str],deco:List[str],modifiers:Set[str],invariants:Optional[str],raises:List[str]}
+DT: ModuleInfo | {id:int,path:str,dotted:str,role_tags:Set[str],symbols:List[Symbol],imports_paths:Set[str],import_names:Dict[str, str],fn_to_sid:Dict[str, int],prop_to_sid:Dict[str, int],dts:List[Tuple[str, Dict[str, str]]],errors:List[Tuple[str, str, str]],routes:List[Tuple[int, str, str, List[str]]],calls:List[Tuple[int, Tuple[int, int]]],tokens:List[Tuple[str, List[str]]],reexports:Dict[str, str],px:List[Tuple[str, str]]}
+DT: ScanResult | {modules:Dict[str, ModuleInfo],langs:List[str]}
+DT: GeneratorConfig | {project_name:str,root_path:Path,output_path:Path,include_pattern:Optional[str],exclude_pattern:Optional[str],emit_type_signatures:bool,delta_from:Optional[Path],stdout_output:bool,per_package:bool}
+
+
+MO: #1 | run_tests.py | {test}
+MO: #2 | src/ctxcard_gen.py | {mod}
+MO: #3 | src/ctxcard_gen/__init__.py | {mod}
+MO: #4 | src/ctxcard_gen/__main__.py | {mod}
+MO: #5 | src/ctxcard_gen/core/__init__.py | {mod}
+MO: #6 | src/ctxcard_gen/core/ast_analyzer.py | {mod}
+MO: #7 | src/ctxcard_gen/core/call_resolver.py | {mod}
+MO: #8 | src/ctxcard_gen/core/card_renderer.py | {mod}
+MO: #9 | src/ctxcard_gen/core/scanner.py | {mod}
+MO: #10 | src/ctxcard_gen/ctxcard_gen.py | {mod}
+MO: #11 | src/ctxcard_gen/exceptions.py | {mod}
+MO: #12 | src/ctxcard_gen/types.py | {mod}
+MO: #13 | src/ctxcard_gen/utils/__init__.py | {mod}
+MO: #14 | src/ctxcard_gen/utils/export.py | {mod}
+MO: #15 | src/ctxcard_gen/utils/helpers.py | {mod}
+MO: #16 | src/ctxcard_gen/utils/ignore.py | {mod}
+MO: #17 | src/ctxcard_gen/utils/validation.py | {mod}
+MO: #18 | tests/__init__.py | {test}
+MO: #19 | tests/cli/test_cli.py | {test}
+MO: #20 | tests/conftest.py | {test}
+MO: #21 | tests/integration/test_full_generation.py | {test}
+MO: #22 | tests/test_ast_analyzer.py | {test}
+MO: #23 | tests/unit/test_call_resolver.py | {test}
+MO: #24 | tests/unit/test_card_renderer.py | {test}
+MO: #25 | tests/unit/test_export.py | {test}
+MO: #26 | tests/unit/test_ignore.py | {test}
+MO: #27 | tests/unit/test_scanner.py | {test}
+MO: #28 | tests/unit/test_utils.py | {test}
+MO: #29 | tests/unit/test_validation.py | {test}
+
+SY: #1.#1 | mod | run_tests
+SY: #1.#2 | fn | run_command
+SY: #1.#3 | fn | main
+SY: #2.#1 | mod | ctxcard_gen
+SY: #2.#2 | cls | CTXCardGenerator
+SY: #2.#3 | fn | CTXCardGenerator.__init__
+SY: #2.#4 | fn | CTXCardGenerator.generate
+SY: #2.#5 | fn | CTXCardGenerator.generate_per_package
+SY: #2.#6 | fn | CTXCardGenerator.save_output
+SY: #2.#7 | fn | CTXCardGenerator.save_per_package
+SY: #2.#8 | fn | main
+SY: #3.#1 | mod | __init__
+SY: #4.#1 | mod | __main__
+SY: #5.#1 | mod | __init__
+SY: #6.#1 | mod | ast_analyzer
+SY: #6.#2 | cls | ASTAnalyzer
+SY: #6.#3 | fn | ASTAnalyzer.__init__
+SY: #6.#4 | fn | ASTAnalyzer.analyze_repository
+SY: #6.#5 | fn | ASTAnalyzer.extract_calls
+SY: #6.#6 | fn | ASTAnalyzer.validate_analysis
+SY: #6.#7 | fn | ASTAnalyzer.get_statistics
+SY: #7.#1 | mod | call_resolver
+SY: #7.#2 | cls | CallResolver
+SY: #7.#3 | fn | CallResolver.__init__
+SY: #7.#4 | fn | CallResolver.build_reexports_global
+SY: #7.#5 | fn | CallResolver.build_indices
+SY: #7.#6 | fn | CallResolver.longest_prefix_module
+SY: #7.#7 | fn | CallResolver.resolve_target
+SY: #7.#8 | fn | CallResolver.extract_calls
+SY: #7.#9 | fn | CallResolver._find_caller_sid
+SY: #7.#10 | fn | CallResolver._resolve_call_target
+SY: #7.#11 | fn | CallResolver._dotted_from_ast
+SY: #7.#12 | fn | CallResolver.process_reexports
+SY: #8.#1 | mod | card_renderer
+SY: #8.#2 | cls | CardRenderer
+SY: #8.#3 | fn | CardRenderer.__init__
+SY: #8.#4 | fn | CardRenderer.render_card
+SY: #8.#5 | fn | CardRenderer._extract_aliases
+SY: #8.#6 | fn | CardRenderer._extract_naming_patterns
+SY: #8.#7 | fn | CardRenderer._extract_dependencies
+SY: #8.#8 | fn | CardRenderer._extract_environment_configs
+SY: #8.#9 | fn | CardRenderer._extract_security_constraints
+SY: #8.#10 | fn | CardRenderer._extract_data_types
+SY: #8.#11 | fn | CardRenderer._extract_token_sets
+SY: #8.#12 | fn | CardRenderer._extract_type_signatures
+SY: #8.#13 | fn | CardRenderer._extract_signatures
+SY: #8.#14 | fn | CardRenderer._extract_edges
+SY: #8.#15 | fn | CardRenderer._extract_event_relationships
+SY: #8.#16 | fn | CardRenderer._extract_async_patterns
+SY: #8.#17 | fn | CardRenderer._extract_invariants
+SY: #8.#18 | fn | CardRenderer._extract_conventions
+SY: #8.#19 | fn | CardRenderer._extract_errors
+SY: #8.#20 | fn | CardRenderer._extract_io_contracts
+SY: #8.#21 | fn | CardRenderer._extract_prohibited_patterns
+SY: #8.#22 | fn | CardRenderer._extract_examples
+SY: #8.#23 | fn | CardRenderer._extract_review_items
+SY: #8.#24 | fn | CardRenderer._append_ty_lines
+SY: #8.#25 | fn | CardRenderer.generate_delta
+SY: #8.#26 | fn | CardRenderer._diff_lines
+SY: #8.#27 | fn | CardRenderer.render_per_package
+SY: #8.#28 | fn | CardRenderer._group_modules_by_package
+SY: #8.#29 | fn | CardRenderer._render_for_package
+SY: #8.#30 | fn | CardRenderer.validate_output
+SY: #9.#1 | mod | scanner
+SY: #9.#2 | cls | RepoScanner
+SY: #9.#3 | fn | RepoScanner.__init__
+SY: #9.#4 | fn | RepoScanner._get_cached_content
+SY: #9.#5 | fn | RepoScanner._set_cached_content
+SY: #9.#6 | fn | RepoScanner.is_code_file
+SY: #9.#7 | fn | RepoScanner.role_tags_for
+SY: #9.#8 | fn | RepoScanner.detect_langs
+SY: #9.#9 | fn | RepoScanner.build_indices
+SY: #9.#10 | fn | RepoScanner.longest_prefix_module
+SY: #9.#11 | fn | RepoScanner.scan_repository
+SY: #9.#12 | fn | RepoScanner._process_files_sequential
+SY: #9.#13 | fn | RepoScanner._process_files_parallel
+SY: #9.#14 | fn | RepoScanner._process_imports
+SY: #9.#15 | fn | RepoScanner._process_symbols
+SY: #9.#16 | fn | RepoScanner._scan_lint_items
+SY: #9.#17 | fn | RepoScanner._process_class
+SY: #9.#18 | fn | RepoScanner._process_class_member
+SY: #9.#19 | fn | RepoScanner._process_function
+SY: #9.#20 | fn | RepoScanner._process_dto_error_enum
+SY: #9.#21 | fn | RepoScanner._process_routes
+SY: #9.#22 | fn | RepoScanner._dotted_from_ast
+SY: #9.#23 | fn | RepoScanner._function_signature
+SY: #9.#24 | fn | RepoScanner._method_modifiers
+SY: #9.#25 | fn | RepoScanner._class_has_descriptor_dunders
+SY: #9.#26 | fn | RepoScanner._is_enum_class
+SY: #9.#27 | fn | RepoScanner._has_mutable_default
+SY: #9.#28 | fn | RepoScanner._collect_raises_in_function
+SY: #9.#29 | fn | RepoScanner._walk_ignoring_nested
+SY: #9.#30 | fn | RepoScanner._exception_name_from_raise
+SY: #10.#1 | mod | ctxcard_gen
+SY: #10.#2 | cls | CTXCardGenerator
+SY: #10.#3 | fn | CTXCardGenerator.__init__
+SY: #10.#4 | fn | CTXCardGenerator.generate
+SY: #10.#5 | fn | CTXCardGenerator.generate_per_package
+SY: #10.#6 | fn | CTXCardGenerator.save_output
+SY: #10.#7 | fn | CTXCardGenerator.save_per_package
+SY: #10.#8 | fn | main
+SY: #11.#1 | mod | exceptions
+SY: #11.#2 | cls | CTXCardError
+SY: #11.#3 | cls | ParseError
+SY: #11.#4 | cls | ValidationError
+SY: #11.#5 | cls | ConfigurationError
+SY: #11.#6 | cls | FileError
+SY: #11.#7 | cls | ASTError
+SY: #12.#1 | mod | types
+SY: #12.#2 | cls | Symbol
+SY: #12.#3 | cls | ModuleInfo
+SY: #12.#4 | cls | ScanResult
+SY: #12.#5 | cls | GeneratorConfig
+SY: #13.#1 | mod | __init__
+SY: #14.#1 | mod | export
+SY: #14.#2 | fn | parse_ctx_card
+SY: #14.#3 | fn | export_to_json
+SY: #14.#4 | fn | export_to_yaml
+SY: #14.#5 | fn | export_to_xml
+SY: #14.#6 | fn | export_to_markdown
+SY: #15.#1 | mod | helpers
+SY: #15.#2 | fn | today_stamp
+SY: #15.#3 | fn | relpath
+SY: #15.#4 | fn | is_probably_binary
+SY: #15.#5 | fn | ascii_only
+SY: #15.#6 | fn | file_to_dotted
+SY: #15.#7 | fn | ann_to_str
+SY: #16.#1 | mod | ignore
+SY: #16.#2 | cls | IgnorePattern
+SY: #16.#3 | fn | IgnorePattern.__init__
+SY: #16.#4 | fn | IgnorePattern._glob_to_regex
+SY: #16.#5 | fn | IgnorePattern.matches
+SY: #16.#6 | cls | IgnoreFile
+SY: #16.#7 | fn | IgnoreFile.__init__
+SY: #16.#8 | fn | IgnoreFile._load_ignore_file
+SY: #16.#9 | fn | IgnoreFile.should_ignore
+SY: #16.#10 | fn | IgnoreFile.get_ignored_patterns
+SY: #16.#11 | fn | load_ignore_file
+SY: #17.#1 | mod | validation
+SY: #17.#2 | fn | validate_prefix_free
+SY: #17.#3 | fn | validate_regex_patterns
+SY: #17.#4 | fn | validate_indices
+SY: #17.#5 | fn | validate_edges
+SY: #17.#6 | fn | validate_ctx_card_structure
+SY: #17.#7 | fn | validate_role_tags
+SY: #17.#8 | fn | validate_function_signatures
+SY: #17.#9 | fn | validate_naming_conventions
+SY: #17.#10 | fn | validate_ascii_compliance
+SY: #17.#11 | fn | validate_semantic_tokens
+SY: #17.#12 | fn | validate_cross_references
+SY: #17.#13 | fn | get_validation_report
+SY: #17.#14 | fn | get_completion_items
+SY: #17.#15 | fn | get_definition_location
+SY: #17.#16 | fn | find_all_references
+SY: #18.#1 | mod | __init__
+SY: #19.#1 | mod | test_cli
+SY: #19.#2 | fn | test_cli_help
+SY: #20.#1 | mod | conftest
+SY: #20.#2 | fn | sample_project_dir
+SY: #20.#3 | fn | sample_modules
+SY: #20.#4 | fn | sample_scan_result
+SY: #20.#5 | fn | sample_ctxcard_content
+SY: #20.#6 | fn | old_ctxcard_content
+SY: #21.#1 | mod | test_full_generation
+SY: #21.#2 | fn | sample_project_dir
+SY: #21.#3 | fn | test_full_generation
+SY: #21.#4 | fn | test_generation_with_type_signatures
+SY: #21.#5 | fn | test_generation_with_delta
+SY: #21.#6 | fn | test_generation_with_per_package
+SY: #21.#7 | fn | test_generation_with_include_pattern
+SY: #21.#8 | fn | test_generation_with_exclude_pattern
+SY: #21.#9 | fn | test_generation_error_handling
+SY: #21.#10 | fn | test_generation_performance
+SY: #22.#1 | mod | test_ast_analyzer
+SY: #22.#2 | cls | TestASTAnalyzer
+SY: #22.#3 | fn | TestASTAnalyzer.test_analyze_repository_basic
+SY: #22.#4 | fn | TestASTAnalyzer.test_analyze_repository_with_include
+SY: #22.#5 | fn | TestASTAnalyzer.test_analyze_repository_with_exclude
+SY: #22.#6 | fn | TestASTAnalyzer.test_extract_calls
+SY: #22.#7 | fn | TestASTAnalyzer.test_validate_analysis_valid
+SY: #22.#8 | fn | TestASTAnalyzer.test_validate_analysis_empty
+SY: #22.#9 | fn | TestASTAnalyzer.test_validate_analysis_duplicate_module_ids
+SY: #22.#10 | fn | TestASTAnalyzer.test_validate_analysis_duplicate_symbol_ids
+SY: #22.#11 | fn | TestASTAnalyzer.test_get_statistics
+SY: #22.#12 | fn | TestASTAnalyzer.test_ast_analyzer_initialization
+SY: #22.#13 | fn | TestASTAnalyzer.test_ast_analyzer_two_pass_analysis
+SY: #22.#14 | fn | TestASTAnalyzer.test_ast_analyzer_error_handling
+SY: #22.#15 | fn | TestASTAnalyzer.test_ast_analyzer_performance
+SY: #22.#16 | fn | TestASTAnalyzer.test_ast_analyzer_component_integration
+SY: #23.#1 | mod | test_call_resolver
+SY: #23.#2 | cls | TestCallResolver
+SY: #23.#3 | fn | TestCallResolver.test_init
+SY: #23.#4 | fn | TestCallResolver.test_build_reexports_global_empty
+SY: #23.#5 | fn | TestCallResolver.test_build_reexports_global_single_module
+SY: #23.#6 | fn | TestCallResolver.test_build_reexports_global_with_reexports
+SY: #23.#7 | fn | TestCallResolver.test_build_indices_empty
+SY: #23.#8 | fn | TestCallResolver.test_build_indices_single_module
+SY: #23.#9 | fn | TestCallResolver.test_longest_prefix_module_exact_match
+SY: #23.#10 | fn | TestCallResolver.test_longest_prefix_module_nested
+SY: #23.#11 | fn | TestCallResolver.test_longest_prefix_module_no_match
+SY: #23.#12 | fn | TestCallResolver.test_resolve_target_function
+SY: #23.#13 | fn | TestCallResolver.test_resolve_target_class_method
+SY: #23.#14 | fn | TestCallResolver.test_resolve_target_module_anchor
+SY: #23.#15 | fn | TestCallResolver.test_resolve_target_not_found
+SY: #24.#1 | mod | test_card_renderer
+SY: #24.#2 | cls | TestCardRenderer
+SY: #24.#3 | fn | TestCardRenderer.test_init
+SY: #24.#4 | fn | TestCardRenderer.test_render_card_basic
+SY: #24.#5 | fn | TestCardRenderer.test_render_card_with_type_signatures
+SY: #24.#6 | fn | TestCardRenderer.test_render_card_with_classes
+SY: #24.#7 | fn | TestCardRenderer.test_render_card_with_properties
+SY: #24.#8 | fn | TestCardRenderer.test_render_card_with_decorators
+SY: #24.#9 | fn | TestCardRenderer.test_render_card_with_exceptions
+SY: #24.#10 | fn | TestCardRenderer.test_render_card_with_role_tags
+SY: #24.#11 | fn | TestCardRenderer.test_render_card_empty_modules
+SY: #24.#12 | fn | TestCardRenderer.test_render_card_multiple_languages
+SY: #24.#13 | fn | TestCardRenderer.test_generate_delta_empty
+SY: #24.#14 | fn | TestCardRenderer.test_generate_delta_with_changes
+SY: #24.#15 | fn | TestCardRenderer.test_group_modules_by_package
+SY: #24.#16 | fn | TestCardRenderer.test_render_for_package
+SY: #24.#17 | fn | TestCardRenderer.test_append_ty_lines
+SY: #25.#1 | mod | test_export
+SY: #25.#2 | cls | TestExportFunctions
+SY: #25.#3 | fn | TestExportFunctions.test_parse_ctx_card_basic
+SY: #25.#4 | fn | TestExportFunctions.test_parse_ctx_card_new_tags
+SY: #25.#5 | fn | TestExportFunctions.test_parse_ctx_card_complex
+SY: #25.#6 | fn | TestExportFunctions.test_export_to_json
+SY: #25.#7 | fn | TestExportFunctions.test_export_to_yaml
+SY: #25.#8 | fn | TestExportFunctions.test_export_to_xml
+SY: #25.#9 | fn | TestExportFunctions.test_export_to_markdown
+SY: #25.#10 | fn | TestExportFunctions.test_export_without_output_path
+SY: #25.#11 | fn | TestExportFunctions.test_parse_edge_cases
+SY: #25.#12 | fn | TestExportFunctions.test_parse_empty_content
+SY: #25.#13 | fn | TestExportFunctions.test_parse_comments_only
+SY: #26.#1 | mod | test_ignore
+SY: #26.#2 | cls | TestIgnoreFile
+SY: #26.#3 | fn | TestIgnoreFile.test_init
+SY: #26.#4 | fn | TestIgnoreFile.test_add_pattern
+SY: #26.#5 | fn | TestIgnoreFile.test_should_ignore_file
+SY: #26.#6 | fn | TestIgnoreFile.test_should_ignore_directory
+SY: #26.#7 | fn | TestIgnoreFile.test_should_ignore_with_paths
+SY: #26.#8 | fn | TestIgnoreFile.test_should_ignore_complex_patterns
+SY: #26.#9 | fn | TestIgnoreFile.test_should_ignore_regex_patterns
+SY: #26.#10 | fn | TestIgnoreFile.test_should_ignore_mixed_patterns
+SY: #26.#11 | fn | TestIgnoreFile.test_should_ignore_case_sensitivity
+SY: #26.#12 | fn | TestIgnoreFile.test_should_ignore_negation_patterns
+SY: #26.#13 | fn | TestIgnoreFile.test_should_ignore_directory_patterns
+SY: #26.#14 | fn | TestIgnoreFile.test_should_ignore_character_classes
+SY: #26.#15 | fn | TestIgnoreFile.test_should_ignore_recursive_patterns
+SY: #26.#16 | fn | TestIgnoreFile.test_should_ignore_path_outside_root
+SY: #26.#17 | fn | TestIgnoreFile.test_get_ignored_patterns
+SY: #26.#18 | cls | TestIgnorePattern
+SY: #26.#19 | fn | TestIgnorePattern.test_init
+SY: #26.#20 | fn | TestIgnorePattern.test_negation_pattern
+SY: #26.#21 | fn | TestIgnorePattern.test_directory_pattern
+SY: #26.#22 | fn | TestIgnorePattern.test_matches_simple_glob
+SY: #26.#23 | fn | TestIgnorePattern.test_matches_directory_glob
+SY: #26.#24 | fn | TestIgnorePattern.test_matches_recursive_glob
+SY: #26.#25 | fn | TestIgnorePattern.test_matches_character_classes
+SY: #26.#26 | fn | TestIgnorePattern.test_matches_negated_character_classes
+SY: #26.#27 | cls | TestLoadIgnoreFile
+SY: #26.#28 | fn | TestLoadIgnoreFile.test_load_ignore_file
+SY: #26.#29 | fn | TestLoadIgnoreFile.test_load_ignore_file_with_patterns
+SY: #27.#1 | mod | test_scanner
+SY: #27.#2 | cls | TestRepoScanner
+SY: #27.#3 | fn | TestRepoScanner.test_init
+SY: #27.#4 | fn | TestRepoScanner.test_scan_repository_empty
+SY: #27.#5 | fn | TestRepoScanner.test_scan_repository_single_python_file
+SY: #27.#6 | fn | TestRepoScanner.test_scan_repository_multiple_files
+SY: #27.#7 | fn | TestRepoScanner.test_scan_repository_with_packages
+SY: #27.#8 | fn | TestRepoScanner.test_scan_repository_with_ignore_patterns
+SY: #27.#9 | fn | TestRepoScanner.test_scan_repository_with_include_patterns
+SY: #27.#10 | fn | TestRepoScanner.test_scan_repository_with_complex_structure
+SY: #27.#11 | fn | TestRepoScanner.test_scan_repository_with_binary_files
+SY: #27.#12 | fn | TestRepoScanner.test_scan_repository_with_syntax_errors
+SY: #27.#13 | fn | TestRepoScanner.test_scan_repository_with_encoding_issues
+SY: #27.#14 | fn | TestRepoScanner.test_scan_repository_performance
+SY: #27.#15 | fn | TestRepoScanner.test_scan_repository_with_ast_analyzer_integration
+SY: #28.#1 | mod | test_utils
+SY: #28.#2 | cls | TestHelpers
+SY: #28.#3 | fn | TestHelpers.test_today_stamp
+SY: #28.#4 | fn | TestHelpers.test_relpath_success
+SY: #28.#5 | fn | TestHelpers.test_relpath_fallback
+SY: #28.#6 | fn | TestHelpers.test_is_probably_binary_text
+SY: #28.#7 | fn | TestHelpers.test_is_probably_binary_binary
+SY: #28.#8 | fn | TestHelpers.test_is_probably_binary_mixed
+SY: #28.#9 | fn | TestHelpers.test_ascii_only_clean
+SY: #28.#10 | fn | TestHelpers.test_ascii_only_with_unicode
+SY: #28.#11 | fn | TestHelpers.test_file_to_dotted_python
+SY: #28.#12 | fn | TestHelpers.test_ann_to_str_none
+SY: #28.#13 | fn | TestHelpers.test_ann_to_str_simple
+SY: #28.#14 | fn | TestHelpers.test_ann_to_str_complex
+SY: #28.#15 | fn | TestHelpers.test_ann_to_str_error_handling
+SY: #28.#16 | cls | TestValidation
+SY: #28.#17 | fn | TestValidation.test_validate_prefix_free_valid
+SY: #28.#18 | fn | TestValidation.test_validate_prefix_free_invalid
+SY: #28.#19 | fn | TestValidation.test_validate_prefix_free_mixed
+SY: #28.#20 | fn | TestValidation.test_validate_regex_patterns_valid
+SY: #28.#21 | fn | TestValidation.test_validate_regex_patterns_invalid
+SY: #28.#22 | fn | TestValidation.test_validate_indices_valid
+SY: #28.#23 | fn | TestValidation.test_validate_indices_duplicate_module_id
+SY: #28.#24 | fn | TestValidation.test_validate_indices_duplicate_symbol_id
+SY: #28.#25 | fn | TestValidation.test_validate_indices_wrong_symbol_module
+SY: #28.#26 | fn | TestValidation.test_validate_edges_valid
+SY: #28.#27 | fn | TestValidation.test_validate_edges_invalid_target_module
+SY: #28.#28 | fn | TestValidation.test_validate_edges_invalid_target_symbol
+SY: #28.#29 | fn | TestValidation.test_validate_edges_invalid_caller
+SY: #29.#1 | mod | test_validation
+SY: #29.#2 | cls | TestValidationFunctions
+SY: #29.#3 | fn | TestValidationFunctions.test_validate_prefix_free_valid
+SY: #29.#4 | fn | TestValidationFunctions.test_validate_prefix_free_invalid
+SY: #29.#5 | fn | TestValidationFunctions.test_validate_regex_patterns_valid
+SY: #29.#6 | fn | TestValidationFunctions.test_validate_regex_patterns_invalid
+SY: #29.#7 | fn | TestValidationFunctions.test_validate_ctx_card_structure_valid
+SY: #29.#8 | fn | TestValidationFunctions.test_validate_ctx_card_structure_invalid
+SY: #29.#9 | fn | TestValidationFunctions.test_validate_ctx_card_structure_missing_required
+SY: #29.#10 | fn | TestValidationFunctions.test_validate_ascii_compliance_valid
+SY: #29.#11 | fn | TestValidationFunctions.test_validate_ascii_compliance_invalid
+SY: #29.#12 | fn | TestValidationFunctions.test_validate_semantic_tokens
+SY: #29.#13 | fn | TestValidationFunctions.test_validate_cross_references_valid
+SY: #29.#14 | fn | TestValidationFunctions.test_validate_cross_references_invalid
+SY: #29.#15 | fn | TestValidationFunctions.test_get_validation_report_complete
+SY: #29.#16 | fn | TestValidationFunctions.test_get_validation_report_with_errors
+SY: #29.#17 | cls | TestValidationIntegration
+SY: #29.#18 | fn | TestValidationIntegration.test_complete_ctx_card_validation
+
+TY: fn | run_command | (cmd:list[str],description:str)->bool
+TY: fn | main | ()->Any
+TY: fn | CTXCardGenerator.__init__ | (self,config:GeneratorConfig)->Any
+TY: fn | CTXCardGenerator.generate | (self)->str
+TY: fn | CTXCardGenerator.generate_per_package | (self,root_content:str)->dict[str, str]
+TY: fn | CTXCardGenerator.save_output | (self,content:str)->None
+TY: fn | CTXCardGenerator.save_per_package | (self,packages:dict[str, str])->None
+TY: fn | main | ()->None
+TY: fn | ASTAnalyzer.__init__ | (self,max_workers:int,cache_size:int)->Any
+TY: fn | ASTAnalyzer.analyze_repository | (self,root:Path,include_glob:Optional[str],exclude_glob:Optional[str])->ScanResult
+TY: fn | ASTAnalyzer.extract_calls | (self,root:Path,scan_result:ScanResult)->None
+TY: fn | ASTAnalyzer.validate_analysis | (self,scan_result:ScanResult)->None !raises[ASTError]
+TY: fn | ASTAnalyzer.get_statistics | (self,scan_result:ScanResult)->Dict[str, int]
+TY: fn | CallResolver.__init__ | (self)->Any
+TY: fn | CallResolver.build_reexports_global | (self,modules:Dict[str, ModuleInfo])->Dict[str, str]
+TY: fn | CallResolver.build_indices | (self,modules:Dict[str, ModuleInfo])->Tuple[Dict[str, str], Dict[str, List[str]]]
+TY: fn | CallResolver.longest_prefix_module | (self,dotted:str,dotted_to_path:Dict[str, str])->Optional[str]
+TY: fn | CallResolver.resolve_target | (self,full_dotted:str,dotted_to_path:Dict[str, str],modules:Dict[str, ModuleInfo])->Tuple[Optional[int], Optional[int], str]
+TY: fn | CallResolver.extract_calls | (self,root:Path,scan:ScanResult)->None
+TY: fn | CallResolver._find_caller_sid | (self,node:ast.Call,local_lookup:Dict[str, int])->Optional[int]
+TY: fn | CallResolver._resolve_call_target | (self,node:ast.Call,mi:ModuleInfo,dotted_to_path:Dict[str, str],modules:Dict[str, ModuleInfo],reexports:Dict[str, str])->Optional[Tuple[int, int]]
+TY: fn | CallResolver._dotted_from_ast | (self,expr:ast.AST)->str
+TY: fn | CallResolver.process_reexports | (self,modules:Dict[str, ModuleInfo])->None
+TY: fn | CardRenderer.__init__ | (self)->Any
+TY: fn | CardRenderer.render_card | (self,project_name:str,langs:List[str],std:str,modules:Dict[str, ModuleInfo],emit_type_signatures:bool)->str
+TY: fn | CardRenderer._extract_aliases | (self,_modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_naming_patterns | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_dependencies | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_environment_configs | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_security_constraints | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_data_types | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_token_sets | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_type_signatures | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_signatures | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_edges | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_event_relationships | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_async_patterns | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_invariants | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_conventions | (self,_modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_errors | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_io_contracts | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_prohibited_patterns | (self,modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_examples | (self,_modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._extract_review_items | (self,_modules:Dict[str, ModuleInfo])->List[str]
+TY: fn | CardRenderer._append_ty_lines | (self,lines:List[str],modules:Dict[str, ModuleInfo])->None
+TY: fn | CardRenderer.generate_delta | (self,old_path:Path,new_content:str)->str
+TY: fn | CardRenderer._diff_lines | (self,old:List[str],new:List[str])->List[str]
+TY: fn | CardRenderer.render_per_package | (self,root_card:str,modules:Dict[str, ModuleInfo],langs:List[str],std:str,proj:str)->Dict[str, str]
+TY: fn | CardRenderer._group_modules_by_package | (self,modules:Dict[str, ModuleInfo])->Dict[str, List[ModuleInfo]]
+TY: fn | CardRenderer._render_for_package | (self,root_card:str,_pkg:str,pkg_modules:List[ModuleInfo],_langs:List[str],_std:str,_proj:str)->str
+TY: fn | CardRenderer.validate_output | (self,content:str)->None !raises[ValidationError]
+TY: fn | RepoScanner.__init__ | (self,max_workers:int,cache_size:int)->Any
+TY: fn | RepoScanner._get_cached_content | (self,file_path:Path)->Optional[str]
+TY: fn | RepoScanner._set_cached_content | (self,file_path:Path,content:str)->None
+TY: fn | RepoScanner.is_code_file | (self,path:Path)->bool
+TY: fn | RepoScanner.role_tags_for | (self,path:str)->Set[str]
+TY: fn | RepoScanner.detect_langs | (self,root:Path)->List[str]
+TY: fn | RepoScanner.build_indices | (self,modules:Dict[str, ModuleInfo])->Tuple[Dict[str, str], Dict[str, List[str]]]
+TY: fn | RepoScanner.longest_prefix_module | (self,dotted:str,dotted_to_path:Dict[str, str])->Optional[str]
+TY: fn | RepoScanner.scan_repository | (self,root:Path,include_pattern:Optional[str],exclude_pattern:Optional[str])->ScanResult
+TY: fn | RepoScanner._process_files_sequential | (self,root:Path,modules:Dict[str, ModuleInfo],dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any
+TY: fn | RepoScanner._process_files_parallel | (self,root:Path,modules:Dict[str, ModuleInfo],dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any
+TY: fn | RepoScanner._process_imports | (self,tree:ast.AST,mi:ModuleInfo,_full:Path,_root:Path,dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any
+TY: fn | RepoScanner._process_symbols | (self,tree:ast.AST,mi:ModuleInfo,rp:str)->Any
+TY: fn | RepoScanner._scan_lint_items | (self,tree:ast.AST,mi:ModuleInfo,rp:str)->Any
+TY: fn | RepoScanner._process_class | (self,node:ast.ClassDef,mi:ModuleInfo,sid:int)->int
+TY: fn | RepoScanner._process_class_member | (self,stmt:ast.FunctionDef | ast.AsyncFunctionDef,mi:ModuleInfo,sid:int,cls:str)->int
+TY: fn | RepoScanner._process_function | (self,node:ast.FunctionDef | ast.AsyncFunctionDef,mi:ModuleInfo,sid:int,rp:str)->int
+TY: fn | RepoScanner._process_dto_error_enum | (self,node:ast.ClassDef,mi:ModuleInfo,cls:str)->Any
+TY: fn | RepoScanner._process_routes | (self,node:ast.FunctionDef | ast.AsyncFunctionDef,mi:ModuleInfo,_sid:int)->Any
+TY: fn | RepoScanner._dotted_from_ast | (self,expr:ast.AST)->str
+TY: fn | RepoScanner._function_signature | (self,node:ast.AST)->str
+TY: fn | RepoScanner._method_modifiers | (self,decos:List[str])->Set[str]
+TY: fn | RepoScanner._class_has_descriptor_dunders | (self,node:ast.ClassDef)->bool
+TY: fn | RepoScanner._is_enum_class | (self,node:ast.ClassDef)->bool
+TY: fn | RepoScanner._has_mutable_default | (self,fn:ast.AST)->bool
+TY: fn | RepoScanner._collect_raises_in_function | (self,fn_node:ast.AST)->List[str]
+TY: fn | RepoScanner._walk_ignoring_nested | (self,fn_node:ast.AST)->Any
+TY: fn | RepoScanner._exception_name_from_raise | (self,exc:Optional[ast.AST])->str
+TY: fn | CTXCardGenerator.__init__ | (self,config:GeneratorConfig,max_workers:int,cache_size:int)->Any
+TY: fn | CTXCardGenerator.generate | (self)->str
+TY: fn | CTXCardGenerator.generate_per_package | (self,root_content:str)->dict[str, str]
+TY: fn | CTXCardGenerator.save_output | (self,content:str)->None
+TY: fn | CTXCardGenerator.save_per_package | (self,packages:dict[str, str])->None
+TY: fn | main | ()->None
+TY: fn | parse_ctx_card | (content:str)->Dict[str, Any]
+TY: fn | export_to_json | (content:str,output_path:Optional[Path])->str
+TY: fn | export_to_yaml | (content:str,output_path:Optional[Path])->str !raises[ImportError]
+TY: fn | export_to_xml | (content:str,output_path:Optional[Path])->str
+TY: fn | export_to_markdown | (content:str,output_path:Optional[Path])->str
+TY: fn | today_stamp | ()->str
+TY: fn | relpath | (p:Path,root:Path)->str
+TY: fn | is_probably_binary | (path:Path)->bool
+TY: fn | ascii_only | (s:str)->str
+TY: fn | file_to_dotted | (rp:str)->str
+TY: fn | ann_to_str | (ann:Optional[ast.AST])->str
+TY: fn | IgnorePattern.__init__ | (self,pattern:str,line_number:int)->Any
+TY: fn | IgnorePattern._glob_to_regex | (self,pattern:str)->re.Pattern
+TY: fn | IgnorePattern.matches | (self,path:str)->bool
+TY: fn | IgnoreFile.__init__ | (self,root_path:Path)->Any
+TY: fn | IgnoreFile._load_ignore_file | (self)->None
+TY: fn | IgnoreFile.should_ignore | (self,path:Path)->bool
+TY: fn | IgnoreFile.get_ignored_patterns | (self)->List[str]
+TY: fn | load_ignore_file | (root_path:Path)->IgnoreFile
+TY: fn | validate_prefix_free | (aliases:List[str])->Tuple[List[str], List[str]]
+TY: fn | validate_regex_patterns | (patterns:List[str])->Tuple[List[str], List[str]]
+TY: fn | validate_indices | (modules:dict)->bool
+TY: fn | validate_edges | (modules:dict)->bool
+TY: fn | validate_ctx_card_structure | (content:str)->Tuple[bool, List[str]]
+TY: fn | validate_role_tags | (modules:dict)->Tuple[bool, List[str]]
+TY: fn | validate_function_signatures | (modules:dict)->Tuple[bool, List[str]]
+TY: fn | validate_naming_conventions | (modules:dict,naming_patterns:Dict[str, str])->Tuple[bool, List[str]]
+TY: fn | validate_ascii_compliance | (content:str)->Tuple[bool, List[str]]
+TY: fn | validate_semantic_tokens | (content:str)->List[Dict]
+TY: fn | validate_cross_references | (content:str)->Tuple[bool, List[str]]
+TY: fn | get_validation_report | (content:str,modules:dict)->Dict
+TY: fn | get_completion_items | (content:str,position:int)->List[Dict]
+TY: fn | get_definition_location | (content:str,position:int)->Optional[Dict]
+TY: fn | find_all_references | (content:str,symbol:str)->List[Dict]
+TY: fn | test_cli_help | ()->Any
+TY: fn | sample_project_dir | (tmp_path:Path)->Path
+TY: fn | sample_modules | ()->Dict[str, ModuleInfo]
+TY: fn | sample_scan_result | (sample_modules)->ScanResult
+TY: fn | sample_ctxcard_content | ()->str
+TY: fn | old_ctxcard_content | ()->str
+TY: fn | sample_project_dir | (tmp_path:Path)->Path
+TY: fn | test_full_generation | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | test_generation_with_type_signatures | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | test_generation_with_delta | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | test_generation_with_per_package | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | test_generation_with_include_pattern | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | test_generation_with_exclude_pattern | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | test_generation_error_handling | (tmp_path:Path)->Any
+TY: fn | test_generation_performance | (project_dir:Path,tmp_path:Path)->Any
+TY: fn | TestASTAnalyzer.test_analyze_repository_basic | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_analyze_repository_with_include | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_analyze_repository_with_exclude | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_extract_calls | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_validate_analysis_valid | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_validate_analysis_empty | (self)->Any
+TY: fn | TestASTAnalyzer.test_validate_analysis_duplicate_module_ids | (self)->Any
+TY: fn | TestASTAnalyzer.test_validate_analysis_duplicate_symbol_ids | (self)->Any
+TY: fn | TestASTAnalyzer.test_get_statistics | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_ast_analyzer_initialization | (self)->Any
+TY: fn | TestASTAnalyzer.test_ast_analyzer_two_pass_analysis | (self,sample_project_dir:Path)->Any
+TY: fn | TestASTAnalyzer.test_ast_analyzer_error_handling | (self,tmp_path:Path)->Any
+TY: fn | TestASTAnalyzer.test_ast_analyzer_performance | (self,tmp_path:Path)->Any
+TY: fn | TestASTAnalyzer.test_ast_analyzer_component_integration | (self,sample_project_dir:Path)->Any
+TY: fn | TestCallResolver.test_init | (self)->Any
+TY: fn | TestCallResolver.test_build_reexports_global_empty | (self)->Any
+TY: fn | TestCallResolver.test_build_reexports_global_single_module | (self)->Any
+TY: fn | TestCallResolver.test_build_reexports_global_with_reexports | (self)->Any
+TY: fn | TestCallResolver.test_build_indices_empty | (self)->Any
+TY: fn | TestCallResolver.test_build_indices_single_module | (self)->Any
+TY: fn | TestCallResolver.test_longest_prefix_module_exact_match | (self)->Any
+TY: fn | TestCallResolver.test_longest_prefix_module_nested | (self)->Any
+TY: fn | TestCallResolver.test_longest_prefix_module_no_match | (self)->Any
+TY: fn | TestCallResolver.test_resolve_target_function | (self)->Any
+TY: fn | TestCallResolver.test_resolve_target_class_method | (self)->Any
+TY: fn | TestCallResolver.test_resolve_target_module_anchor | (self)->Any
+TY: fn | TestCallResolver.test_resolve_target_not_found | (self)->Any
+TY: fn | TestCardRenderer.test_init | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_basic | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_with_type_signatures | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_with_classes | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_with_properties | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_with_decorators | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_with_exceptions | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_with_role_tags | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_empty_modules | (self)->Any
+TY: fn | TestCardRenderer.test_render_card_multiple_languages | (self)->Any
+TY: fn | TestCardRenderer.test_generate_delta_empty | (self)->Any
+TY: fn | TestCardRenderer.test_generate_delta_with_changes | (self)->Any
+TY: fn | TestCardRenderer.test_group_modules_by_package | (self)->Any
+TY: fn | TestCardRenderer.test_render_for_package | (self)->Any
+TY: fn | TestCardRenderer.test_append_ty_lines | (self)->Any
+TY: fn | TestExportFunctions.test_parse_ctx_card_basic | (self)->Any
+TY: fn | TestExportFunctions.test_parse_ctx_card_new_tags | (self)->Any
+TY: fn | TestExportFunctions.test_parse_ctx_card_complex | (self)->Any
+TY: fn | TestExportFunctions.test_export_to_json | (self)->Any
+TY: fn | TestExportFunctions.test_export_to_yaml | (self)->Any
+TY: fn | TestExportFunctions.test_export_to_xml | (self)->Any
+TY: fn | TestExportFunctions.test_export_to_markdown | (self)->Any
+TY: fn | TestExportFunctions.test_export_without_output_path | (self)->Any
+TY: fn | TestExportFunctions.test_parse_edge_cases | (self)->Any
+TY: fn | TestExportFunctions.test_parse_empty_content | (self)->Any
+TY: fn | TestExportFunctions.test_parse_comments_only | (self)->Any
+TY: fn | TestIgnoreFile.test_init | (self)->Any
+TY: fn | TestIgnoreFile.test_add_pattern | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_file | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_directory | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_with_paths | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_complex_patterns | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_regex_patterns | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_mixed_patterns | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_case_sensitivity | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_negation_patterns | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_directory_patterns | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_character_classes | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_recursive_patterns | (self)->Any
+TY: fn | TestIgnoreFile.test_should_ignore_path_outside_root | (self)->Any
+TY: fn | TestIgnoreFile.test_get_ignored_patterns | (self)->Any
+TY: fn | TestIgnorePattern.test_init | (self)->Any
+TY: fn | TestIgnorePattern.test_negation_pattern | (self)->Any
+TY: fn | TestIgnorePattern.test_directory_pattern | (self)->Any
+TY: fn | TestIgnorePattern.test_matches_simple_glob | (self)->Any
+TY: fn | TestIgnorePattern.test_matches_directory_glob | (self)->Any
+TY: fn | TestIgnorePattern.test_matches_recursive_glob | (self)->Any
+TY: fn | TestIgnorePattern.test_matches_character_classes | (self)->Any
+TY: fn | TestIgnorePattern.test_matches_negated_character_classes | (self)->Any
+TY: fn | TestLoadIgnoreFile.test_load_ignore_file | (self)->Any
+TY: fn | TestLoadIgnoreFile.test_load_ignore_file_with_patterns | (self,tmp_path)->Any
+TY: fn | TestRepoScanner.test_init | (self)->Any
+TY: fn | TestRepoScanner.test_scan_repository_empty | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_single_python_file | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_multiple_files | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_packages | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_ignore_patterns | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_include_patterns | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_complex_structure | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_binary_files | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_syntax_errors | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_encoding_issues | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_performance | (self,tmp_path:Path)->Any
+TY: fn | TestRepoScanner.test_scan_repository_with_ast_analyzer_integration | (self,tmp_path:Path)->Any
+TY: fn | TestHelpers.test_today_stamp | (self)->Any
+TY: fn | TestHelpers.test_relpath_success | (self,tmp_path:Path)->Any
+TY: fn | TestHelpers.test_relpath_fallback | (self,tmp_path:Path)->Any
+TY: fn | TestHelpers.test_is_probably_binary_text | (self,tmp_path:Path)->Any
+TY: fn | TestHelpers.test_is_probably_binary_binary | (self,tmp_path:Path)->Any
+TY: fn | TestHelpers.test_is_probably_binary_mixed | (self,tmp_path:Path)->Any
+TY: fn | TestHelpers.test_ascii_only_clean | (self)->Any
+TY: fn | TestHelpers.test_ascii_only_with_unicode | (self)->Any
+TY: fn | TestHelpers.test_file_to_dotted_python | (self)->Any
+TY: fn | TestHelpers.test_ann_to_str_none | (self)->Any
+TY: fn | TestHelpers.test_ann_to_str_simple | (self)->Any
+TY: fn | TestHelpers.test_ann_to_str_complex | (self)->Any
+TY: fn | TestHelpers.test_ann_to_str_error_handling | (self)->Any
+TY: fn | TestValidation.test_validate_prefix_free_valid | (self)->Any
+TY: fn | TestValidation.test_validate_prefix_free_invalid | (self)->Any
+TY: fn | TestValidation.test_validate_prefix_free_mixed | (self)->Any
+TY: fn | TestValidation.test_validate_regex_patterns_valid | (self)->Any
+TY: fn | TestValidation.test_validate_regex_patterns_invalid | (self)->Any
+TY: fn | TestValidation.test_validate_indices_valid | (self)->Any
+TY: fn | TestValidation.test_validate_indices_duplicate_module_id | (self)->Any
+TY: fn | TestValidation.test_validate_indices_duplicate_symbol_id | (self)->Any
+TY: fn | TestValidation.test_validate_indices_wrong_symbol_module | (self)->Any
+TY: fn | TestValidation.test_validate_edges_valid | (self)->Any
+TY: fn | TestValidation.test_validate_edges_invalid_target_module | (self)->Any
+TY: fn | TestValidation.test_validate_edges_invalid_target_symbol | (self)->Any
+TY: fn | TestValidation.test_validate_edges_invalid_caller | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_prefix_free_valid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_prefix_free_invalid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_regex_patterns_valid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_regex_patterns_invalid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_ctx_card_structure_valid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_ctx_card_structure_invalid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_ctx_card_structure_missing_required | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_ascii_compliance_valid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_ascii_compliance_invalid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_semantic_tokens | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_cross_references_valid | (self)->Any
+TY: fn | TestValidationFunctions.test_validate_cross_references_invalid | (self)->Any
+TY: fn | TestValidationFunctions.test_get_validation_report_complete | (self)->Any
+TY: fn | TestValidationFunctions.test_get_validation_report_with_errors | (self)->Any
+TY: fn | TestValidationIntegration.test_complete_ctx_card_validation | (self)->Any
+
+SG: #1.#2 | (cmd:list[str],description:str)->bool
+SG: #1.#3 | ()->Any
+SG: #2.#3 | (self,config:GeneratorConfig)->Any
+SG: #2.#4 | (self)->str
+SG: #2.#5 | (self,root_content:str)->dict[str, str]
+SG: #2.#6 | (self,content:str)->None
+SG: #2.#7 | (self,packages:dict[str, str])->None
+SG: #2.#8 | ()->None
+SG: #6.#3 | (self,max_workers:int,cache_size:int)->Any
+SG: #6.#4 | (self,root:Path,include_glob:Optional[str],exclude_glob:Optional[str])->ScanResult
+SG: #6.#5 | (self,root:Path,scan_result:ScanResult)->None
+SG: #6.#6 | (self,scan_result:ScanResult)->None !raises[ASTError]
+SG: #6.#7 | (self,scan_result:ScanResult)->Dict[str, int]
+SG: #7.#3 | (self)->Any
+SG: #7.#4 | (self,modules:Dict[str, ModuleInfo])->Dict[str, str]
+SG: #7.#5 | (self,modules:Dict[str, ModuleInfo])->Tuple[Dict[str, str], Dict[str, List[str]]]
+SG: #7.#6 | (self,dotted:str,dotted_to_path:Dict[str, str])->Optional[str]
+SG: #7.#7 | (self,full_dotted:str,dotted_to_path:Dict[str, str],modules:Dict[str, ModuleInfo])->Tuple[Optional[int], Optional[int], str]
+SG: #7.#8 | (self,root:Path,scan:ScanResult)->None
+SG: #7.#9 | (self,node:ast.Call,local_lookup:Dict[str, int])->Optional[int]
+SG: #7.#10 | (self,node:ast.Call,mi:ModuleInfo,dotted_to_path:Dict[str, str],modules:Dict[str, ModuleInfo],reexports:Dict[str, str])->Optional[Tuple[int, int]]
+SG: #7.#11 | (self,expr:ast.AST)->str
+SG: #7.#12 | (self,modules:Dict[str, ModuleInfo])->None
+SG: #8.#3 | (self)->Any
+SG: #8.#4 | (self,project_name:str,langs:List[str],std:str,modules:Dict[str, ModuleInfo],emit_type_signatures:bool)->str
+SG: #8.#5 | (self,_modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#6 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#7 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#8 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#9 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#10 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#11 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#12 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#13 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#14 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#15 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#16 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#17 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#18 | (self,_modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#19 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#20 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#21 | (self,modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#22 | (self,_modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#23 | (self,_modules:Dict[str, ModuleInfo])->List[str]
+SG: #8.#24 | (self,lines:List[str],modules:Dict[str, ModuleInfo])->None
+SG: #8.#25 | (self,old_path:Path,new_content:str)->str
+SG: #8.#26 | (self,old:List[str],new:List[str])->List[str]
+SG: #8.#27 | (self,root_card:str,modules:Dict[str, ModuleInfo],langs:List[str],std:str,proj:str)->Dict[str, str]
+SG: #8.#28 | (self,modules:Dict[str, ModuleInfo])->Dict[str, List[ModuleInfo]]
+SG: #8.#29 | (self,root_card:str,_pkg:str,pkg_modules:List[ModuleInfo],_langs:List[str],_std:str,_proj:str)->str
+SG: #8.#30 | (self,content:str)->None !raises[ValidationError]
+SG: #9.#3 | (self,max_workers:int,cache_size:int)->Any
+SG: #9.#4 | (self,file_path:Path)->Optional[str]
+SG: #9.#5 | (self,file_path:Path,content:str)->None
+SG: #9.#6 | (self,path:Path)->bool
+SG: #9.#7 | (self,path:str)->Set[str]
+SG: #9.#8 | (self,root:Path)->List[str]
+SG: #9.#9 | (self,modules:Dict[str, ModuleInfo])->Tuple[Dict[str, str], Dict[str, List[str]]]
+SG: #9.#10 | (self,dotted:str,dotted_to_path:Dict[str, str])->Optional[str]
+SG: #9.#11 | (self,root:Path,include_pattern:Optional[str],exclude_pattern:Optional[str])->ScanResult
+SG: #9.#12 | (self,root:Path,modules:Dict[str, ModuleInfo],dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any
+SG: #9.#13 | (self,root:Path,modules:Dict[str, ModuleInfo],dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any
+SG: #9.#14 | (self,tree:ast.AST,mi:ModuleInfo,_full:Path,_root:Path,dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any
+SG: #9.#15 | (self,tree:ast.AST,mi:ModuleInfo,rp:str)->Any
+SG: #9.#16 | (self,tree:ast.AST,mi:ModuleInfo,rp:str)->Any
+SG: #9.#17 | (self,node:ast.ClassDef,mi:ModuleInfo,sid:int)->int
+SG: #9.#18 | (self,stmt:ast.FunctionDef | ast.AsyncFunctionDef,mi:ModuleInfo,sid:int,cls:str)->int
+SG: #9.#19 | (self,node:ast.FunctionDef | ast.AsyncFunctionDef,mi:ModuleInfo,sid:int,rp:str)->int
+SG: #9.#20 | (self,node:ast.ClassDef,mi:ModuleInfo,cls:str)->Any
+SG: #9.#21 | (self,node:ast.FunctionDef | ast.AsyncFunctionDef,mi:ModuleInfo,_sid:int)->Any
+SG: #9.#22 | (self,expr:ast.AST)->str
+SG: #9.#23 | (self,node:ast.AST)->str
+SG: #9.#24 | (self,decos:List[str])->Set[str]
+SG: #9.#25 | (self,node:ast.ClassDef)->bool
+SG: #9.#26 | (self,node:ast.ClassDef)->bool
+SG: #9.#27 | (self,fn:ast.AST)->bool
+SG: #9.#28 | (self,fn_node:ast.AST)->List[str]
+SG: #9.#29 | (self,fn_node:ast.AST)->Any
+SG: #9.#30 | (self,exc:Optional[ast.AST])->str
+SG: #10.#3 | (self,config:GeneratorConfig,max_workers:int,cache_size:int)->Any
+SG: #10.#4 | (self)->str
+SG: #10.#5 | (self,root_content:str)->dict[str, str]
+SG: #10.#6 | (self,content:str)->None
+SG: #10.#7 | (self,packages:dict[str, str])->None
+SG: #10.#8 | ()->None
+SG: #14.#2 | (content:str)->Dict[str, Any]
+SG: #14.#3 | (content:str,output_path:Optional[Path])->str
+SG: #14.#4 | (content:str,output_path:Optional[Path])->str !raises[ImportError]
+SG: #14.#5 | (content:str,output_path:Optional[Path])->str
+SG: #14.#6 | (content:str,output_path:Optional[Path])->str
+SG: #15.#2 | ()->str
+SG: #15.#3 | (p:Path,root:Path)->str
+SG: #15.#4 | (path:Path)->bool
+SG: #15.#5 | (s:str)->str
+SG: #15.#6 | (rp:str)->str
+SG: #15.#7 | (ann:Optional[ast.AST])->str
+SG: #16.#3 | (self,pattern:str,line_number:int)->Any
+SG: #16.#4 | (self,pattern:str)->re.Pattern
+SG: #16.#5 | (self,path:str)->bool
+SG: #16.#7 | (self,root_path:Path)->Any
+SG: #16.#8 | (self)->None
+SG: #16.#9 | (self,path:Path)->bool
+SG: #16.#10 | (self)->List[str]
+SG: #16.#11 | (root_path:Path)->IgnoreFile
+SG: #17.#2 | (aliases:List[str])->Tuple[List[str], List[str]]
+SG: #17.#3 | (patterns:List[str])->Tuple[List[str], List[str]]
+SG: #17.#4 | (modules:dict)->bool
+SG: #17.#5 | (modules:dict)->bool
+SG: #17.#6 | (content:str)->Tuple[bool, List[str]]
+SG: #17.#7 | (modules:dict)->Tuple[bool, List[str]]
+SG: #17.#8 | (modules:dict)->Tuple[bool, List[str]]
+SG: #17.#9 | (modules:dict,naming_patterns:Dict[str, str])->Tuple[bool, List[str]]
+SG: #17.#10 | (content:str)->Tuple[bool, List[str]]
+SG: #17.#11 | (content:str)->List[Dict]
+SG: #17.#12 | (content:str)->Tuple[bool, List[str]]
+SG: #17.#13 | (content:str,modules:dict)->Dict
+SG: #17.#14 | (content:str,position:int)->List[Dict]
+SG: #17.#15 | (content:str,position:int)->Optional[Dict]
+SG: #17.#16 | (content:str,symbol:str)->List[Dict]
+SG: #19.#2 | ()->Any
+SG: #20.#2 | (tmp_path:Path)->Path
+SG: #20.#3 | ()->Dict[str, ModuleInfo]
+SG: #20.#4 | (sample_modules)->ScanResult
+SG: #20.#5 | ()->str
+SG: #20.#6 | ()->str
+SG: #21.#2 | (tmp_path:Path)->Path
+SG: #21.#3 | (project_dir:Path,tmp_path:Path)->Any
+SG: #21.#4 | (project_dir:Path,tmp_path:Path)->Any
+SG: #21.#5 | (project_dir:Path,tmp_path:Path)->Any
+SG: #21.#6 | (project_dir:Path,tmp_path:Path)->Any
+SG: #21.#7 | (project_dir:Path,tmp_path:Path)->Any
+SG: #21.#8 | (project_dir:Path,tmp_path:Path)->Any
+SG: #21.#9 | (tmp_path:Path)->Any
+SG: #21.#10 | (project_dir:Path,tmp_path:Path)->Any
+SG: #22.#3 | (self,sample_project_dir:Path)->Any
+SG: #22.#4 | (self,sample_project_dir:Path)->Any
+SG: #22.#5 | (self,sample_project_dir:Path)->Any
+SG: #22.#6 | (self,sample_project_dir:Path)->Any
+SG: #22.#7 | (self,sample_project_dir:Path)->Any
+SG: #22.#8 | (self)->Any
+SG: #22.#9 | (self)->Any
+SG: #22.#10 | (self)->Any
+SG: #22.#11 | (self,sample_project_dir:Path)->Any
+SG: #22.#12 | (self)->Any
+SG: #22.#13 | (self,sample_project_dir:Path)->Any
+SG: #22.#14 | (self,tmp_path:Path)->Any
+SG: #22.#15 | (self,tmp_path:Path)->Any
+SG: #22.#16 | (self,sample_project_dir:Path)->Any
+SG: #23.#3 | (self)->Any
+SG: #23.#4 | (self)->Any
+SG: #23.#5 | (self)->Any
+SG: #23.#6 | (self)->Any
+SG: #23.#7 | (self)->Any
+SG: #23.#8 | (self)->Any
+SG: #23.#9 | (self)->Any
+SG: #23.#10 | (self)->Any
+SG: #23.#11 | (self)->Any
+SG: #23.#12 | (self)->Any
+SG: #23.#13 | (self)->Any
+SG: #23.#14 | (self)->Any
+SG: #23.#15 | (self)->Any
+SG: #24.#3 | (self)->Any
+SG: #24.#4 | (self)->Any
+SG: #24.#5 | (self)->Any
+SG: #24.#6 | (self)->Any
+SG: #24.#7 | (self)->Any
+SG: #24.#8 | (self)->Any
+SG: #24.#9 | (self)->Any
+SG: #24.#10 | (self)->Any
+SG: #24.#11 | (self)->Any
+SG: #24.#12 | (self)->Any
+SG: #24.#13 | (self)->Any
+SG: #24.#14 | (self)->Any
+SG: #24.#15 | (self)->Any
+SG: #24.#16 | (self)->Any
+SG: #24.#17 | (self)->Any
+SG: #25.#3 | (self)->Any
+SG: #25.#4 | (self)->Any
+SG: #25.#5 | (self)->Any
+SG: #25.#6 | (self)->Any
+SG: #25.#7 | (self)->Any
+SG: #25.#8 | (self)->Any
+SG: #25.#9 | (self)->Any
+SG: #25.#10 | (self)->Any
+SG: #25.#11 | (self)->Any
+SG: #25.#12 | (self)->Any
+SG: #25.#13 | (self)->Any
+SG: #26.#3 | (self)->Any
+SG: #26.#4 | (self)->Any
+SG: #26.#5 | (self)->Any
+SG: #26.#6 | (self)->Any
+SG: #26.#7 | (self)->Any
+SG: #26.#8 | (self)->Any
+SG: #26.#9 | (self)->Any
+SG: #26.#10 | (self)->Any
+SG: #26.#11 | (self)->Any
+SG: #26.#12 | (self)->Any
+SG: #26.#13 | (self)->Any
+SG: #26.#14 | (self)->Any
+SG: #26.#15 | (self)->Any
+SG: #26.#16 | (self)->Any
+SG: #26.#17 | (self)->Any
+SG: #26.#19 | (self)->Any
+SG: #26.#20 | (self)->Any
+SG: #26.#21 | (self)->Any
+SG: #26.#22 | (self)->Any
+SG: #26.#23 | (self)->Any
+SG: #26.#24 | (self)->Any
+SG: #26.#25 | (self)->Any
+SG: #26.#26 | (self)->Any
+SG: #26.#28 | (self)->Any
+SG: #26.#29 | (self,tmp_path)->Any
+SG: #27.#3 | (self)->Any
+SG: #27.#4 | (self,tmp_path:Path)->Any
+SG: #27.#5 | (self,tmp_path:Path)->Any
+SG: #27.#6 | (self,tmp_path:Path)->Any
+SG: #27.#7 | (self,tmp_path:Path)->Any
+SG: #27.#8 | (self,tmp_path:Path)->Any
+SG: #27.#9 | (self,tmp_path:Path)->Any
+SG: #27.#10 | (self,tmp_path:Path)->Any
+SG: #27.#11 | (self,tmp_path:Path)->Any
+SG: #27.#12 | (self,tmp_path:Path)->Any
+SG: #27.#13 | (self,tmp_path:Path)->Any
+SG: #27.#14 | (self,tmp_path:Path)->Any
+SG: #27.#15 | (self,tmp_path:Path)->Any
+SG: #28.#3 | (self)->Any
+SG: #28.#4 | (self,tmp_path:Path)->Any
+SG: #28.#5 | (self,tmp_path:Path)->Any
+SG: #28.#6 | (self,tmp_path:Path)->Any
+SG: #28.#7 | (self,tmp_path:Path)->Any
+SG: #28.#8 | (self,tmp_path:Path)->Any
+SG: #28.#9 | (self)->Any
+SG: #28.#10 | (self)->Any
+SG: #28.#11 | (self)->Any
+SG: #28.#12 | (self)->Any
+SG: #28.#13 | (self)->Any
+SG: #28.#14 | (self)->Any
+SG: #28.#15 | (self)->Any
+SG: #28.#17 | (self)->Any
+SG: #28.#18 | (self)->Any
+SG: #28.#19 | (self)->Any
+SG: #28.#20 | (self)->Any
+SG: #28.#21 | (self)->Any
+SG: #28.#22 | (self)->Any
+SG: #28.#23 | (self)->Any
+SG: #28.#24 | (self)->Any
+SG: #28.#25 | (self)->Any
+SG: #28.#26 | (self)->Any
+SG: #28.#27 | (self)->Any
+SG: #28.#28 | (self)->Any
+SG: #28.#29 | (self)->Any
+SG: #29.#3 | (self)->Any
+SG: #29.#4 | (self)->Any
+SG: #29.#5 | (self)->Any
+SG: #29.#6 | (self)->Any
+SG: #29.#7 | (self)->Any
+SG: #29.#8 | (self)->Any
+SG: #29.#9 | (self)->Any
+SG: #29.#10 | (self)->Any
+SG: #29.#11 | (self)->Any
+SG: #29.#12 | (self)->Any
+SG: #29.#13 | (self)->Any
+SG: #29.#14 | (self)->Any
+SG: #29.#15 | (self)->Any
+SG: #29.#16 | (self)->Any
+SG: #29.#18 | (self)->Any
+
+ED: #1.#3 -> #1.#2 | calls
+ED: #1.#3 -> #1.#2 | calls
+ED: #1.#3 -> #1.#2 | calls
+ED: #1.#3 -> #1.#2 | calls
+ED: #2.#0 -> #6.#0 | imports
+ED: #2.#0 -> #8.#0 | imports
+ED: #2.#0 -> #11.#0 | imports
+ED: #2.#0 -> #12.#0 | imports
+ED: #3.#0 -> #2.#0 | imports
+ED: #3.#0 -> #6.#0 | imports
+ED: #3.#0 -> #7.#0 | imports
+ED: #3.#0 -> #8.#0 | imports
+ED: #3.#0 -> #9.#0 | imports
+ED: #3.#0 -> #10.#0 | imports
+ED: #3.#0 -> #11.#0 | imports
+ED: #3.#0 -> #12.#0 | imports
+ED: #3.#0 -> #16.#0 | imports
+ED: #4.#0 -> #2.#0 | imports
+ED: #4.#0 -> #10.#0 | imports
+ED: #5.#0 -> #6.#0 | imports
+ED: #5.#0 -> #7.#0 | imports
+ED: #5.#0 -> #8.#0 | imports
+ED: #5.#0 -> #9.#0 | imports
+ED: #6.#0 -> #7.#0 | imports
+ED: #6.#0 -> #9.#0 | imports
+ED: #6.#0 -> #11.#0 | imports
+ED: #6.#0 -> #12.#0 | imports
+ED: #7.#0 -> #12.#0 | imports
+ED: #8.#0 -> #11.#0 | imports
+ED: #8.#0 -> #12.#0 | imports
+ED: #8.#0 -> #15.#0 | imports
+ED: #8.#0 -> #17.#0 | imports
+ED: #9.#0 -> #12.#0 | imports
+ED: #9.#0 -> #15.#0 | imports
+ED: #9.#0 -> #16.#0 | imports
+ED: #10.#0 -> #6.#0 | imports
+ED: #10.#0 -> #8.#0 | imports
+ED: #10.#0 -> #11.#0 | imports
+ED: #10.#0 -> #12.#0 | imports
+ED: #10.#0 -> #14.#0 | imports
+ED: #10.#0 -> #16.#0 | imports
+ED: #10.#0 -> #17.#0 | imports
+ED: #13.#0 -> #15.#0 | imports
+ED: #13.#0 -> #16.#0 | imports
+ED: #13.#0 -> #17.#0 | imports
+ED: #14.#3 -> #14.#2 | calls
+ED: #14.#4 -> #14.#2 | calls
+ED: #14.#5 -> #14.#2 | calls
+ED: #14.#6 -> #14.#2 | calls
+ED: #17.#13 -> #17.#6 | calls
+ED: #17.#13 -> #17.#10 | calls
+ED: #17.#13 -> #17.#12 | calls
+ED: #17.#13 -> #17.#11 | calls
+ED: #17.#13 -> #17.#7 | calls
+ED: #17.#13 -> #17.#8 | calls
+ED: #20.#0 -> #12.#0 | imports
+ED: #21.#0 -> #3.#0 | imports
+ED: #21.#0 -> #12.#0 | imports
+ED: #22.#0 -> #6.#0 | imports
+ED: #22.#0 -> #11.#0 | imports
+ED: #22.#0 -> #12.#0 | imports
+ED: #23.#0 -> #7.#0 | imports
+ED: #23.#0 -> #12.#0 | imports
+ED: #24.#0 -> #8.#0 | imports
+ED: #24.#0 -> #12.#0 | imports
+ED: #25.#0 -> #14.#0 | imports
+ED: #26.#0 -> #16.#0 | imports
+ED: #27.#0 -> #9.#0 | imports
+ED: #28.#0 -> #12.#0 | imports
+ED: #28.#0 -> #15.#0 | imports
+ED: #28.#0 -> #17.#0 | imports
+ED: #29.#0 -> #17.#0 | imports
+
+EVT: #8.#15 | event | CardRenderer._extract_event_relationships
+
+ASYNC: #8.#16 | async | CardRenderer._extract_async_patterns
+
+
+CN: repos never import svc
+CN: async functions end with _async
+
+ER: CTXCardError | domain | custom exception
+
+
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+PX: forbid print in production | logging
+
+EX: var(repo) => user_repo
+
+RV: public functions have signatures & docstrings
+RV: check invariants (IN) on public fn

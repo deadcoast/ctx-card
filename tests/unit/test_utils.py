@@ -2,11 +2,16 @@
 Unit tests for utility modules.
 """
 
+import ast
 from pathlib import Path
-from typing import List, Tuple
 
-import pytest
+# Note: pytest import is handled by test runner
+try:
+    import pytest
+except ImportError:
+    pytest = None
 
+from ctxcard_gen.types import ModuleInfo, Symbol
 from ctxcard_gen.utils.helpers import (
     ann_to_str,
     ascii_only,
@@ -125,8 +130,6 @@ class TestHelpers:
 
     def test_ann_to_str_simple(self):
         """Test annotation to string conversion with simple types."""
-        import ast
-
         # Simple name
         name_ann = ast.Name(id="str")
         result = ann_to_str(name_ann)
@@ -139,8 +142,6 @@ class TestHelpers:
 
     def test_ann_to_str_complex(self):
         """Test annotation to string conversion with complex types."""
-        import ast
-
         # Union type
         union_ann = ast.BinOp(
             left=ast.Name(id="str"), op=ast.BitOr(), right=ast.Name(id="None")
@@ -150,8 +151,6 @@ class TestHelpers:
 
     def test_ann_to_str_error_handling(self):
         """Test annotation to string conversion error handling."""
-        import ast
-
         # Create an invalid AST node
         invalid_node = ast.Constant(value="invalid")
 
@@ -214,7 +213,6 @@ class TestValidation:
 
     def test_validate_indices_valid(self):
         """Test index validation with valid indices."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
 
         modules = {}
 
@@ -237,7 +235,7 @@ class TestValidation:
 
     def test_validate_indices_duplicate_module_id(self):
         """Test index validation with duplicate module IDs."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 
@@ -254,7 +252,7 @@ class TestValidation:
 
     def test_validate_indices_duplicate_symbol_id(self):
         """Test index validation with duplicate symbol IDs."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 
@@ -269,7 +267,7 @@ class TestValidation:
 
     def test_validate_indices_wrong_symbol_module(self):
         """Test index validation with symbol in wrong module."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 
@@ -283,7 +281,7 @@ class TestValidation:
 
     def test_validate_edges_valid(self):
         """Test edge validation with valid edges."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 
@@ -307,7 +305,7 @@ class TestValidation:
 
     def test_validate_edges_invalid_target_module(self):
         """Test edge validation with invalid target module."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 
@@ -323,7 +321,7 @@ class TestValidation:
 
     def test_validate_edges_invalid_target_symbol(self):
         """Test edge validation with invalid target symbol."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 
@@ -347,7 +345,7 @@ class TestValidation:
 
     def test_validate_edges_invalid_caller(self):
         """Test edge validation with invalid caller symbol."""
-        from ctxcard_gen.types import ModuleInfo, Symbol
+        from ctxcard_gen.types import ModuleInfo, Symbol  # pylint: disable=import-outside-toplevel
 
         modules = {}
 

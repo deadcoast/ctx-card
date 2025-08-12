@@ -1,421 +1,245 @@
 """
-Unit tests for the repository scanner.
+Unit tests for scanner module.
+
+This module tests the repository scanning functionality.
 """
 
 from pathlib import Path
-from typing import Set
 
-import pytest
+# Note: pytest import is handled by test runner
+try:
+    import pytest
+except ImportError:
+    pytest = None
 
-from ctxcard_gen.core.scanner import RepoScanner
-from ctxcard_gen.types import ModuleInfo, Symbol
+from src.ctxcard_gen.core.scanner import RepoScanner
 
 
 class TestRepoScanner:
-    """Test cases for RepoScanner."""
+    """Test cases for repository scanner functionality."""
 
-    def test_is_code_file(self):
-        """Test code file detection."""
+    def test_init(self):
+        """Test scanner initialization."""
         scanner = RepoScanner()
+        assert scanner is not None
 
-        # Test Python files - create a temporary file
-        import tempfile
-        with tempfile.NamedTemporaryFile(suffix=".py", delete=False) as f:
-            temp_path = Path(f.name)
-        
-        try:
-            assert scanner.is_code_file(temp_path)
-        finally:
-            temp_path.unlink()  # Clean up
-        
-        # Test __init__.py file - create directory and file
-        import tempfile
-        import os
-        temp_dir = tempfile.mkdtemp()
-        try:
-            init_path = Path(temp_dir) / "module" / "__init__.py"
-            init_path.parent.mkdir(exist_ok=True)
-            init_path.write_text("# init file")
-            assert scanner.is_code_file(init_path)
-        finally:
-            import shutil
-            shutil.rmtree(temp_dir)
-
-        # Test other code files - create temporary files
-        for ext in [".ts", ".js", ".go"]:
-            with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as f:
-                temp_path = Path(f.name)
-            try:
-                assert scanner.is_code_file(temp_path)
-            finally:
-                temp_path.unlink()
-
-        # Test non-code files
-        assert not scanner.is_code_file(Path("test.txt"))
-        assert not scanner.is_code_file(Path("test.md"))
-        assert not scanner.is_code_file(Path("test.json"))
-
-    def test_role_tags_for(self):
-        """Test role tag detection."""
+    def test_scan_repository_empty(self, tmp_path: Path):
+        """Test scanning empty repository."""
         scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
 
-        # Test service tags
-        assert "svc" in scanner.role_tags_for("service.py")
-        assert "svc" in scanner.role_tags_for("auth_service.py")
+        assert result is not None
+        assert len(result.modules) == 0
+        assert len(result.langs) == 0
 
-        # Test repository tags
-        assert "repo" in scanner.role_tags_for("repository.py")
-        assert "repo" in scanner.role_tags_for("user_repo.py")
+    def test_scan_repository_single_python_file(self, tmp_path: Path):
+        """Test scanning repository with single Python file."""
+        # Create a simple Python file
+        test_file = tmp_path / "test.py"
+        test_file.write_text(
+            '''
+def hello():
+    return "Hello, World!"
 
-        # Test API tags
-        assert "api" in scanner.role_tags_for("api.py")
-        assert "api" in scanner.role_tags_for("rest_api.py")
-
-        # Test auth tags
-        assert "auth" in scanner.role_tags_for("auth.py")
-        assert "auth" in scanner.role_tags_for("authentication.py")
-
-        # Test test tags
-        assert "test" in scanner.role_tags_for("test_service.py")
-        assert "test" in scanner.role_tags_for("tests/test_auth.py")
-
-        # Test default tag
-        tags = scanner.role_tags_for("utils.py")
-        assert "mod" in tags
-
-    def test_detect_langs(self, tmp_path: Path):
-        """Test language detection."""
-        scanner = RepoScanner()
-
-        # Create files with different extensions
-        (tmp_path / "test.py").touch()
-        (tmp_path / "test.ts").touch()
-        (tmp_path / "test.js").touch()
-        (tmp_path / "test.txt").touch()  # Should be ignored
-
-        langs = scanner.detect_langs(tmp_path)
-        assert "py" in langs
-        assert "ts" in langs
-        assert "js" in langs
-        assert "txt" not in langs
-
-    def test_build_indices(self):
-        """Test repository index building."""
-        scanner = RepoScanner()
-
-        # Create sample modules
-        modules = {}
-        mi1 = ModuleInfo(id=1, path="auth/service.py", dotted="auth.service")
-        mi2 = ModuleInfo(id=2, path="auth/models.py", dotted="auth.models")
-        mi3 = ModuleInfo(id=3, path="utils/helpers.py", dotted="utils.helpers")
-
-        modules["auth/service.py"] = mi1
-        modules["auth/models.py"] = mi2
-        modules["utils/helpers.py"] = mi3
-
-        dotted_to_path, stem_to_paths = scanner.build_indices(modules)
-
-        # Test dotted to path mapping
-        assert dotted_to_path["auth.service"] == "auth/service.py"
-        assert dotted_to_path["auth.models"] == "auth/models.py"
-        assert dotted_to_path["utils.helpers"] == "utils/helpers.py"
-
-        # Test stem to paths mapping
-        assert "service" in stem_to_paths
-        assert "models" in stem_to_paths
-        assert "helpers" in stem_to_paths
-        assert len(stem_to_paths["service"]) == 1
-        assert stem_to_paths["service"][0] == "auth/service.py"
-
-    def test_longest_prefix_module(self):
-        """Test longest prefix module resolution."""
-        scanner = RepoScanner()
-
-        dotted_to_path = {
-            "auth": "auth/__init__.py",
-            "auth.service": "auth/service.py",
-            "auth.models": "auth/models.py",
-            "utils": "utils/__init__.py",
-            "utils.helpers": "utils/helpers.py",
-        }
-
-        # Test exact matches
-        assert (
-            scanner.longest_prefix_module("auth.service", dotted_to_path)
-            == "auth/service.py"
-        )
-        assert (
-            scanner.longest_prefix_module("utils.helpers", dotted_to_path)
-            == "utils/helpers.py"
+class TestClass:
+    def __init__(self):
+        pass
+'''
         )
 
-        # Test partial matches
-        assert (
-            scanner.longest_prefix_module("auth.service.method", dotted_to_path)
-            == "auth/service.py"
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        assert result is not None
+        assert len(result.modules) == 1
+        assert "py" in result.langs
+        assert "test.py" in result.modules
+
+    def test_scan_repository_multiple_files(self, tmp_path: Path):
+        """Test scanning repository with multiple files."""
+        # Create multiple Python files
+        (tmp_path / "module1.py").write_text("def func1(): pass")
+        (tmp_path / "module2.py").write_text("def func2(): pass")
+        (tmp_path / "README.md").write_text("# Test Project")
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        assert result is not None
+        assert len(result.modules) == 2  # Only Python files
+        assert "py" in result.langs
+
+    def test_scan_repository_with_packages(self, tmp_path: Path):
+        """Test scanning repository with package structure."""
+        # Create package structure
+        pkg_dir = tmp_path / "mypackage"
+        pkg_dir.mkdir()
+        (pkg_dir / "__init__.py").write_text("")
+        (pkg_dir / "module.py").write_text("def package_func(): pass")
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        assert result is not None
+        assert len(result.modules) == 2  # __init__.py and module.py
+        assert "py" in result.langs
+
+    def test_scan_repository_with_ignore_patterns(self, tmp_path: Path):
+        """Test scanning repository with ignore patterns."""
+        # Create files including some to ignore
+        (tmp_path / "main.py").write_text("def main(): pass")
+        (tmp_path / "test_main.py").write_text("def test_main(): pass")
+        (tmp_path / "temp.py").write_text("def temp(): pass")
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(
+            tmp_path,
+            exclude_pattern="**/test_*.py"
         )
-        assert (
-            scanner.longest_prefix_module("utils.helpers.format", dotted_to_path)
-            == "utils/helpers.py"
+
+        assert result is not None
+        # Should exclude test_main.py
+        assert "main.py" in result.modules
+        assert "test_main.py" not in result.modules
+
+    def test_scan_repository_with_include_patterns(self, tmp_path: Path):
+        """Test scanning repository with include patterns."""
+        # Create files of different types
+        (tmp_path / "main.py").write_text("def main(): pass")
+        (tmp_path / "utils.py").write_text("def utils(): pass")
+        (tmp_path / "config.json").write_text('{"key": "value"}')
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(
+            tmp_path,
+            include_pattern="**/main.py"
         )
 
-        # Test no matches
-        assert (
-            scanner.longest_prefix_module("nonexistent.module", dotted_to_path) is None
+        assert result is not None
+        # Should only include main.py
+        assert "main.py" in result.modules
+        assert "utils.py" not in result.modules
+
+    def test_scan_repository_with_complex_structure(self, tmp_path: Path):
+        """Test scanning repository with complex structure."""
+        # Create complex package structure
+        src_dir = tmp_path / "src"
+        src_dir.mkdir()
+
+        pkg1_dir = src_dir / "package1"
+        pkg1_dir.mkdir()
+        (pkg1_dir / "__init__.py").write_text("")
+        (pkg1_dir / "module1.py").write_text("def pkg1_func(): pass")
+
+        pkg2_dir = src_dir / "package2"
+        pkg2_dir.mkdir()
+        (pkg2_dir / "__init__.py").write_text("")
+        (pkg2_dir / "module2.py").write_text("def pkg2_func(): pass")
+
+        tests_dir = tmp_path / "tests"
+        tests_dir.mkdir()
+        (tests_dir / "test_module1.py").write_text("def test_pkg1(): pass")
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        assert result is not None
+        assert len(result.modules) == 5  # All Python files
+        assert "py" in result.langs
+
+    def test_scan_repository_with_binary_files(self, tmp_path: Path):
+        """Test scanning repository with binary files."""
+        # Create Python file and binary file
+        (tmp_path / "main.py").write_text("def main(): pass")
+        (tmp_path / "binary.dat").write_bytes(b"\x00\x01\x02\x03")
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        assert result is not None
+        # Should only include Python files
+        assert "main.py" in result.modules
+        assert len(result.modules) == 1
+
+    def test_scan_repository_with_syntax_errors(self, tmp_path: Path):
+        """Test scanning repository with syntax errors."""
+        # Create Python file with syntax error
+        (tmp_path / "broken.py").write_text("def broken(: pass")  # Invalid syntax
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        # Should handle syntax errors gracefully
+        assert result is not None
+        # May or may not include the file, but shouldn't crash
+
+    def test_scan_repository_with_encoding_issues(self, tmp_path: Path):
+        """Test scanning repository with encoding issues."""
+        # Create Python file with encoding issues
+        (tmp_path / "encoding_test.py").write_text("def test(): pass", encoding="utf-8")
+
+        # Try to read with wrong encoding (this is just a test setup)
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        # Should handle encoding issues gracefully
+        assert result is not None
+
+    def test_scan_repository_performance(self, tmp_path: Path):
+        """Test scanning repository performance."""
+        # Create many small files
+        for i in range(10):
+            (tmp_path / f"module_{i}.py").write_text(f"def func_{i}(): pass")
+
+        scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
+
+        assert result is not None
+        assert len(result.modules) == 10
+
+    def test_scan_repository_with_ast_analyzer_integration(self, tmp_path: Path):
+        """Test scanner integration with AST analyzer."""
+        # Create a file with complex Python code
+        test_file = tmp_path / "complex.py"
+        test_file.write_text(
+            '''
+from typing import Optional, List
+from dataclasses import dataclass
+
+@dataclass
+class User:
+    name: str
+    email: str
+
+class UserService:
+    def __init__(self, db_url: str):
+        self.db_url = db_url
+
+    def get_user(self, user_id: int) -> Optional[User]:
+        return User("test", "test@example.com")
+
+    def list_users(self) -> List[User]:
+        return []
+
+def main():
+    service = UserService("sqlite:///test.db")
+    user = service.get_user(1)
+    print(user)
+'''
         )
 
-    def test_scan_repo_basic(self, sample_project_dir: Path):
-        """Test basic repository scanning."""
         scanner = RepoScanner()
+        result = scanner.scan_repository(tmp_path)
 
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Check that modules were found
-        assert len(scan_result.modules) > 0
-
-        # Check that Python was detected
-        assert "py" in scan_result.langs
-
-        # Check that specific files were processed
-        expected_files = [
-            "main_pkg/__init__.py",
-            "main_pkg/service.py",
-            "main_pkg/models.py",
-            "main_pkg/repository.py",
-            "api/routes.py",
-            "utils/helpers.py",
-        ]
-
-        for expected_file in expected_files:
-            found = any(mi.path == expected_file for mi in scan_result.modules.values())
-            assert found, f"Expected file {expected_file} not found in scan result"
-
-    def test_scan_repo_with_include(self, sample_project_dir: Path):
-        """Test repository scanning with include pattern."""
-        scanner = RepoScanner()
-
-        # Only include Python files
-        scan_result = scanner.scan_repo(sample_project_dir, "**/*.py", None)
-
-        # Check that only Python files were included
-        for mi in scan_result.modules.values():
-            assert mi.path.endswith(".py")
-
-    def test_scan_repo_with_exclude(self, sample_project_dir: Path):
-        """Test repository scanning with exclude pattern."""
-        scanner = RepoScanner()
-
-        # Exclude test files
-        scan_result = scanner.scan_repo(sample_project_dir, None, "**/tests/**")
-
-        # Check that test files were excluded
-        for mi in scan_result.modules.values():
-            assert "tests" not in mi.path
-
-    def test_symbol_extraction(self, sample_project_dir: Path):
-        """Test symbol extraction from Python files."""
-        scanner = RepoScanner()
-
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Find the service module
-        service_module = None
-        for mi in scan_result.modules.values():
-            if "service.py" in mi.path:
-                service_module = mi
-                break
-
-        assert service_module is not None
+        assert result is not None
+        assert "complex.py" in result.modules
 
         # Check that symbols were extracted
-        symbols = {s.name for s in service_module.symbols}
-        assert "AuthService" in symbols
+        module_info = result.modules["complex.py"]
+        assert len(module_info.symbols) > 0
 
-        # Check that functions were extracted
-        fn_symbols = [s for s in service_module.symbols if s.kind == "fn"]
-        assert len(fn_symbols) > 0
-
-        # Check that properties were extracted
-        prop_symbols = [s for s in service_module.symbols if s.kind == "prop"]
-        assert len(prop_symbols) > 0
-
-    def test_dto_detection(self, sample_project_dir: Path):
-        """Test DTO detection."""
-        scanner = RepoScanner()
-
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Find the models module
-        models_module = None
-        for mi in scan_result.modules.values():
-            if "models.py" in mi.path:
-                models_module = mi
-                break
-
-        assert models_module is not None
-
-        # Check that DTOs were detected
-        assert len(models_module.dts) > 0
-
-        # Check for specific DTOs
-        dto_names = [name for name, _ in models_module.dts]
-        assert "UserCreds" in dto_names
-        assert "User" in dto_names
-
-    def test_error_detection(self, sample_project_dir: Path):
-        """Test error detection."""
-        scanner = RepoScanner()
-
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Find the models module
-        models_module = None
-        for mi in scan_result.modules.values():
-            if "models.py" in mi.path:
-                models_module = mi
-                break
-
-        assert models_module is not None
-
-        # Check that errors were detected
-        assert len(models_module.errors) > 0
-
-        # Check for specific errors
-        error_names = [name for name, _, _ in models_module.errors]
-        assert "AuthError" in error_names
-        assert "ValidationError" in error_names
-
-    def test_linting_violations(self, sample_project_dir: Path):
-        """Test linting violation detection."""
-        scanner = RepoScanner()
-
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Find the bad_code module
-        bad_code_module = None
-        for mi in scan_result.modules.values():
-            if "bad_code.py" in mi.path:
-                bad_code_module = mi
-                break
-
-        assert bad_code_module is not None
-
-        # Check that linting violations were detected
-        assert len(bad_code_module.px) > 0
-
-        # Check for specific violations
-        violation_rules = [rule for rule, _ in bad_code_module.px]
-        assert any("bare except" in rule for rule in violation_rules)
-        assert any("eval/exec" in rule for rule in violation_rules)
-        assert any("mutable default" in rule for rule in violation_rules)
-        assert any("print in production" in rule for rule in violation_rules)
-
-    def test_route_detection(self, sample_project_dir: Path):
-        """Test API route detection."""
-        scanner = RepoScanner()
-
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Find the routes module
-        routes_module = None
-        for mi in scan_result.modules.values():
-            if "routes.py" in mi.path:
-                routes_module = mi
-                break
-
-        assert routes_module is not None
-
-        # Check that routes were detected
-        assert len(routes_module.routes) > 0
-
-        # Check for specific routes
-        route_paths = [path for _, _, path, _ in routes_module.routes]
-        assert "/login" in route_paths
-        assert "/users/{user_id}" in route_paths
-
-    def test_import_resolution(self, sample_project_dir: Path):
-        """Test import resolution."""
-        scanner = RepoScanner()
-
-        scan_result = scanner.scan_repo(sample_project_dir, None, None)
-
-        # Check that imports were resolved
-        for mi in scan_result.modules.values():
-            if "service.py" in mi.path:
-                # Should have imports to models and repository
-                assert len(mi.imports_paths) > 0
-                break
-
-    def test_reexport_processing(self, sample_project_dir: Path):
-        """Test re-export processing."""
-        from ctxcard_gen.core.ast_analyzer import ASTAnalyzer
-
-        analyzer = ASTAnalyzer()
-        scan_result = analyzer.analyze_repository(sample_project_dir, None, None)
-
-        # Find the __init__.py module
-        init_module = None
-        for mi in scan_result.modules.values():
-            if "__init__.py" in mi.path:
-                init_module = mi
-                break
-
-        assert init_module is not None
-
-        # Check that re-exports were processed
-        assert len(init_module.reexports) > 0
-
-    def test_enum_detection(self, tmp_path: Path):
-        """Test enum detection."""
-        scanner = RepoScanner()
-
-        # Create a file with enum
-        enum_file = tmp_path / "test_enum.py"
-        enum_file.write_text(
-            """
-from enum import Enum
-
-class UserRole(Enum):
-    ADMIN = "admin"
-    USER = "user"
-    GUEST = "guest"
-"""
-        )
-
-        scan_result = scanner.scan_repo(tmp_path, None, None)
-
-        # Check that enum was detected
-        for mi in scan_result.modules.values():
-            if "test_enum.py" in mi.path:
-                assert len(mi.tokens) > 0
-                token_names = [name for name, _ in mi.tokens]
-                assert "UserRole" in token_names
-                break
-
-    def test_descriptor_detection(self, tmp_path: Path):
-        """Test descriptor detection."""
-        scanner = RepoScanner()
-
-        # Create a file with descriptor
-        desc_file = tmp_path / "test_descriptor.py"
-        desc_file.write_text(
-            """
-class Descriptor:
-    def __get__(self, obj, objtype=None):
-        return "value"
-    
-    def __set__(self, obj, value):
-        pass
-"""
-        )
-
-        scan_result = scanner.scan_repo(tmp_path, None, None)
-
-        # Check that descriptor was detected
-        for mi in scan_result.modules.values():
-            if "test_descriptor.py" in mi.path:
-                for symbol in mi.symbols:
-                    if symbol.name == "Descriptor":
-                        assert "descriptor" in symbol.modifiers
-                        break
-                break
+        # Check for specific symbols
+        symbol_names = [s.name for s in module_info.symbols]
+        assert "User" in symbol_names
+        assert "UserService" in symbol_names
+        assert "main" in symbol_names

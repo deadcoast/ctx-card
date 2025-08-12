@@ -4,14 +4,15 @@ Tests for CTX-CARD validation functions.
 This module tests the validation utilities for CTX-CARD format compliance.
 """
 
-from pathlib import Path
-import pytest
+# Note: pytest import is handled by test runner
+try:
+    import pytest
+except ImportError:
+    pytest = None
 
 from ctxcard_gen.utils.validation import (
     validate_prefix_free,
     validate_regex_patterns,
-    validate_indices,
-    validate_edges,
     validate_ctx_card_structure,
     validate_ascii_compliance,
     validate_semantic_tokens,

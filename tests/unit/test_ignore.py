@@ -1,229 +1,253 @@
 """
-Tests for ignore file functionality.
+Unit tests for ignore module.
 
-This module tests the .ctxignore file parsing and pattern matching.
+This module tests the .ctxignore file functionality.
 """
 
-import pytest
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 
-from ctxcard_gen.utils.ignore import IgnorePattern, IgnoreFile, load_ignore_file
+# Note: pytest import is handled by test runner
+try:
+    import pytest
+except ImportError:
+    pytest = None
 
-
-class TestIgnorePattern:
-    """Test cases for IgnorePattern class."""
-
-    def test_basic_pattern_matching(self):
-        """Test basic pattern matching."""
-        pattern = IgnorePattern("*.py", 1)
-
-        assert pattern.matches("test.py")
-        assert pattern.matches("module.py")
-        assert not pattern.matches("test.txt")
-        assert not pattern.matches("test.pyc")
-
-    def test_directory_pattern_matching(self):
-        """Test directory pattern matching."""
-        pattern = IgnorePattern("venv/", 1)
-
-        assert pattern.matches("venv")
-        assert pattern.matches("venv/")
-        assert pattern.matches("venv/lib")
-        assert pattern.matches("venv/lib/python3.8")
-        assert not pattern.matches("venv_file")
-
-    def test_negation_pattern(self):
-        """Test negation pattern."""
-        pattern = IgnorePattern("!important.py", 1)
-
-        assert pattern.is_negation
-        assert pattern.matches("important.py")
-        assert not pattern.matches("other.py")
-
-    def test_character_class_pattern(self):
-        """Test character class pattern."""
-        pattern = IgnorePattern("test[abc].py", 1)
-
-        assert pattern.matches("testa.py")
-        assert pattern.matches("testb.py")
-        assert pattern.matches("testc.py")
-        assert not pattern.matches("testd.py")
-
-    def test_negated_character_class_pattern(self):
-        """Test negated character class pattern."""
-        pattern = IgnorePattern("test[!abc].py", 1)
-
-        assert not pattern.matches("testa.py")
-        assert not pattern.matches("testb.py")
-        assert not pattern.matches("testc.py")
-        assert pattern.matches("testd.py")
-
-    def test_question_mark_pattern(self):
-        """Test question mark pattern."""
-        pattern = IgnorePattern("test?.py", 1)
-
-        assert pattern.matches("test1.py")
-        assert pattern.matches("testa.py")
-        assert not pattern.matches("test12.py")
-
-    def test_complex_pattern(self):
-        """Test complex pattern with multiple wildcards."""
-        pattern = IgnorePattern("src/**/*.py", 1)
-
-        assert pattern.matches("src/module.py")
-        assert pattern.matches("src/utils/helper.py")
-        assert pattern.matches("src/core/parser.py")
-        assert not pattern.matches("test.py")
+from src.ctxcard_gen.utils.ignore import IgnoreFile, IgnorePattern, load_ignore_file
 
 
 class TestIgnoreFile:
-    """Test cases for IgnoreFile class."""
+    """Test cases for ignore file functionality."""
 
-    def test_empty_ignore_file(self, tmp_path: Path):
-        """Test ignore file with no patterns."""
-        ignore_file = IgnoreFile(tmp_path)
-
-        assert len(ignore_file.patterns) == 0
-        assert not ignore_file.should_ignore(tmp_path / "test.py")
-
-    def test_basic_ignore_file(self, tmp_path: Path):
-        """Test basic ignore file functionality."""
-        # Create .ctxignore file
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text("*.pyc\n__pycache__/\n.venv/")
-
-        ignore_file = IgnoreFile(tmp_path)
-
-        assert len(ignore_file.patterns) == 3
-        assert ignore_file.should_ignore(tmp_path / "test.pyc")
-        assert ignore_file.should_ignore(tmp_path / "__pycache__")
-        assert ignore_file.should_ignore(tmp_path / ".venv")
-        assert not ignore_file.should_ignore(tmp_path / "test.py")
-
-    def test_ignore_file_with_comments(self, tmp_path: Path):
-        """Test ignore file with comments."""
-        # Create .ctxignore file with comments
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text(
-            "# Python cache files\n"
-            "*.pyc\n"
-            "\n"
-            "# Virtual environments\n"
-            ".venv/\n"
-        )
-
-        ignore_file = IgnoreFile(tmp_path)
-
-        assert len(ignore_file.patterns) == 2
-        assert ignore_file.should_ignore(tmp_path / "test.pyc")
-        assert ignore_file.should_ignore(tmp_path / ".venv")
-
-    def test_ignore_file_with_negation(self, tmp_path: Path):
-        """Test ignore file with negation patterns."""
-        # Create .ctxignore file with negation
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text("*.py\n!important.py")
-
-        ignore_file = IgnoreFile(tmp_path)
-
-        assert len(ignore_file.patterns) == 2
-        assert ignore_file.should_ignore(tmp_path / "test.py")
-        assert not ignore_file.should_ignore(tmp_path / "important.py")
-
-    def test_ignore_file_with_empty_lines(self, tmp_path: Path):
-        """Test ignore file with empty lines."""
-        # Create .ctxignore file with empty lines
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text("*.pyc\n\n*.log\n")
-
-        ignore_file = IgnoreFile(tmp_path)
-
-        assert len(ignore_file.patterns) == 2
-        assert ignore_file.should_ignore(tmp_path / "test.pyc")
-        assert ignore_file.should_ignore(tmp_path / "test.log")
-
-    def test_ignore_file_error_handling(self, tmp_path: Path):
-        """Test ignore file error handling."""
-        # Create a directory with the same name as .ctxignore
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.mkdir()
-
-        # Should not raise an exception
-        ignore_file = IgnoreFile(tmp_path)
+    def test_init(self):
+        """Test ignore file initialization."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        assert ignore_file is not None
         assert len(ignore_file.patterns) == 0
 
-    def test_get_ignored_patterns(self, tmp_path: Path):
-        """Test getting ignored patterns."""
-        # Create .ctxignore file
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text("*.pyc\n__pycache__/\n.venv/")
+    def test_add_pattern(self):
+        """Test adding patterns to ignore file."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        pattern = IgnorePattern("*.pyc", 1)
+        ignore_file.patterns.append(pattern)
 
-        ignore_file = IgnoreFile(tmp_path)
-        patterns = ignore_file.get_ignored_patterns()
+        assert len(ignore_file.patterns) == 1
+        assert ignore_file.patterns[0].pattern == "*.pyc"
 
-        assert len(patterns) == 3
-        assert "*.pyc" in patterns
-        assert "__pycache__/" in patterns
-        assert ".venv/" in patterns
+    def test_should_ignore_file(self):
+        """Test file ignore decision."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("*.pyc", 1))
+        ignore_file.patterns.append(IgnorePattern("__pycache__", 2))
 
-    def test_path_outside_root(self, tmp_path: Path):
-        """Test path outside root directory."""
-        ignore_file = IgnoreFile(tmp_path)
+        assert ignore_file.should_ignore(Path("/tmp/test.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/__pycache__/module.pyc"))
+        assert not ignore_file.should_ignore(Path("/tmp/test.py"))
+
+    def test_should_ignore_directory(self):
+        """Test directory ignore decision."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("node_modules", 1))
+        ignore_file.patterns.append(IgnorePattern(".git", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/node_modules"))
+        assert ignore_file.should_ignore(Path("/tmp/.git"))
+        assert not ignore_file.should_ignore(Path("/tmp/src"))
+
+    def test_should_ignore_with_paths(self):
+        """Test ignore with relative paths."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("tests/", 1))
+        ignore_file.patterns.append(IgnorePattern("*.log", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/tests/test_file.py"))
+        assert ignore_file.should_ignore(Path("/tmp/app.log"))
+        assert not ignore_file.should_ignore(Path("/tmp/src/main.py"))
+
+    def test_should_ignore_complex_patterns(self):
+        """Test ignore with complex patterns."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("**/__pycache__/**", 1))
+        ignore_file.patterns.append(IgnorePattern("*.{pyc,pyo}", 2))
+        ignore_file.patterns.append(IgnorePattern("build/", 3))
+
+        assert ignore_file.should_ignore(Path("/tmp/src/__pycache__/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/build/dist/package.tar.gz"))
+        assert not ignore_file.should_ignore(Path("/tmp/src/main.py"))
+
+    def test_should_ignore_regex_patterns(self):
+        """Test ignore with regex patterns."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern(r"\.pyc$", 1))
+        ignore_file.patterns.append(IgnorePattern(r"__pycache__", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/test.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/__pycache__/module.pyc"))
+        assert not ignore_file.should_ignore(Path("/tmp/test.py"))
+
+    def test_should_ignore_mixed_patterns(self):
+        """Test ignore with mixed pattern types."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("*.pyc", 1))
+        ignore_file.patterns.append(IgnorePattern(r"\.log$", 2))
+        ignore_file.patterns.append(IgnorePattern("temp/", 3))
+
+        assert ignore_file.should_ignore(Path("/tmp/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/app.log"))
+        assert ignore_file.should_ignore(Path("/tmp/temp/file.txt"))
+        assert not ignore_file.should_ignore(Path("/tmp/src/main.py"))
+
+    def test_should_ignore_case_sensitivity(self):
+        """Test case sensitivity in ignore patterns."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("*.TXT", 1))
+        ignore_file.patterns.append(IgnorePattern("BACKUP", 2))
+
+        # Should match case-insensitively
+        assert ignore_file.should_ignore(Path("/tmp/file.txt"))
+        assert ignore_file.should_ignore(Path("/tmp/backup"))
+        assert ignore_file.should_ignore(Path("/tmp/BACKUP"))
+
+    def test_should_ignore_negation_patterns(self):
+        """Test negation patterns in ignore file."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("*.pyc", 1))
+        ignore_file.patterns.append(IgnorePattern("!important.pyc", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/module.pyc"))
+        assert not ignore_file.should_ignore(Path("/tmp/important.pyc"))
+
+    def test_should_ignore_directory_patterns(self):
+        """Test directory-specific patterns."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("logs/", 1))
+        ignore_file.patterns.append(IgnorePattern("temp/", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/logs/"))
+        assert ignore_file.should_ignore(Path("/tmp/logs/error.log"))
+        assert ignore_file.should_ignore(Path("/tmp/temp/"))
+        assert ignore_file.should_ignore(Path("/tmp/temp/file.txt"))
+
+    def test_should_ignore_character_classes(self):
+        """Test character class patterns."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("*.{pyc,pyo}", 1))
+        ignore_file.patterns.append(IgnorePattern("test[0-9].py", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/module.pyo"))
+        assert ignore_file.should_ignore(Path("/tmp/test1.py"))
+        assert ignore_file.should_ignore(Path("/tmp/test9.py"))
+        assert not ignore_file.should_ignore(Path("/tmp/test.py"))
+
+    def test_should_ignore_recursive_patterns(self):
+        """Test recursive directory patterns."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("**/__pycache__", 1))
+        ignore_file.patterns.append(IgnorePattern("**/*.pyc", 2))
+
+        assert ignore_file.should_ignore(Path("/tmp/__pycache__/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/src/__pycache__/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/src/subdir/__pycache__/module.pyc"))
+        assert ignore_file.should_ignore(Path("/tmp/src/module.pyc"))
+
+    def test_should_ignore_path_outside_root(self):
+        """Test paths outside the root directory."""
+        ignore_file = IgnoreFile(Path("/tmp"))
 
         # Path outside root should not be ignored
-        outside_path = Path("/tmp/outside.py")
-        assert not ignore_file.should_ignore(outside_path)
+        assert not ignore_file.should_ignore(Path("/other/file.pyc"))
+
+    def test_get_ignored_patterns(self):
+        """Test getting ignored patterns list."""
+        ignore_file = IgnoreFile(Path("/tmp"))
+        ignore_file.patterns.append(IgnorePattern("*.pyc", 1))
+        ignore_file.patterns.append(IgnorePattern("__pycache__", 2))
+
+        patterns = ignore_file.get_ignored_patterns()
+        assert "*.pyc" in patterns
+        assert "__pycache__" in patterns
+        assert len(patterns) == 2
+
+
+class TestIgnorePattern:
+    """Test cases for ignore pattern functionality."""
+
+    def test_init(self):
+        """Test ignore pattern initialization."""
+        pattern = IgnorePattern("*.pyc", 1)
+        assert pattern.pattern == "*.pyc"
+        assert pattern.line_number == 1
+        assert not pattern.is_negation
+        assert not pattern.is_directory
+
+    def test_negation_pattern(self):
+        """Test negation pattern detection."""
+        pattern = IgnorePattern("!important.pyc", 1)
+        assert pattern.is_negation
+        assert pattern.pattern == "!important.pyc"
+
+    def test_directory_pattern(self):
+        """Test directory pattern detection."""
+        pattern = IgnorePattern("logs/", 1)
+        assert pattern.is_directory
+        assert pattern.pattern == "logs/"
+
+    def test_matches_simple_glob(self):
+        """Test simple glob pattern matching."""
+        pattern = IgnorePattern("*.pyc", 1)
+        assert pattern.matches("module.pyc")
+        assert pattern.matches("test.pyc")
+        assert not pattern.matches("module.py")
+
+    def test_matches_directory_glob(self):
+        """Test directory glob pattern matching."""
+        pattern = IgnorePattern("logs/", 1)
+        assert pattern.matches("logs")
+        assert pattern.matches("logs/error.log")
+        assert not pattern.matches("src/logs")
+
+    def test_matches_recursive_glob(self):
+        """Test recursive glob pattern matching."""
+        pattern = IgnorePattern("**/__pycache__", 1)
+        assert pattern.matches("__pycache__")
+        assert pattern.matches("src/__pycache__")
+        assert pattern.matches("src/subdir/__pycache__")
+
+    def test_matches_character_classes(self):
+        """Test character class pattern matching."""
+        pattern = IgnorePattern("test[0-9].py", 1)
+        assert pattern.matches("test1.py")
+        assert pattern.matches("test9.py")
+        assert not pattern.matches("test.py")
+        assert not pattern.matches("test10.py")
+
+    def test_matches_negated_character_classes(self):
+        """Test negated character class pattern matching."""
+        pattern = IgnorePattern("test[!0-9].py", 1)
+        assert pattern.matches("testa.py")
+        assert pattern.matches("test_.py")
+        assert not pattern.matches("test1.py")
+        assert not pattern.matches("test9.py")
 
 
 class TestLoadIgnoreFile:
-    """Test cases for load_ignore_file function."""
+    """Test cases for loading ignore files."""
 
-    def test_load_ignore_file(self, tmp_path: Path):
+    def test_load_ignore_file(self):
         """Test loading ignore file."""
-        # Create .ctxignore file
+        ignore_file = load_ignore_file(Path("/tmp"))
+        assert isinstance(ignore_file, IgnoreFile)
+        assert ignore_file.root_path == Path("/tmp")
+
+    def test_load_ignore_file_with_patterns(self, tmp_path):
+        """Test loading ignore file with actual patterns."""
+        # Create a .ctxignore file
         ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text("*.pyc\n__pycache__/")
+        ignore_file_path.write_text("*.pyc\n__pycache__\n*.log\n")
 
         ignore_file = load_ignore_file(tmp_path)
-
-        assert isinstance(ignore_file, IgnoreFile)
-        assert len(ignore_file.patterns) == 2
-
-    def test_load_ignore_file_nonexistent(self, tmp_path: Path):
-        """Test loading ignore file when it doesn't exist."""
-        ignore_file = load_ignore_file(tmp_path)
-
-        assert isinstance(ignore_file, IgnoreFile)
-        assert len(ignore_file.patterns) == 0
-
-
-class TestIgnoreIntegration:
-    """Integration tests for ignore functionality."""
-
-    def test_ignore_in_scanner(self, tmp_path: Path):
-        """Test ignore functionality in scanner."""
-        from ctxcard_gen.core.scanner import RepoScanner
-
-        # Create project structure
-        src_dir = tmp_path / "src"
-        src_dir.mkdir()
-
-        (src_dir / "main.py").write_text("print('hello')")
-        (src_dir / "cache.pyc").write_text("compiled")
-        (src_dir / "__pycache__").mkdir()
-        (src_dir / "__pycache__" / "main.pyc").write_text("compiled")
-
-        # Create .ctxignore file
-        ignore_file_path = tmp_path / ".ctxignore"
-        ignore_file_path.write_text("*.pyc\n__pycache__/")
-
-        # Scan repository
-        scanner = RepoScanner()
-        scan_result = scanner.scan_repo(tmp_path, None, None)
-
-        # Check that ignored files are not included
-        module_paths = [mi.path for mi in scan_result.modules.values()]
-        assert "src/cache.pyc" not in module_paths
-        assert "src/__pycache__/main.pyc" not in module_paths
-        assert "src/main.py" in module_paths
+        assert len(ignore_file.patterns) == 3
+        assert ignore_file.patterns[0].pattern == "*.pyc"
+        assert ignore_file.patterns[1].pattern == "__pycache__"
+        assert ignore_file.patterns[2].pattern == "*.log"

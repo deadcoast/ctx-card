@@ -301,7 +301,9 @@ def export_to_yaml(content: str, output_path: Optional[Path] = None) -> str:
     try:
         import yaml  # pylint: disable=import-outside-toplevel
     except ImportError as exc:
-        raise ImportError("PyYAML is required for YAML export. Install with: pip install PyYAML") from exc
+        raise ImportError(
+            "PyYAML is required for YAML export. Install with: pip install PyYAML"
+        ) from exc
 
     parsed = parse_ctx_card(content)
     yaml_str = yaml.dump(parsed, default_flow_style=False, allow_unicode=True, sort_keys=False)

@@ -1,0 +1,5056 @@
+{
+  "metadata": {
+    "proj": "ctx-card-generator",
+    "lang": "py",
+    "std": "pep8",
+    "ts": "20250812"
+  },
+  "aliases": [
+    {
+      "alias": "cfg",
+      "value": "Configuration"
+    },
+    {
+      "alias": "svc",
+      "value": "Service"
+    },
+    {
+      "alias": "repo",
+      "value": "Repository"
+    },
+    {
+      "alias": "dto",
+      "value": "DataTransferObject"
+    },
+    {
+      "alias": "uc",
+      "value": "UseCase"
+    },
+    {
+      "alias": "http",
+      "value": "HTTP"
+    },
+    {
+      "alias": "db",
+      "value": "Database"
+    },
+    {
+      "alias": "jwt",
+      "value": "JWT"
+    }
+  ],
+  "naming": [
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_edges_invalid_target_symbol"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_file"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_io_contracts"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.resolve_target"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_analyze_repository_basic"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_with_role_tags"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_ann_to_str_error_handling"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestIgnoreFile"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnoreFile._load_ignore_file"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_packages"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_utils"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver._find_caller_sid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CTXCardGenerator.generate_per_package"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestLoadIgnoreFile"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_errors"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._class_has_descriptor_dunders"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_complex_structure"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_ast_analyzer_initialization"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.__init__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_build_indices_empty"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_with_classes"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "is_probably_binary"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_cli_help"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "CallResolver"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ASTAnalyzer.extract_calls"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._dotted_from_ast"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._method_modifiers"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_function_signatures"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ASTAnalyzer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_ann_to_str_simple"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_scanner"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_group_modules_by_package"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CTXCardGenerator.save_output"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_binary_files"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer.validate_output"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ASTAnalyzer.__init__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_performance"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_get_validation_report_complete"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_parse_ctx_card_complex"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_ast_analyzer_component_integration"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ASTAnalyzer.get_statistics"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_semantic_tokens"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_include_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_analyze_repository_with_include"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_build_reexports_global_empty"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_indices_duplicate_symbol_id"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.role_tags_for"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_ascii_compliance_invalid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_is_probably_binary_binary"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "export_to_yaml"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_generate_delta_empty"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_files_sequential"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "__main__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_complex_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_with_exceptions"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "load_ignore_file"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._set_cached_content"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_matches_character_classes"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "CTXCardGenerator"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "sample_ctxcard_content"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "CTXCardError"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestHelpers"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_cross_references"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_recursive_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_conventions"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnorePattern.__init__"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_call_resolver"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_prohibited_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_case_sensitivity"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ascii_only"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "run_command"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "IgnorePattern"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "old_ctxcard_content"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_ascii_only_clean"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "call_resolver"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_directory_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_event_relationships"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_with_type_signatures"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestCallResolver"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._get_cached_content"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "GeneratorConfig"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_indices_wrong_symbol_module"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_full_generation"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.detect_langs"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestValidationFunctions"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_multiple_files"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_role_tags"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_regex_patterns_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_prefix_free_mixed"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_files_parallel"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "relpath"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_export_to_markdown"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_class_member"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_token_sets"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_directory"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "export"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_negation_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.scan_repository"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "get_definition_location"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_card_renderer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CTXCardGenerator.__init__"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestValidationIntegration"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "file_to_dotted"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "export_to_xml"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_prefix_free_invalid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_class"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_empty_modules"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_init"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_export"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_export_to_json"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_init"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_path_outside_root"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_matches_negated_character_classes"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CTXCardGenerator.generate"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_resolve_target_function"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_build_reexports_global_single_module"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_validate_analysis_duplicate_symbol_ids"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestRepoScanner"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "parse_ctx_card"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_with_type_signatures"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_basic"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "scanner"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_multiple_languages"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_encoding_issues"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_ast_analyzer_two_pass_analysis"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._diff_lines"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer.generate_delta"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_cross_references_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver._resolve_call_target"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnoreFile.get_ignored_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CTXCardGenerator.save_per_package"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_full_generation"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_character_classes"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._scan_lint_items"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_indices_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.build_indices"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_aliases"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestExportFunctions"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_security_constraints"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "CardRenderer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_negation_pattern"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_mixed_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_longest_prefix_module_exact_match"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_prefix_free"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_ascii_compliance"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnorePattern._glob_to_regex"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_get_ignored_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_ast_analyzer_integration"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_export_to_yaml"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "__init__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_for_package"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_with_paths"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_signatures"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.longest_prefix_module"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_export_to_xml"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_analyze_repository_with_exclude"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._collect_raises_in_function"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_relpath_fallback"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_parse_empty_content"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_edges_invalid_caller"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "export_to_markdown"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_examples"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_performance"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_directory_pattern"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ConfigurationError"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "export_to_json"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestLoadIgnoreFile.test_load_ignore_file"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_data_types"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_edges_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_with_exclude_pattern"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_async_patterns"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_validation"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_error_handling"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_extract_calls"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_dto_error_enum"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_parse_ctx_card_basic"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_add_pattern"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "helpers"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "card_renderer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_generate_delta_with_changes"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver._dotted_from_ast"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_init"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_edges"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_init"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestASTAnalyzer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_file_to_dotted_python"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_indices"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_syntax_errors"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_parse_comments_only"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ASTAnalyzer.validate_analysis"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationIntegration.test_complete_ctx_card_validation"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "Symbol"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_validate_analysis_empty"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnoreFile.should_ignore"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_ctx_card_structure"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "find_all_references"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnorePattern.matches"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_ast_analyzer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_is_probably_binary_text"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "RepoScanner"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_regex_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_prefix_free_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer.__init__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_edges"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "ctxcard_gen"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_naming_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_ctx_card_structure_invalid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_matches_recursive_glob"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_dependencies"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._append_ty_lines"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer.render_card"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnoreFile.test_should_ignore_regex_patterns"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "IgnoreFile"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer.render_per_package"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ASTAnalyzer.analyze_repository"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ModuleInfo"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_regex_patterns_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_validate_analysis_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_today_stamp"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_build_reexports_global_with_reexports"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_symbols"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_init"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_ann_to_str_none"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_get_statistics"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_with_delta"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "FileError"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_ann_to_str_complex"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.longest_prefix_module"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_build_indices_single_module"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.build_reexports_global"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.process_reexports"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner.is_code_file"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_ctx_card_structure_missing_required"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_routes"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_resolve_target_module_anchor"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_ast_analyzer_performance"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "sample_project_dir"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_ctx_card_structure_valid"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "exceptions"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_prefix_free_valid"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ValidationError"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "sample_scan_result"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._exception_name_from_raise"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_cli"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._function_signature"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "today_stamp"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_relpath_success"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_with_per_package"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "IgnoreFile.__init__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestLoadIgnoreFile.test_load_ignore_file_with_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_with_ignore_patterns"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "main"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._group_modules_by_package"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ParseError"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestIgnorePattern"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_with_properties"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_render_card_with_decorators"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestCardRenderer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_resolve_target_not_found"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_ascii_only_with_unicode"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_ast_analyzer_error_handling"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._has_mutable_default"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "types"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestHelpers.test_is_probably_binary_mixed"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "test_generation_with_include_pattern"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_prefix_free_invalid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._is_enum_class"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_invariants"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_type_signatures"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "sample_modules"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "test_ignore"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._walk_ignoring_nested"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "ann_to_str"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_export_without_output_path"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.__init__"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestASTAnalyzer.test_validate_analysis_duplicate_module_ids"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._render_for_package"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_naming_conventions"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.extract_calls"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_regex_patterns_invalid"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ScanResult"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "validate_semantic_tokens"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_longest_prefix_module_nested"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "ignore"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "conftest"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "TestValidation"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_get_validation_report_with_errors"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_imports"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_ascii_compliance_valid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCardRenderer.test_append_ty_lines"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_indices_duplicate_module_id"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_resolve_target_class_method"
+    },
+    {
+      "scope": "class",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "example": "ASTError"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_empty"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_environment_configs"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "get_completion_items"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CardRenderer._extract_review_items"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidationFunctions.test_validate_cross_references_invalid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_matches_simple_glob"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "RepoScanner._process_function"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_regex_patterns_invalid"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestRepoScanner.test_scan_repository_single_python_file"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_parse_ctx_card_new_tags"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "run_tests"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestValidation.test_validate_edges_invalid_target_module"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "ast_analyzer"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestCallResolver.test_longest_prefix_module_no_match"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "get_validation_report"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestIgnorePattern.test_matches_directory_glob"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "CallResolver.build_indices"
+    },
+    {
+      "scope": "module",
+      "pattern": "^[a-z_]+$",
+      "example": "validation"
+    },
+    {
+      "scope": "func",
+      "pattern": "^[a-z_]+$",
+      "example": "TestExportFunctions.test_parse_edge_cases"
+    }
+  ],
+  "dependencies": [],
+  "environment": [],
+  "security": [
+    {
+      "name": "CardRenderer._extract_security_constraints",
+      "category": "authentication",
+      "description": "required"
+    }
+  ],
+  "modules": [
+    {
+      "id": "#1",
+      "path": "run_tests.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#2",
+      "path": "src/ctxcard_gen.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#3",
+      "path": "src/ctxcard_gen/__init__.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#4",
+      "path": "src/ctxcard_gen/__main__.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#5",
+      "path": "src/ctxcard_gen/core/__init__.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#6",
+      "path": "src/ctxcard_gen/core/ast_analyzer.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#7",
+      "path": "src/ctxcard_gen/core/call_resolver.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#8",
+      "path": "src/ctxcard_gen/core/card_renderer.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#9",
+      "path": "src/ctxcard_gen/core/scanner.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#10",
+      "path": "src/ctxcard_gen/ctxcard_gen.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#11",
+      "path": "src/ctxcard_gen/exceptions.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#12",
+      "path": "src/ctxcard_gen/types.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#13",
+      "path": "src/ctxcard_gen/utils/__init__.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#14",
+      "path": "src/ctxcard_gen/utils/export.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#15",
+      "path": "src/ctxcard_gen/utils/helpers.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#16",
+      "path": "src/ctxcard_gen/utils/ignore.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#17",
+      "path": "src/ctxcard_gen/utils/validation.py",
+      "role_tags": [
+        "mod"
+      ]
+    },
+    {
+      "id": "#18",
+      "path": "tests/__init__.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#19",
+      "path": "tests/cli/test_cli.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#20",
+      "path": "tests/conftest.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#21",
+      "path": "tests/integration/test_full_generation.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#22",
+      "path": "tests/test_ast_analyzer.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#23",
+      "path": "tests/unit/test_call_resolver.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#24",
+      "path": "tests/unit/test_card_renderer.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#25",
+      "path": "tests/unit/test_export.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#26",
+      "path": "tests/unit/test_ignore.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#27",
+      "path": "tests/unit/test_scanner.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#28",
+      "path": "tests/unit/test_utils.py",
+      "role_tags": [
+        "test"
+      ]
+    },
+    {
+      "id": "#29",
+      "path": "tests/unit/test_validation.py",
+      "role_tags": [
+        "test"
+      ]
+    }
+  ],
+  "symbols": [
+    {
+      "index": "#1.#1",
+      "kind": "mod",
+      "name": "run_tests"
+    },
+    {
+      "index": "#1.#2",
+      "kind": "fn",
+      "name": "run_command"
+    },
+    {
+      "index": "#1.#3",
+      "kind": "fn",
+      "name": "main"
+    },
+    {
+      "index": "#2.#1",
+      "kind": "mod",
+      "name": "ctxcard_gen"
+    },
+    {
+      "index": "#2.#2",
+      "kind": "cls",
+      "name": "CTXCardGenerator"
+    },
+    {
+      "index": "#2.#3",
+      "kind": "fn",
+      "name": "CTXCardGenerator.__init__"
+    },
+    {
+      "index": "#2.#4",
+      "kind": "fn",
+      "name": "CTXCardGenerator.generate"
+    },
+    {
+      "index": "#2.#5",
+      "kind": "fn",
+      "name": "CTXCardGenerator.generate_per_package"
+    },
+    {
+      "index": "#2.#6",
+      "kind": "fn",
+      "name": "CTXCardGenerator.save_output"
+    },
+    {
+      "index": "#2.#7",
+      "kind": "fn",
+      "name": "CTXCardGenerator.save_per_package"
+    },
+    {
+      "index": "#2.#8",
+      "kind": "fn",
+      "name": "main"
+    },
+    {
+      "index": "#3.#1",
+      "kind": "mod",
+      "name": "__init__"
+    },
+    {
+      "index": "#4.#1",
+      "kind": "mod",
+      "name": "__main__"
+    },
+    {
+      "index": "#5.#1",
+      "kind": "mod",
+      "name": "__init__"
+    },
+    {
+      "index": "#6.#1",
+      "kind": "mod",
+      "name": "ast_analyzer"
+    },
+    {
+      "index": "#6.#2",
+      "kind": "cls",
+      "name": "ASTAnalyzer"
+    },
+    {
+      "index": "#6.#3",
+      "kind": "fn",
+      "name": "ASTAnalyzer.__init__"
+    },
+    {
+      "index": "#6.#4",
+      "kind": "fn",
+      "name": "ASTAnalyzer.analyze_repository"
+    },
+    {
+      "index": "#6.#5",
+      "kind": "fn",
+      "name": "ASTAnalyzer.extract_calls"
+    },
+    {
+      "index": "#6.#6",
+      "kind": "fn",
+      "name": "ASTAnalyzer.validate_analysis"
+    },
+    {
+      "index": "#6.#7",
+      "kind": "fn",
+      "name": "ASTAnalyzer.get_statistics"
+    },
+    {
+      "index": "#7.#1",
+      "kind": "mod",
+      "name": "call_resolver"
+    },
+    {
+      "index": "#7.#2",
+      "kind": "cls",
+      "name": "CallResolver"
+    },
+    {
+      "index": "#7.#3",
+      "kind": "fn",
+      "name": "CallResolver.__init__"
+    },
+    {
+      "index": "#7.#4",
+      "kind": "fn",
+      "name": "CallResolver.build_reexports_global"
+    },
+    {
+      "index": "#7.#5",
+      "kind": "fn",
+      "name": "CallResolver.build_indices"
+    },
+    {
+      "index": "#7.#6",
+      "kind": "fn",
+      "name": "CallResolver.longest_prefix_module"
+    },
+    {
+      "index": "#7.#7",
+      "kind": "fn",
+      "name": "CallResolver.resolve_target"
+    },
+    {
+      "index": "#7.#8",
+      "kind": "fn",
+      "name": "CallResolver.extract_calls"
+    },
+    {
+      "index": "#7.#9",
+      "kind": "fn",
+      "name": "CallResolver._find_caller_sid"
+    },
+    {
+      "index": "#7.#10",
+      "kind": "fn",
+      "name": "CallResolver._resolve_call_target"
+    },
+    {
+      "index": "#7.#11",
+      "kind": "fn",
+      "name": "CallResolver._dotted_from_ast"
+    },
+    {
+      "index": "#7.#12",
+      "kind": "fn",
+      "name": "CallResolver.process_reexports"
+    },
+    {
+      "index": "#8.#1",
+      "kind": "mod",
+      "name": "card_renderer"
+    },
+    {
+      "index": "#8.#2",
+      "kind": "cls",
+      "name": "CardRenderer"
+    },
+    {
+      "index": "#8.#3",
+      "kind": "fn",
+      "name": "CardRenderer.__init__"
+    },
+    {
+      "index": "#8.#4",
+      "kind": "fn",
+      "name": "CardRenderer.render_card"
+    },
+    {
+      "index": "#8.#5",
+      "kind": "fn",
+      "name": "CardRenderer._extract_aliases"
+    },
+    {
+      "index": "#8.#6",
+      "kind": "fn",
+      "name": "CardRenderer._extract_naming_patterns"
+    },
+    {
+      "index": "#8.#7",
+      "kind": "fn",
+      "name": "CardRenderer._extract_dependencies"
+    },
+    {
+      "index": "#8.#8",
+      "kind": "fn",
+      "name": "CardRenderer._extract_environment_configs"
+    },
+    {
+      "index": "#8.#9",
+      "kind": "fn",
+      "name": "CardRenderer._extract_security_constraints"
+    },
+    {
+      "index": "#8.#10",
+      "kind": "fn",
+      "name": "CardRenderer._extract_data_types"
+    },
+    {
+      "index": "#8.#11",
+      "kind": "fn",
+      "name": "CardRenderer._extract_token_sets"
+    },
+    {
+      "index": "#8.#12",
+      "kind": "fn",
+      "name": "CardRenderer._extract_type_signatures"
+    },
+    {
+      "index": "#8.#13",
+      "kind": "fn",
+      "name": "CardRenderer._extract_signatures"
+    },
+    {
+      "index": "#8.#14",
+      "kind": "fn",
+      "name": "CardRenderer._extract_edges"
+    },
+    {
+      "index": "#8.#15",
+      "kind": "fn",
+      "name": "CardRenderer._extract_event_relationships"
+    },
+    {
+      "index": "#8.#16",
+      "kind": "fn",
+      "name": "CardRenderer._extract_async_patterns"
+    },
+    {
+      "index": "#8.#17",
+      "kind": "fn",
+      "name": "CardRenderer._extract_invariants"
+    },
+    {
+      "index": "#8.#18",
+      "kind": "fn",
+      "name": "CardRenderer._extract_conventions"
+    },
+    {
+      "index": "#8.#19",
+      "kind": "fn",
+      "name": "CardRenderer._extract_errors"
+    },
+    {
+      "index": "#8.#20",
+      "kind": "fn",
+      "name": "CardRenderer._extract_io_contracts"
+    },
+    {
+      "index": "#8.#21",
+      "kind": "fn",
+      "name": "CardRenderer._extract_prohibited_patterns"
+    },
+    {
+      "index": "#8.#22",
+      "kind": "fn",
+      "name": "CardRenderer._extract_examples"
+    },
+    {
+      "index": "#8.#23",
+      "kind": "fn",
+      "name": "CardRenderer._extract_review_items"
+    },
+    {
+      "index": "#8.#24",
+      "kind": "fn",
+      "name": "CardRenderer._append_ty_lines"
+    },
+    {
+      "index": "#8.#25",
+      "kind": "fn",
+      "name": "CardRenderer.generate_delta"
+    },
+    {
+      "index": "#8.#26",
+      "kind": "fn",
+      "name": "CardRenderer._diff_lines"
+    },
+    {
+      "index": "#8.#27",
+      "kind": "fn",
+      "name": "CardRenderer.render_per_package"
+    },
+    {
+      "index": "#8.#28",
+      "kind": "fn",
+      "name": "CardRenderer._group_modules_by_package"
+    },
+    {
+      "index": "#8.#29",
+      "kind": "fn",
+      "name": "CardRenderer._render_for_package"
+    },
+    {
+      "index": "#8.#30",
+      "kind": "fn",
+      "name": "CardRenderer.validate_output"
+    },
+    {
+      "index": "#9.#1",
+      "kind": "mod",
+      "name": "scanner"
+    },
+    {
+      "index": "#9.#2",
+      "kind": "cls",
+      "name": "RepoScanner"
+    },
+    {
+      "index": "#9.#3",
+      "kind": "fn",
+      "name": "RepoScanner.__init__"
+    },
+    {
+      "index": "#9.#4",
+      "kind": "fn",
+      "name": "RepoScanner._get_cached_content"
+    },
+    {
+      "index": "#9.#5",
+      "kind": "fn",
+      "name": "RepoScanner._set_cached_content"
+    },
+    {
+      "index": "#9.#6",
+      "kind": "fn",
+      "name": "RepoScanner.is_code_file"
+    },
+    {
+      "index": "#9.#7",
+      "kind": "fn",
+      "name": "RepoScanner.role_tags_for"
+    },
+    {
+      "index": "#9.#8",
+      "kind": "fn",
+      "name": "RepoScanner.detect_langs"
+    },
+    {
+      "index": "#9.#9",
+      "kind": "fn",
+      "name": "RepoScanner.build_indices"
+    },
+    {
+      "index": "#9.#10",
+      "kind": "fn",
+      "name": "RepoScanner.longest_prefix_module"
+    },
+    {
+      "index": "#9.#11",
+      "kind": "fn",
+      "name": "RepoScanner.scan_repository"
+    },
+    {
+      "index": "#9.#12",
+      "kind": "fn",
+      "name": "RepoScanner._process_files_sequential"
+    },
+    {
+      "index": "#9.#13",
+      "kind": "fn",
+      "name": "RepoScanner._process_files_parallel"
+    },
+    {
+      "index": "#9.#14",
+      "kind": "fn",
+      "name": "RepoScanner._process_imports"
+    },
+    {
+      "index": "#9.#15",
+      "kind": "fn",
+      "name": "RepoScanner._process_symbols"
+    },
+    {
+      "index": "#9.#16",
+      "kind": "fn",
+      "name": "RepoScanner._scan_lint_items"
+    },
+    {
+      "index": "#9.#17",
+      "kind": "fn",
+      "name": "RepoScanner._process_class"
+    },
+    {
+      "index": "#9.#18",
+      "kind": "fn",
+      "name": "RepoScanner._process_class_member"
+    },
+    {
+      "index": "#9.#19",
+      "kind": "fn",
+      "name": "RepoScanner._process_function"
+    },
+    {
+      "index": "#9.#20",
+      "kind": "fn",
+      "name": "RepoScanner._process_dto_error_enum"
+    },
+    {
+      "index": "#9.#21",
+      "kind": "fn",
+      "name": "RepoScanner._process_routes"
+    },
+    {
+      "index": "#9.#22",
+      "kind": "fn",
+      "name": "RepoScanner._dotted_from_ast"
+    },
+    {
+      "index": "#9.#23",
+      "kind": "fn",
+      "name": "RepoScanner._function_signature"
+    },
+    {
+      "index": "#9.#24",
+      "kind": "fn",
+      "name": "RepoScanner._method_modifiers"
+    },
+    {
+      "index": "#9.#25",
+      "kind": "fn",
+      "name": "RepoScanner._class_has_descriptor_dunders"
+    },
+    {
+      "index": "#9.#26",
+      "kind": "fn",
+      "name": "RepoScanner._is_enum_class"
+    },
+    {
+      "index": "#9.#27",
+      "kind": "fn",
+      "name": "RepoScanner._has_mutable_default"
+    },
+    {
+      "index": "#9.#28",
+      "kind": "fn",
+      "name": "RepoScanner._collect_raises_in_function"
+    },
+    {
+      "index": "#9.#29",
+      "kind": "fn",
+      "name": "RepoScanner._walk_ignoring_nested"
+    },
+    {
+      "index": "#9.#30",
+      "kind": "fn",
+      "name": "RepoScanner._exception_name_from_raise"
+    },
+    {
+      "index": "#10.#1",
+      "kind": "mod",
+      "name": "ctxcard_gen"
+    },
+    {
+      "index": "#10.#2",
+      "kind": "cls",
+      "name": "CTXCardGenerator"
+    },
+    {
+      "index": "#10.#3",
+      "kind": "fn",
+      "name": "CTXCardGenerator.__init__"
+    },
+    {
+      "index": "#10.#4",
+      "kind": "fn",
+      "name": "CTXCardGenerator.generate"
+    },
+    {
+      "index": "#10.#5",
+      "kind": "fn",
+      "name": "CTXCardGenerator.generate_per_package"
+    },
+    {
+      "index": "#10.#6",
+      "kind": "fn",
+      "name": "CTXCardGenerator.save_output"
+    },
+    {
+      "index": "#10.#7",
+      "kind": "fn",
+      "name": "CTXCardGenerator.save_per_package"
+    },
+    {
+      "index": "#10.#8",
+      "kind": "fn",
+      "name": "main"
+    },
+    {
+      "index": "#11.#1",
+      "kind": "mod",
+      "name": "exceptions"
+    },
+    {
+      "index": "#11.#2",
+      "kind": "cls",
+      "name": "CTXCardError"
+    },
+    {
+      "index": "#11.#3",
+      "kind": "cls",
+      "name": "ParseError"
+    },
+    {
+      "index": "#11.#4",
+      "kind": "cls",
+      "name": "ValidationError"
+    },
+    {
+      "index": "#11.#5",
+      "kind": "cls",
+      "name": "ConfigurationError"
+    },
+    {
+      "index": "#11.#6",
+      "kind": "cls",
+      "name": "FileError"
+    },
+    {
+      "index": "#11.#7",
+      "kind": "cls",
+      "name": "ASTError"
+    },
+    {
+      "index": "#12.#1",
+      "kind": "mod",
+      "name": "types"
+    },
+    {
+      "index": "#12.#2",
+      "kind": "cls",
+      "name": "Symbol"
+    },
+    {
+      "index": "#12.#3",
+      "kind": "cls",
+      "name": "ModuleInfo"
+    },
+    {
+      "index": "#12.#4",
+      "kind": "cls",
+      "name": "ScanResult"
+    },
+    {
+      "index": "#12.#5",
+      "kind": "cls",
+      "name": "GeneratorConfig"
+    },
+    {
+      "index": "#13.#1",
+      "kind": "mod",
+      "name": "__init__"
+    },
+    {
+      "index": "#14.#1",
+      "kind": "mod",
+      "name": "export"
+    },
+    {
+      "index": "#14.#2",
+      "kind": "fn",
+      "name": "parse_ctx_card"
+    },
+    {
+      "index": "#14.#3",
+      "kind": "fn",
+      "name": "export_to_json"
+    },
+    {
+      "index": "#14.#4",
+      "kind": "fn",
+      "name": "export_to_yaml"
+    },
+    {
+      "index": "#14.#5",
+      "kind": "fn",
+      "name": "export_to_xml"
+    },
+    {
+      "index": "#14.#6",
+      "kind": "fn",
+      "name": "export_to_markdown"
+    },
+    {
+      "index": "#15.#1",
+      "kind": "mod",
+      "name": "helpers"
+    },
+    {
+      "index": "#15.#2",
+      "kind": "fn",
+      "name": "today_stamp"
+    },
+    {
+      "index": "#15.#3",
+      "kind": "fn",
+      "name": "relpath"
+    },
+    {
+      "index": "#15.#4",
+      "kind": "fn",
+      "name": "is_probably_binary"
+    },
+    {
+      "index": "#15.#5",
+      "kind": "fn",
+      "name": "ascii_only"
+    },
+    {
+      "index": "#15.#6",
+      "kind": "fn",
+      "name": "file_to_dotted"
+    },
+    {
+      "index": "#15.#7",
+      "kind": "fn",
+      "name": "ann_to_str"
+    },
+    {
+      "index": "#16.#1",
+      "kind": "mod",
+      "name": "ignore"
+    },
+    {
+      "index": "#16.#2",
+      "kind": "cls",
+      "name": "IgnorePattern"
+    },
+    {
+      "index": "#16.#3",
+      "kind": "fn",
+      "name": "IgnorePattern.__init__"
+    },
+    {
+      "index": "#16.#4",
+      "kind": "fn",
+      "name": "IgnorePattern._glob_to_regex"
+    },
+    {
+      "index": "#16.#5",
+      "kind": "fn",
+      "name": "IgnorePattern.matches"
+    },
+    {
+      "index": "#16.#6",
+      "kind": "cls",
+      "name": "IgnoreFile"
+    },
+    {
+      "index": "#16.#7",
+      "kind": "fn",
+      "name": "IgnoreFile.__init__"
+    },
+    {
+      "index": "#16.#8",
+      "kind": "fn",
+      "name": "IgnoreFile._load_ignore_file"
+    },
+    {
+      "index": "#16.#9",
+      "kind": "fn",
+      "name": "IgnoreFile.should_ignore"
+    },
+    {
+      "index": "#16.#10",
+      "kind": "fn",
+      "name": "IgnoreFile.get_ignored_patterns"
+    },
+    {
+      "index": "#16.#11",
+      "kind": "fn",
+      "name": "load_ignore_file"
+    },
+    {
+      "index": "#17.#1",
+      "kind": "mod",
+      "name": "validation"
+    },
+    {
+      "index": "#17.#2",
+      "kind": "fn",
+      "name": "validate_prefix_free"
+    },
+    {
+      "index": "#17.#3",
+      "kind": "fn",
+      "name": "validate_regex_patterns"
+    },
+    {
+      "index": "#17.#4",
+      "kind": "fn",
+      "name": "validate_indices"
+    },
+    {
+      "index": "#17.#5",
+      "kind": "fn",
+      "name": "validate_edges"
+    },
+    {
+      "index": "#17.#6",
+      "kind": "fn",
+      "name": "validate_ctx_card_structure"
+    },
+    {
+      "index": "#17.#7",
+      "kind": "fn",
+      "name": "validate_role_tags"
+    },
+    {
+      "index": "#17.#8",
+      "kind": "fn",
+      "name": "validate_function_signatures"
+    },
+    {
+      "index": "#17.#9",
+      "kind": "fn",
+      "name": "validate_naming_conventions"
+    },
+    {
+      "index": "#17.#10",
+      "kind": "fn",
+      "name": "validate_ascii_compliance"
+    },
+    {
+      "index": "#17.#11",
+      "kind": "fn",
+      "name": "validate_semantic_tokens"
+    },
+    {
+      "index": "#17.#12",
+      "kind": "fn",
+      "name": "validate_cross_references"
+    },
+    {
+      "index": "#17.#13",
+      "kind": "fn",
+      "name": "get_validation_report"
+    },
+    {
+      "index": "#17.#14",
+      "kind": "fn",
+      "name": "get_completion_items"
+    },
+    {
+      "index": "#17.#15",
+      "kind": "fn",
+      "name": "get_definition_location"
+    },
+    {
+      "index": "#17.#16",
+      "kind": "fn",
+      "name": "find_all_references"
+    },
+    {
+      "index": "#18.#1",
+      "kind": "mod",
+      "name": "__init__"
+    },
+    {
+      "index": "#19.#1",
+      "kind": "mod",
+      "name": "test_cli"
+    },
+    {
+      "index": "#19.#2",
+      "kind": "fn",
+      "name": "test_cli_help"
+    },
+    {
+      "index": "#20.#1",
+      "kind": "mod",
+      "name": "conftest"
+    },
+    {
+      "index": "#20.#2",
+      "kind": "fn",
+      "name": "sample_project_dir"
+    },
+    {
+      "index": "#20.#3",
+      "kind": "fn",
+      "name": "sample_modules"
+    },
+    {
+      "index": "#20.#4",
+      "kind": "fn",
+      "name": "sample_scan_result"
+    },
+    {
+      "index": "#20.#5",
+      "kind": "fn",
+      "name": "sample_ctxcard_content"
+    },
+    {
+      "index": "#20.#6",
+      "kind": "fn",
+      "name": "old_ctxcard_content"
+    },
+    {
+      "index": "#21.#1",
+      "kind": "mod",
+      "name": "test_full_generation"
+    },
+    {
+      "index": "#21.#2",
+      "kind": "fn",
+      "name": "sample_project_dir"
+    },
+    {
+      "index": "#21.#3",
+      "kind": "fn",
+      "name": "test_full_generation"
+    },
+    {
+      "index": "#21.#4",
+      "kind": "fn",
+      "name": "test_generation_with_type_signatures"
+    },
+    {
+      "index": "#21.#5",
+      "kind": "fn",
+      "name": "test_generation_with_delta"
+    },
+    {
+      "index": "#21.#6",
+      "kind": "fn",
+      "name": "test_generation_with_per_package"
+    },
+    {
+      "index": "#21.#7",
+      "kind": "fn",
+      "name": "test_generation_with_include_pattern"
+    },
+    {
+      "index": "#21.#8",
+      "kind": "fn",
+      "name": "test_generation_with_exclude_pattern"
+    },
+    {
+      "index": "#21.#9",
+      "kind": "fn",
+      "name": "test_generation_error_handling"
+    },
+    {
+      "index": "#21.#10",
+      "kind": "fn",
+      "name": "test_generation_performance"
+    },
+    {
+      "index": "#22.#1",
+      "kind": "mod",
+      "name": "test_ast_analyzer"
+    },
+    {
+      "index": "#22.#2",
+      "kind": "cls",
+      "name": "TestASTAnalyzer"
+    },
+    {
+      "index": "#22.#3",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_analyze_repository_basic"
+    },
+    {
+      "index": "#22.#4",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_analyze_repository_with_include"
+    },
+    {
+      "index": "#22.#5",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_analyze_repository_with_exclude"
+    },
+    {
+      "index": "#22.#6",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_extract_calls"
+    },
+    {
+      "index": "#22.#7",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_validate_analysis_valid"
+    },
+    {
+      "index": "#22.#8",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_validate_analysis_empty"
+    },
+    {
+      "index": "#22.#9",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_validate_analysis_duplicate_module_ids"
+    },
+    {
+      "index": "#22.#10",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_validate_analysis_duplicate_symbol_ids"
+    },
+    {
+      "index": "#22.#11",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_get_statistics"
+    },
+    {
+      "index": "#22.#12",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_ast_analyzer_initialization"
+    },
+    {
+      "index": "#22.#13",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_ast_analyzer_two_pass_analysis"
+    },
+    {
+      "index": "#22.#14",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_ast_analyzer_error_handling"
+    },
+    {
+      "index": "#22.#15",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_ast_analyzer_performance"
+    },
+    {
+      "index": "#22.#16",
+      "kind": "fn",
+      "name": "TestASTAnalyzer.test_ast_analyzer_component_integration"
+    },
+    {
+      "index": "#23.#1",
+      "kind": "mod",
+      "name": "test_call_resolver"
+    },
+    {
+      "index": "#23.#2",
+      "kind": "cls",
+      "name": "TestCallResolver"
+    },
+    {
+      "index": "#23.#3",
+      "kind": "fn",
+      "name": "TestCallResolver.test_init"
+    },
+    {
+      "index": "#23.#4",
+      "kind": "fn",
+      "name": "TestCallResolver.test_build_reexports_global_empty"
+    },
+    {
+      "index": "#23.#5",
+      "kind": "fn",
+      "name": "TestCallResolver.test_build_reexports_global_single_module"
+    },
+    {
+      "index": "#23.#6",
+      "kind": "fn",
+      "name": "TestCallResolver.test_build_reexports_global_with_reexports"
+    },
+    {
+      "index": "#23.#7",
+      "kind": "fn",
+      "name": "TestCallResolver.test_build_indices_empty"
+    },
+    {
+      "index": "#23.#8",
+      "kind": "fn",
+      "name": "TestCallResolver.test_build_indices_single_module"
+    },
+    {
+      "index": "#23.#9",
+      "kind": "fn",
+      "name": "TestCallResolver.test_longest_prefix_module_exact_match"
+    },
+    {
+      "index": "#23.#10",
+      "kind": "fn",
+      "name": "TestCallResolver.test_longest_prefix_module_nested"
+    },
+    {
+      "index": "#23.#11",
+      "kind": "fn",
+      "name": "TestCallResolver.test_longest_prefix_module_no_match"
+    },
+    {
+      "index": "#23.#12",
+      "kind": "fn",
+      "name": "TestCallResolver.test_resolve_target_function"
+    },
+    {
+      "index": "#23.#13",
+      "kind": "fn",
+      "name": "TestCallResolver.test_resolve_target_class_method"
+    },
+    {
+      "index": "#23.#14",
+      "kind": "fn",
+      "name": "TestCallResolver.test_resolve_target_module_anchor"
+    },
+    {
+      "index": "#23.#15",
+      "kind": "fn",
+      "name": "TestCallResolver.test_resolve_target_not_found"
+    },
+    {
+      "index": "#24.#1",
+      "kind": "mod",
+      "name": "test_card_renderer"
+    },
+    {
+      "index": "#24.#2",
+      "kind": "cls",
+      "name": "TestCardRenderer"
+    },
+    {
+      "index": "#24.#3",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_init"
+    },
+    {
+      "index": "#24.#4",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_basic"
+    },
+    {
+      "index": "#24.#5",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_with_type_signatures"
+    },
+    {
+      "index": "#24.#6",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_with_classes"
+    },
+    {
+      "index": "#24.#7",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_with_properties"
+    },
+    {
+      "index": "#24.#8",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_with_decorators"
+    },
+    {
+      "index": "#24.#9",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_with_exceptions"
+    },
+    {
+      "index": "#24.#10",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_with_role_tags"
+    },
+    {
+      "index": "#24.#11",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_empty_modules"
+    },
+    {
+      "index": "#24.#12",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_card_multiple_languages"
+    },
+    {
+      "index": "#24.#13",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_generate_delta_empty"
+    },
+    {
+      "index": "#24.#14",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_generate_delta_with_changes"
+    },
+    {
+      "index": "#24.#15",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_group_modules_by_package"
+    },
+    {
+      "index": "#24.#16",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_render_for_package"
+    },
+    {
+      "index": "#24.#17",
+      "kind": "fn",
+      "name": "TestCardRenderer.test_append_ty_lines"
+    },
+    {
+      "index": "#25.#1",
+      "kind": "mod",
+      "name": "test_export"
+    },
+    {
+      "index": "#25.#2",
+      "kind": "cls",
+      "name": "TestExportFunctions"
+    },
+    {
+      "index": "#25.#3",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_parse_ctx_card_basic"
+    },
+    {
+      "index": "#25.#4",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_parse_ctx_card_new_tags"
+    },
+    {
+      "index": "#25.#5",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_parse_ctx_card_complex"
+    },
+    {
+      "index": "#25.#6",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_export_to_json"
+    },
+    {
+      "index": "#25.#7",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_export_to_yaml"
+    },
+    {
+      "index": "#25.#8",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_export_to_xml"
+    },
+    {
+      "index": "#25.#9",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_export_to_markdown"
+    },
+    {
+      "index": "#25.#10",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_export_without_output_path"
+    },
+    {
+      "index": "#25.#11",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_parse_edge_cases"
+    },
+    {
+      "index": "#25.#12",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_parse_empty_content"
+    },
+    {
+      "index": "#25.#13",
+      "kind": "fn",
+      "name": "TestExportFunctions.test_parse_comments_only"
+    },
+    {
+      "index": "#26.#1",
+      "kind": "mod",
+      "name": "test_ignore"
+    },
+    {
+      "index": "#26.#2",
+      "kind": "cls",
+      "name": "TestIgnoreFile"
+    },
+    {
+      "index": "#26.#3",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_init"
+    },
+    {
+      "index": "#26.#4",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_add_pattern"
+    },
+    {
+      "index": "#26.#5",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_file"
+    },
+    {
+      "index": "#26.#6",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_directory"
+    },
+    {
+      "index": "#26.#7",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_with_paths"
+    },
+    {
+      "index": "#26.#8",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_complex_patterns"
+    },
+    {
+      "index": "#26.#9",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_regex_patterns"
+    },
+    {
+      "index": "#26.#10",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_mixed_patterns"
+    },
+    {
+      "index": "#26.#11",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_case_sensitivity"
+    },
+    {
+      "index": "#26.#12",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_negation_patterns"
+    },
+    {
+      "index": "#26.#13",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_directory_patterns"
+    },
+    {
+      "index": "#26.#14",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_character_classes"
+    },
+    {
+      "index": "#26.#15",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_recursive_patterns"
+    },
+    {
+      "index": "#26.#16",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_should_ignore_path_outside_root"
+    },
+    {
+      "index": "#26.#17",
+      "kind": "fn",
+      "name": "TestIgnoreFile.test_get_ignored_patterns"
+    },
+    {
+      "index": "#26.#18",
+      "kind": "cls",
+      "name": "TestIgnorePattern"
+    },
+    {
+      "index": "#26.#19",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_init"
+    },
+    {
+      "index": "#26.#20",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_negation_pattern"
+    },
+    {
+      "index": "#26.#21",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_directory_pattern"
+    },
+    {
+      "index": "#26.#22",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_matches_simple_glob"
+    },
+    {
+      "index": "#26.#23",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_matches_directory_glob"
+    },
+    {
+      "index": "#26.#24",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_matches_recursive_glob"
+    },
+    {
+      "index": "#26.#25",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_matches_character_classes"
+    },
+    {
+      "index": "#26.#26",
+      "kind": "fn",
+      "name": "TestIgnorePattern.test_matches_negated_character_classes"
+    },
+    {
+      "index": "#26.#27",
+      "kind": "cls",
+      "name": "TestLoadIgnoreFile"
+    },
+    {
+      "index": "#26.#28",
+      "kind": "fn",
+      "name": "TestLoadIgnoreFile.test_load_ignore_file"
+    },
+    {
+      "index": "#26.#29",
+      "kind": "fn",
+      "name": "TestLoadIgnoreFile.test_load_ignore_file_with_patterns"
+    },
+    {
+      "index": "#27.#1",
+      "kind": "mod",
+      "name": "test_scanner"
+    },
+    {
+      "index": "#27.#2",
+      "kind": "cls",
+      "name": "TestRepoScanner"
+    },
+    {
+      "index": "#27.#3",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_init"
+    },
+    {
+      "index": "#27.#4",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_empty"
+    },
+    {
+      "index": "#27.#5",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_single_python_file"
+    },
+    {
+      "index": "#27.#6",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_multiple_files"
+    },
+    {
+      "index": "#27.#7",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_packages"
+    },
+    {
+      "index": "#27.#8",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_ignore_patterns"
+    },
+    {
+      "index": "#27.#9",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_include_patterns"
+    },
+    {
+      "index": "#27.#10",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_complex_structure"
+    },
+    {
+      "index": "#27.#11",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_binary_files"
+    },
+    {
+      "index": "#27.#12",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_syntax_errors"
+    },
+    {
+      "index": "#27.#13",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_encoding_issues"
+    },
+    {
+      "index": "#27.#14",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_performance"
+    },
+    {
+      "index": "#27.#15",
+      "kind": "fn",
+      "name": "TestRepoScanner.test_scan_repository_with_ast_analyzer_integration"
+    },
+    {
+      "index": "#28.#1",
+      "kind": "mod",
+      "name": "test_utils"
+    },
+    {
+      "index": "#28.#2",
+      "kind": "cls",
+      "name": "TestHelpers"
+    },
+    {
+      "index": "#28.#3",
+      "kind": "fn",
+      "name": "TestHelpers.test_today_stamp"
+    },
+    {
+      "index": "#28.#4",
+      "kind": "fn",
+      "name": "TestHelpers.test_relpath_success"
+    },
+    {
+      "index": "#28.#5",
+      "kind": "fn",
+      "name": "TestHelpers.test_relpath_fallback"
+    },
+    {
+      "index": "#28.#6",
+      "kind": "fn",
+      "name": "TestHelpers.test_is_probably_binary_text"
+    },
+    {
+      "index": "#28.#7",
+      "kind": "fn",
+      "name": "TestHelpers.test_is_probably_binary_binary"
+    },
+    {
+      "index": "#28.#8",
+      "kind": "fn",
+      "name": "TestHelpers.test_is_probably_binary_mixed"
+    },
+    {
+      "index": "#28.#9",
+      "kind": "fn",
+      "name": "TestHelpers.test_ascii_only_clean"
+    },
+    {
+      "index": "#28.#10",
+      "kind": "fn",
+      "name": "TestHelpers.test_ascii_only_with_unicode"
+    },
+    {
+      "index": "#28.#11",
+      "kind": "fn",
+      "name": "TestHelpers.test_file_to_dotted_python"
+    },
+    {
+      "index": "#28.#12",
+      "kind": "fn",
+      "name": "TestHelpers.test_ann_to_str_none"
+    },
+    {
+      "index": "#28.#13",
+      "kind": "fn",
+      "name": "TestHelpers.test_ann_to_str_simple"
+    },
+    {
+      "index": "#28.#14",
+      "kind": "fn",
+      "name": "TestHelpers.test_ann_to_str_complex"
+    },
+    {
+      "index": "#28.#15",
+      "kind": "fn",
+      "name": "TestHelpers.test_ann_to_str_error_handling"
+    },
+    {
+      "index": "#28.#16",
+      "kind": "cls",
+      "name": "TestValidation"
+    },
+    {
+      "index": "#28.#17",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_prefix_free_valid"
+    },
+    {
+      "index": "#28.#18",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_prefix_free_invalid"
+    },
+    {
+      "index": "#28.#19",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_prefix_free_mixed"
+    },
+    {
+      "index": "#28.#20",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_regex_patterns_valid"
+    },
+    {
+      "index": "#28.#21",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_regex_patterns_invalid"
+    },
+    {
+      "index": "#28.#22",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_indices_valid"
+    },
+    {
+      "index": "#28.#23",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_indices_duplicate_module_id"
+    },
+    {
+      "index": "#28.#24",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_indices_duplicate_symbol_id"
+    },
+    {
+      "index": "#28.#25",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_indices_wrong_symbol_module"
+    },
+    {
+      "index": "#28.#26",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_edges_valid"
+    },
+    {
+      "index": "#28.#27",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_edges_invalid_target_module"
+    },
+    {
+      "index": "#28.#28",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_edges_invalid_target_symbol"
+    },
+    {
+      "index": "#28.#29",
+      "kind": "fn",
+      "name": "TestValidation.test_validate_edges_invalid_caller"
+    },
+    {
+      "index": "#29.#1",
+      "kind": "mod",
+      "name": "test_validation"
+    },
+    {
+      "index": "#29.#2",
+      "kind": "cls",
+      "name": "TestValidationFunctions"
+    },
+    {
+      "index": "#29.#3",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_prefix_free_valid"
+    },
+    {
+      "index": "#29.#4",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_prefix_free_invalid"
+    },
+    {
+      "index": "#29.#5",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_regex_patterns_valid"
+    },
+    {
+      "index": "#29.#6",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_regex_patterns_invalid"
+    },
+    {
+      "index": "#29.#7",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_ctx_card_structure_valid"
+    },
+    {
+      "index": "#29.#8",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_ctx_card_structure_invalid"
+    },
+    {
+      "index": "#29.#9",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_ctx_card_structure_missing_required"
+    },
+    {
+      "index": "#29.#10",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_ascii_compliance_valid"
+    },
+    {
+      "index": "#29.#11",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_ascii_compliance_invalid"
+    },
+    {
+      "index": "#29.#12",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_semantic_tokens"
+    },
+    {
+      "index": "#29.#13",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_cross_references_valid"
+    },
+    {
+      "index": "#29.#14",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_validate_cross_references_invalid"
+    },
+    {
+      "index": "#29.#15",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_get_validation_report_complete"
+    },
+    {
+      "index": "#29.#16",
+      "kind": "fn",
+      "name": "TestValidationFunctions.test_get_validation_report_with_errors"
+    },
+    {
+      "index": "#29.#17",
+      "kind": "cls",
+      "name": "TestValidationIntegration"
+    },
+    {
+      "index": "#29.#18",
+      "kind": "fn",
+      "name": "TestValidationIntegration.test_complete_ctx_card_validation"
+    }
+  ],
+  "signatures": [
+    {
+      "index": "#1.#2",
+      "signature": "(cmd:list[str],description:str)->bool"
+    },
+    {
+      "index": "#1.#3",
+      "signature": "()->Any"
+    },
+    {
+      "index": "#2.#3",
+      "signature": "(self,config:GeneratorConfig)->Any"
+    },
+    {
+      "index": "#2.#4",
+      "signature": "(self)->str"
+    },
+    {
+      "index": "#2.#5",
+      "signature": "(self,root_content:str)->dict[str, str]"
+    },
+    {
+      "index": "#2.#6",
+      "signature": "(self,content:str)->None"
+    },
+    {
+      "index": "#2.#7",
+      "signature": "(self,packages:dict[str, str])->None"
+    },
+    {
+      "index": "#2.#8",
+      "signature": "()->None"
+    },
+    {
+      "index": "#6.#3",
+      "signature": "(self,max_workers:int,cache_size:int)->Any"
+    },
+    {
+      "index": "#6.#4",
+      "signature": "(self,root:Path,include_glob:Optional[str],exclude_glob:Optional[str])->ScanResult"
+    },
+    {
+      "index": "#6.#5",
+      "signature": "(self,root:Path,scan_result:ScanResult)->None"
+    },
+    {
+      "index": "#6.#6",
+      "signature": "(self,scan_result:ScanResult)->None !raises[ASTError]"
+    },
+    {
+      "index": "#6.#7",
+      "signature": "(self,scan_result:ScanResult)->Dict[str, int]"
+    },
+    {
+      "index": "#7.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#7.#4",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->Dict[str, str]"
+    },
+    {
+      "index": "#7.#5",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->Tuple[Dict[str, str], Dict[str, List[str]]]"
+    },
+    {
+      "index": "#7.#6",
+      "signature": "(self,dotted:str,dotted_to_path:Dict[str, str])->Optional[str]"
+    },
+    {
+      "index": "#7.#7",
+      "signature": "(self,full_dotted:str,dotted_to_path:Dict[str, str],modules:Dict[str, ModuleInfo])->Tuple[Optional[int], Optional[int], str]"
+    },
+    {
+      "index": "#7.#8",
+      "signature": "(self,root:Path,scan:ScanResult)->None"
+    },
+    {
+      "index": "#7.#9",
+      "signature": "(self,node:ast.Call,local_lookup:Dict[str, int])->Optional[int]"
+    },
+    {
+      "index": "#7.#10",
+      "signature": "(self,node:ast.Call,mi:ModuleInfo,dotted_to_path:Dict[str, str],modules:Dict[str, ModuleInfo],reexports:Dict[str, str])->Optional[Tuple[int, int]]"
+    },
+    {
+      "index": "#7.#11",
+      "signature": "(self,expr:ast.AST)->str"
+    },
+    {
+      "index": "#7.#12",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->None"
+    },
+    {
+      "index": "#8.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#8.#4",
+      "signature": "(self,project_name:str,langs:List[str],std:str,modules:Dict[str, ModuleInfo],emit_type_signatures:bool)->str"
+    },
+    {
+      "index": "#8.#5",
+      "signature": "(self,_modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#6",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#7",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#8",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#9",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#10",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#11",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#12",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#13",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#14",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#15",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#16",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#17",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#18",
+      "signature": "(self,_modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#19",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#20",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#21",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#22",
+      "signature": "(self,_modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#23",
+      "signature": "(self,_modules:Dict[str, ModuleInfo])->List[str]"
+    },
+    {
+      "index": "#8.#24",
+      "signature": "(self,lines:List[str],modules:Dict[str, ModuleInfo])->None"
+    },
+    {
+      "index": "#8.#25",
+      "signature": "(self,old_path:Path,new_content:str)->str"
+    },
+    {
+      "index": "#8.#26",
+      "signature": "(self,old:List[str],new:List[str])->List[str]"
+    },
+    {
+      "index": "#8.#27",
+      "signature": "(self,root_card:str,modules:Dict[str, ModuleInfo],langs:List[str],std:str,proj:str)->Dict[str, str]"
+    },
+    {
+      "index": "#8.#28",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->Dict[str, List[ModuleInfo]]"
+    },
+    {
+      "index": "#8.#29",
+      "signature": "(self,root_card:str,_pkg:str,pkg_modules:List[ModuleInfo],_langs:List[str],_std:str,_proj:str)->str"
+    },
+    {
+      "index": "#8.#30",
+      "signature": "(self,content:str)->None !raises[ValidationError]"
+    },
+    {
+      "index": "#9.#3",
+      "signature": "(self,max_workers:int,cache_size:int)->Any"
+    },
+    {
+      "index": "#9.#4",
+      "signature": "(self,file_path:Path)->Optional[str]"
+    },
+    {
+      "index": "#9.#5",
+      "signature": "(self,file_path:Path,content:str)->None"
+    },
+    {
+      "index": "#9.#6",
+      "signature": "(self,path:Path)->bool"
+    },
+    {
+      "index": "#9.#7",
+      "signature": "(self,path:str)->Set[str]"
+    },
+    {
+      "index": "#9.#8",
+      "signature": "(self,root:Path)->List[str]"
+    },
+    {
+      "index": "#9.#9",
+      "signature": "(self,modules:Dict[str, ModuleInfo])->Tuple[Dict[str, str], Dict[str, List[str]]]"
+    },
+    {
+      "index": "#9.#10",
+      "signature": "(self,dotted:str,dotted_to_path:Dict[str, str])->Optional[str]"
+    },
+    {
+      "index": "#9.#11",
+      "signature": "(self,root:Path,include_pattern:Optional[str],exclude_pattern:Optional[str])->ScanResult"
+    },
+    {
+      "index": "#9.#12",
+      "signature": "(self,root:Path,modules:Dict[str, ModuleInfo],dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any"
+    },
+    {
+      "index": "#9.#13",
+      "signature": "(self,root:Path,modules:Dict[str, ModuleInfo],dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any"
+    },
+    {
+      "index": "#9.#14",
+      "signature": "(self,tree:ast.AST,mi:ModuleInfo,_full:Path,_root:Path,dotted_to_path:Dict[str, str],stem_to_paths:Dict[str, List[str]])->Any"
+    },
+    {
+      "index": "#9.#15",
+      "signature": "(self,tree:ast.AST,mi:ModuleInfo,rp:str)->Any"
+    },
+    {
+      "index": "#9.#16",
+      "signature": "(self,tree:ast.AST,mi:ModuleInfo,rp:str)->Any"
+    },
+    {
+      "index": "#9.#17",
+      "signature": "(self,node:ast.ClassDef,mi:ModuleInfo,sid:int)->int"
+    },
+    {
+      "index": "#9.#18",
+      "signature": "(self,stmt:ast.FunctionDef"
+    },
+    {
+      "index": "#9.#19",
+      "signature": "(self,node:ast.FunctionDef"
+    },
+    {
+      "index": "#9.#20",
+      "signature": "(self,node:ast.ClassDef,mi:ModuleInfo,cls:str)->Any"
+    },
+    {
+      "index": "#9.#21",
+      "signature": "(self,node:ast.FunctionDef"
+    },
+    {
+      "index": "#9.#22",
+      "signature": "(self,expr:ast.AST)->str"
+    },
+    {
+      "index": "#9.#23",
+      "signature": "(self,node:ast.AST)->str"
+    },
+    {
+      "index": "#9.#24",
+      "signature": "(self,decos:List[str])->Set[str]"
+    },
+    {
+      "index": "#9.#25",
+      "signature": "(self,node:ast.ClassDef)->bool"
+    },
+    {
+      "index": "#9.#26",
+      "signature": "(self,node:ast.ClassDef)->bool"
+    },
+    {
+      "index": "#9.#27",
+      "signature": "(self,fn:ast.AST)->bool"
+    },
+    {
+      "index": "#9.#28",
+      "signature": "(self,fn_node:ast.AST)->List[str]"
+    },
+    {
+      "index": "#9.#29",
+      "signature": "(self,fn_node:ast.AST)->Any"
+    },
+    {
+      "index": "#9.#30",
+      "signature": "(self,exc:Optional[ast.AST])->str"
+    },
+    {
+      "index": "#10.#3",
+      "signature": "(self,config:GeneratorConfig,max_workers:int,cache_size:int)->Any"
+    },
+    {
+      "index": "#10.#4",
+      "signature": "(self)->str"
+    },
+    {
+      "index": "#10.#5",
+      "signature": "(self,root_content:str)->dict[str, str]"
+    },
+    {
+      "index": "#10.#6",
+      "signature": "(self,content:str)->None"
+    },
+    {
+      "index": "#10.#7",
+      "signature": "(self,packages:dict[str, str])->None"
+    },
+    {
+      "index": "#10.#8",
+      "signature": "()->None"
+    },
+    {
+      "index": "#14.#2",
+      "signature": "(content:str)->Dict[str, Any]"
+    },
+    {
+      "index": "#14.#3",
+      "signature": "(content:str,output_path:Optional[Path])->str"
+    },
+    {
+      "index": "#14.#4",
+      "signature": "(content:str,output_path:Optional[Path])->str !raises[ImportError]"
+    },
+    {
+      "index": "#14.#5",
+      "signature": "(content:str,output_path:Optional[Path])->str"
+    },
+    {
+      "index": "#14.#6",
+      "signature": "(content:str,output_path:Optional[Path])->str"
+    },
+    {
+      "index": "#15.#2",
+      "signature": "()->str"
+    },
+    {
+      "index": "#15.#3",
+      "signature": "(p:Path,root:Path)->str"
+    },
+    {
+      "index": "#15.#4",
+      "signature": "(path:Path)->bool"
+    },
+    {
+      "index": "#15.#5",
+      "signature": "(s:str)->str"
+    },
+    {
+      "index": "#15.#6",
+      "signature": "(rp:str)->str"
+    },
+    {
+      "index": "#15.#7",
+      "signature": "(ann:Optional[ast.AST])->str"
+    },
+    {
+      "index": "#16.#3",
+      "signature": "(self,pattern:str,line_number:int)->Any"
+    },
+    {
+      "index": "#16.#4",
+      "signature": "(self,pattern:str)->re.Pattern"
+    },
+    {
+      "index": "#16.#5",
+      "signature": "(self,path:str)->bool"
+    },
+    {
+      "index": "#16.#7",
+      "signature": "(self,root_path:Path)->Any"
+    },
+    {
+      "index": "#16.#8",
+      "signature": "(self)->None"
+    },
+    {
+      "index": "#16.#9",
+      "signature": "(self,path:Path)->bool"
+    },
+    {
+      "index": "#16.#10",
+      "signature": "(self)->List[str]"
+    },
+    {
+      "index": "#16.#11",
+      "signature": "(root_path:Path)->IgnoreFile"
+    },
+    {
+      "index": "#17.#2",
+      "signature": "(aliases:List[str])->Tuple[List[str], List[str]]"
+    },
+    {
+      "index": "#17.#3",
+      "signature": "(patterns:List[str])->Tuple[List[str], List[str]]"
+    },
+    {
+      "index": "#17.#4",
+      "signature": "(modules:dict)->bool"
+    },
+    {
+      "index": "#17.#5",
+      "signature": "(modules:dict)->bool"
+    },
+    {
+      "index": "#17.#6",
+      "signature": "(content:str)->Tuple[bool, List[str]]"
+    },
+    {
+      "index": "#17.#7",
+      "signature": "(modules:dict)->Tuple[bool, List[str]]"
+    },
+    {
+      "index": "#17.#8",
+      "signature": "(modules:dict)->Tuple[bool, List[str]]"
+    },
+    {
+      "index": "#17.#9",
+      "signature": "(modules:dict,naming_patterns:Dict[str, str])->Tuple[bool, List[str]]"
+    },
+    {
+      "index": "#17.#10",
+      "signature": "(content:str)->Tuple[bool, List[str]]"
+    },
+    {
+      "index": "#17.#11",
+      "signature": "(content:str)->List[Dict]"
+    },
+    {
+      "index": "#17.#12",
+      "signature": "(content:str)->Tuple[bool, List[str]]"
+    },
+    {
+      "index": "#17.#13",
+      "signature": "(content:str,modules:dict)->Dict"
+    },
+    {
+      "index": "#17.#14",
+      "signature": "(content:str,position:int)->List[Dict]"
+    },
+    {
+      "index": "#17.#15",
+      "signature": "(content:str,position:int)->Optional[Dict]"
+    },
+    {
+      "index": "#17.#16",
+      "signature": "(content:str,symbol:str)->List[Dict]"
+    },
+    {
+      "index": "#19.#2",
+      "signature": "()->Any"
+    },
+    {
+      "index": "#20.#2",
+      "signature": "(tmp_path:Path)->Path"
+    },
+    {
+      "index": "#20.#3",
+      "signature": "()->Dict[str, ModuleInfo]"
+    },
+    {
+      "index": "#20.#4",
+      "signature": "(sample_modules)->ScanResult"
+    },
+    {
+      "index": "#20.#5",
+      "signature": "()->str"
+    },
+    {
+      "index": "#20.#6",
+      "signature": "()->str"
+    },
+    {
+      "index": "#21.#2",
+      "signature": "(tmp_path:Path)->Path"
+    },
+    {
+      "index": "#21.#3",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#4",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#5",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#6",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#7",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#8",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#9",
+      "signature": "(tmp_path:Path)->Any"
+    },
+    {
+      "index": "#21.#10",
+      "signature": "(project_dir:Path,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#22.#3",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#4",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#5",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#6",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#7",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#8",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#22.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#22.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#22.#11",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#22.#13",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#22.#14",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#22.#15",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#22.#16",
+      "signature": "(self,sample_project_dir:Path)->Any"
+    },
+    {
+      "index": "#23.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#4",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#5",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#6",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#7",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#8",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#11",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#13",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#14",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#23.#15",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#4",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#5",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#6",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#7",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#8",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#11",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#13",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#14",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#15",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#16",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#24.#17",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#4",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#5",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#6",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#7",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#8",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#11",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#25.#13",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#4",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#5",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#6",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#7",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#8",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#11",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#13",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#14",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#15",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#16",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#17",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#19",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#20",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#21",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#22",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#23",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#24",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#25",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#26",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#28",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#26.#29",
+      "signature": "(self,tmp_path)->Any"
+    },
+    {
+      "index": "#27.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#27.#4",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#5",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#6",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#7",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#8",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#9",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#10",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#11",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#12",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#13",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#14",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#27.#15",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#28.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#4",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#28.#5",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#28.#6",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#28.#7",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#28.#8",
+      "signature": "(self,tmp_path:Path)->Any"
+    },
+    {
+      "index": "#28.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#11",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#13",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#14",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#15",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#17",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#18",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#19",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#20",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#21",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#22",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#23",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#24",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#25",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#26",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#27",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#28",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#28.#29",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#3",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#4",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#5",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#6",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#7",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#8",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#9",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#10",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#11",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#12",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#13",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#14",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#15",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#16",
+      "signature": "(self)->Any"
+    },
+    {
+      "index": "#29.#18",
+      "signature": "(self)->Any"
+    }
+  ],
+  "edges": [
+    {
+      "source": "#1.#3",
+      "target": "#1.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#1.#3",
+      "target": "#1.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#1.#3",
+      "target": "#1.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#1.#3",
+      "target": "#1.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#2.#0",
+      "target": "#6.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#2.#0",
+      "target": "#8.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#2.#0",
+      "target": "#11.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#2.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#2.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#6.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#7.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#8.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#9.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#10.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#11.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#3.#0",
+      "target": "#16.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#4.#0",
+      "target": "#2.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#4.#0",
+      "target": "#10.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#5.#0",
+      "target": "#6.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#5.#0",
+      "target": "#7.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#5.#0",
+      "target": "#8.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#5.#0",
+      "target": "#9.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#6.#0",
+      "target": "#7.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#6.#0",
+      "target": "#9.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#6.#0",
+      "target": "#11.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#6.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#7.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#8.#0",
+      "target": "#11.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#8.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#8.#0",
+      "target": "#15.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#8.#0",
+      "target": "#17.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#9.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#9.#0",
+      "target": "#15.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#9.#0",
+      "target": "#16.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#6.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#8.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#11.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#14.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#16.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#10.#0",
+      "target": "#17.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#13.#0",
+      "target": "#15.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#13.#0",
+      "target": "#16.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#13.#0",
+      "target": "#17.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#14.#3",
+      "target": "#14.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#14.#4",
+      "target": "#14.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#14.#5",
+      "target": "#14.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#14.#6",
+      "target": "#14.#2",
+      "reason": "calls"
+    },
+    {
+      "source": "#17.#13",
+      "target": "#17.#6",
+      "reason": "calls"
+    },
+    {
+      "source": "#17.#13",
+      "target": "#17.#10",
+      "reason": "calls"
+    },
+    {
+      "source": "#17.#13",
+      "target": "#17.#12",
+      "reason": "calls"
+    },
+    {
+      "source": "#17.#13",
+      "target": "#17.#11",
+      "reason": "calls"
+    },
+    {
+      "source": "#17.#13",
+      "target": "#17.#7",
+      "reason": "calls"
+    },
+    {
+      "source": "#17.#13",
+      "target": "#17.#8",
+      "reason": "calls"
+    },
+    {
+      "source": "#20.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#21.#0",
+      "target": "#3.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#21.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#22.#0",
+      "target": "#6.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#22.#0",
+      "target": "#11.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#22.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#23.#0",
+      "target": "#7.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#23.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#24.#0",
+      "target": "#8.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#24.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#25.#0",
+      "target": "#14.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#26.#0",
+      "target": "#16.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#27.#0",
+      "target": "#9.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#28.#0",
+      "target": "#12.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#28.#0",
+      "target": "#15.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#28.#0",
+      "target": "#17.#0",
+      "reason": "imports"
+    },
+    {
+      "source": "#29.#0",
+      "target": "#17.#0",
+      "reason": "imports"
+    }
+  ],
+  "events": [
+    {
+      "index": "#8.#15",
+      "type": "event",
+      "name": "CardRenderer._extract_event_relationships"
+    }
+  ],
+  "async_patterns": [
+    {
+      "index": "#8.#16",
+      "type": "async",
+      "name": "CardRenderer._extract_async_patterns"
+    }
+  ],
+  "invariants": [],
+  "conventions": [
+    "repos never import svc",
+    "async functions end with _async"
+  ],
+  "errors": [
+    {
+      "name": "CTXCardError",
+      "category": "domain",
+      "meaning": "custom exception"
+    }
+  ],
+  "io_contracts": [],
+  "data_types": [
+    {
+      "name": "Symbol",
+      "fields": "{mid:int,sid:int,kind:str,name:str,signature:Optional[str],deco:List[str],modifiers:Set[str],invariants:Optional[str],raises:List[str]}"
+    },
+    {
+      "name": "ModuleInfo",
+      "fields": "{id:int,path:str,dotted:str,role_tags:Set[str],symbols:List[Symbol],imports_paths:Set[str],import_names:Dict[str, str],fn_to_sid:Dict[str, int],prop_to_sid:Dict[str, int],dts:List[Tuple[str, Dict[str, str]]],errors:List[Tuple[str, str, str]],routes:List[Tuple[int, str, str, List[str]]],calls:List[Tuple[int, Tuple[int, int]]],tokens:List[Tuple[str, List[str]]],reexports:Dict[str, str],px:List[Tuple[str, str]]}"
+    },
+    {
+      "name": "ScanResult",
+      "fields": "{modules:Dict[str, ModuleInfo],langs:List[str]}"
+    },
+    {
+      "name": "GeneratorConfig",
+      "fields": "{project_name:str,root_path:Path,output_path:Path,include_pattern:Optional[str],exclude_pattern:Optional[str],emit_type_signatures:bool,delta_from:Optional[Path],stdout_output:bool,per_package:bool}"
+    }
+  ],
+  "tokens": [],
+  "prohibited": [
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    },
+    {
+      "rule": "forbid print in production",
+      "reason": "logging"
+    }
+  ],
+  "examples": [
+    "var(repo) => user_repo"
+  ],
+  "review": [
+    "public functions have signatures & docstrings",
+    "check invariants (IN) on public fn"
+  ]
+}
